@@ -1,34 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Crear Usuario</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="base_style.css" />
+        <h:outputScript library="js" name="jquery.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap.js" target="head"/>
     </h:head>
     <h:body>
-        <panel>
-            <h:form>
-                <h1>KWINTY</h1>
-                <hr/>
-                <h2>Crear Usuario</h2>   
-                <h:panelGrid columns="2">
-                    <label>Nombre de usuario:</label>
-                    <h:inputText value="#{createUserBean.username}" required="true" requiredMessage="¡El nombre de usuario es requerido!"/>
-                    <label>Nombre completo:</label>
-                    <h:inputText value="#{createUserBean.name}" required="true" requiredMessage="¡El nombre es requerido!"/>
-                    <label>Tipo Documento:</label>
-                    <h:inputText value="#{createUserBean.idType}" required="true" requiredMessage="¡El tipo documento es requerido!"/>
-                    <label>Numero de Doc::</label>
-                    <h:inputText value="#{createUserBean.id}" required="true" requiredMessage="¡La número de doc es requerida!"/>                                                </h:panelGrid>
-                    <label>Rol:</label>
-                    <h:inputText value="#{createUserBean.role}" required="true" requiredMessage="¡El rol es requerido!"/>
-                    <label>Contraseña:</label>
-                    <h:inputSecret value="#{createUserBean.password}" required="true" requiredMessage="¡La constraseña es requerida!"/>
-                    
-                    
-                <br/>
-                <h:commandButton action="#{createUserBean.createUser()}" value="Crear"/>
-                <br/><br/>
+        <header>
+            <div class="header container">
+                <div class="col-md-12 header-title">
+                <h2>K</h2>
+                <h3>winty</h3>
+                </div>
+                <div class="col-md-12 header-slogan">
+                <h4>"Make easy your life"</h4>
+                </div>
+            </div>    
+        </header>
+        <div class="container body">
+            <div class="row">
+            <h:form styleClass="form-horizontal">
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="username">Nombre de usuario:</label>
+                    <div class="col-sm-5">
+                    <h:inputText value="#{createUserBean.username}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="username" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="name">Nombre completo:</label>
+                    <div class="col-sm-5">
+                    <h:inputText value="#{createUserBean.name}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="name"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="doc_type">Tipo Documento:</label>
+                    <div class="col-sm-5">
+                       <h:selectOneMenu value="#{createUserBean.idType}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="doc_type">
+                            <f:selectItem itemValue="cedula" itemLabel="C.C" />
+                            <f:selectItem itemValue="tarjeta_identidad" itemLabel="T.I" />	   							
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="doc_number">Número documento:</label>
+                    <div class="col-sm-5">
+                    <h:inputText value="#{createUserBean.id}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="doc_number"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="rol">Rol:</label>
+                    <div class="col-sm-5">
+                        <h:selectOneMenu value="#{createUserBean.role}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="rol">
+                            <f:selectItem itemValue="client" itemLabel="Cliente" />
+                            <f:selectItem itemValue="admin" itemLabel="Administrador" />	
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="password">Contraseña:</label>
+                    <div class="col-sm-5">
+                    <h:inputSecret value="#{createUserBean.password}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="password"/>
+                    </div>
+                </div>
+                <div class="form-group"> 
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <h:commandButton action="#{createUserBean.createUser()}" value="Crear" styleClass="btn btn-default"/>
+                    </div>
+                </div>
                 <label>Mensaje: </label>
                 <h:outputText value="#{createUserBean.message}"/>
                 <br/><br/>
@@ -36,6 +80,7 @@
                 
 
             </h:form>
-        </panel>
+               </div>
+        </div>
     </h:body>
 </html>
