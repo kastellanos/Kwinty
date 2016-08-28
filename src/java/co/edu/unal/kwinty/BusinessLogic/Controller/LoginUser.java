@@ -7,23 +7,22 @@ package co.edu.unal.kwinty.BusinessLogic.Controller;
 
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.CredentialsDAOImpl;
 import co.edu.unal.kwinty.DataAcess.Entity.Credentials;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author franco
  */
-public class LoginUser {
+public class LoginUser extends HttpServlet{
 
     public String start(String username, String password) {
-        
         CredentialsDAOImpl cdi = new CredentialsDAOImpl();
         Credentials check = cdi.searchByUsername(username);
-        
+                             
         if (check != null) {
             if(check.getPassword().equals(password)){
-                // DO LOGIN
+                // DO LOGIN              
                 // Cookie session = new Cookie("user", username);
                 return " Bienvenido " + username;
             }else{

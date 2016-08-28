@@ -5,7 +5,7 @@
  */
 package co.edu.unal.kwinty.Presentation.Bean;
 
-import co.edu.unal.kwinty.BusinessLogic.Controller.HandleUser;
+import co.edu.unal.kwinty.BusinessLogic.Controller.LoginUser;
 import javax.ejb.Handle;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -22,8 +22,8 @@ public class LoginBean {
     }
     
     public void login(){
-        //HandleUser createUser = new HandleUser();
-        //message = createUser.createAccount(this.username, this.password);
+        LoginUser log = new LoginUser();
+        message = log.start(this.username, this.password);
     }
 
     public String getUsername() {

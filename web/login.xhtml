@@ -29,26 +29,27 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="username">Nombre de usuario:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{LoginBean.username}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="username" />
+                    <h:inputText value="#{loginBean.username}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="username" />
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="password">Contraseña:</label>
                     <div class="col-sm-5">
-                    <h:inputSecret value="#{LoginBean.password}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="password"/>
+                    <h:inputSecret value="#{loginBean.password}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="password"/>
                     </div>
                 </div>
                 <div class="form-group"> 
                     <div class="col-sm-offset-2 col-sm-10">
-                        <h:commandButton action="#{LoginBean.login()}" value="Iniciar sesion" styleClass="btn btn-default"/>
+                        <h:commandButton action="#{loginBean.login()}" value="Iniciar sesion" styleClass="btn btn-default"/>
                     </div>
                 </div>
                 <label>Mensaje: </label>
-                <h:outputText value="#{LoginBean.message}"/>
+                <h:outputText value="#{loginBean.message}"/>
                 <br/><br/>
                 
                 <a href="createUser.xhtml">Crear nuevo usuario</a><br/>
+                
                 <a href="index.xhtml">Inicio</a><br/>  
                 
 
