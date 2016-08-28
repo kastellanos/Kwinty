@@ -7,7 +7,7 @@ package co.edu.unal.kwinty.DataAcess.DAO.Implementation;
 
 import co.edu.unal.kwinty.DataAcess.DAO.ClientDAO;
 import co.edu.unal.kwinty.DataAcess.Entity.Client;
-import co.edu.unal.kwinty.DataAcess.Entity.User;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,11 +16,10 @@ import javax.persistence.Query;
 
 /**
  *
- * @author stephanie
+ * @author root
  */
 public class ClientDAOImpl extends GenericDAOImpl<Client, String> implements ClientDAO{
-    
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("KwintyPU");
+private EntityManagerFactory emf = Persistence.createEntityManagerFactory("KwintyPU");
      
     
    private static <T> T first(List<T> items) {
@@ -50,5 +49,6 @@ public class ClientDAOImpl extends GenericDAOImpl<Client, String> implements Cli
    
   return client;
   }
-        
+    
+  
 }

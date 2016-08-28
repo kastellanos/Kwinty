@@ -5,7 +5,11 @@
  */
 package co.edu.unal.kwinty.BusinessLogic.Controller;
 
+import co.edu.unal.kwinty.DataAcess.DAO.Implementation.AdminDAOImpl;
+import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ClientDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.UserDAOImpl;
+import co.edu.unal.kwinty.DataAcess.Entity.Admin;
+import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import co.edu.unal.kwinty.DataAcess.Entity.Credentials;
 import co.edu.unal.kwinty.DataAcess.Entity.User;
 
@@ -14,16 +18,28 @@ import co.edu.unal.kwinty.DataAcess.Entity.User;
  * @author Andres
  */
 public class HandleUser {
-    
-    public String createAccount(String username, String idType, String role, String name, int id, String password){
+    public String createUser(String username, String idType, String role, String name, int id, String password,int phone_number,String email,String address,float payment_capacity){
         User user = new User(username,idType, role, name, id);
         Credentials credentials = new Credentials(username,password);
         user.setCredentials( credentials );
-        UserDAOImpl userDAOImpl = new UserDAOImpl();
-        boolean created = userDAOImpl.create(user);
+        
+        boolean created = false;
+        if(role.equals("client")){
+            Client client = new Client(username, phone_number, email, payment_capacity);
+            client.setUser(user);
+            ClientDAOImpl clientDAO = new ClientDAOImpl();
+            created = clientDAO.create(client);
+        }else{
+            Admin admin = new Admin(username);
+            admin.setUser(user);
+            AdminDAOImpl adminDAO = new AdminDAOImpl();
+            created = adminDAO.create(admin);
+        }
         if ( created == true )
             return "El usuario ha sido creado.";
         else
             return "El usuario no pudo ser creado.";  
     }
+    
+    
 }
