@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Andres
  */
-@Entity
-@Table(name = "admin")
+@Entity(name = "Admin")
+@Table(name = "Admin")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a"),
@@ -43,7 +43,7 @@ public class Admin implements Serializable {
     @Column(name = "Admin_username")
     private String adminusername;
     @JoinColumn(name = "Admin_username", referencedColumnName = "username", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
     private User user;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "admin")
     private Collection<Payment> paymentCollection;

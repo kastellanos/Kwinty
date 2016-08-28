@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Andres
  */
-@Entity
-@Table(name = "client")
+@Entity(name="Client")
+@Table(name = "Client")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
@@ -45,7 +45,7 @@ public class Client implements Serializable {
     @NotNull
     @Size(min = 1, max = 25)
     @Column(name = "Client_username")
-    private String clientusername;
+    private String clientusername;  
     @Basic(optional = false)
     @NotNull
     @Column(name = "phonenumber")
@@ -66,7 +66,7 @@ public class Client implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private Collection<Acquiredproduct> acquiredproductCollection;
     @JoinColumn(name = "Client_username", referencedColumnName = "username", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false,cascade = CascadeType.PERSIST)
     private User user;
 
     public Client() {

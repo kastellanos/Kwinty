@@ -6,7 +6,7 @@
 package co.edu.unal.kwinty.Presentation.Bean;
 
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleUser;
-import javax.ejb.Handle;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -23,7 +23,8 @@ public class CreateUserBean {
     
     public void createUser(){
         HandleUser createUser = new HandleUser();
-        message = createUser.createAccount(this.username, this.idType, this.role, this.name, this.id,this.password);
+        message = createUser.createUser(this.username, this.idType, this.role, this.name, this.id,this.password,this.phone_number,this.email,this.address,this.payment_capacity);
+    
     }
 
     public String getUsername() {
@@ -53,6 +54,8 @@ public class CreateUserBean {
     public int getId() {
         return id;
     }
+    
+    
     private String username;
     private String idType;
     private String role;
@@ -60,6 +63,45 @@ public class CreateUserBean {
     private int id;
     private String message;
     private String password;
+    private int phone_number;
+    private String email;
+
+    public int getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(int phone_number) {
+        this.phone_number = phone_number;
+    }
+    private String address;
+    private float payment_capacity;
+    
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public float getPayment_capacity() {
+        return payment_capacity;
+    }
+
+    public void setPayment_capacity(float payment_capacity) {
+        this.payment_capacity = payment_capacity;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
