@@ -33,8 +33,8 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     }
     /*
     
-    */
-   /* @Override
+    
+    @Override
     public boolean create(T newInstance) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -53,11 +53,13 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
         em.persist(newInstance);
     }
         return true;
-    }*/
+    }
+    
+    */
     @Override
     public boolean create(T newInstance) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+       em.getTransaction().begin();
         try {
             em.persist(newInstance);
             em.getTransaction().commit();
@@ -70,6 +72,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
         }
         return true;
     }
+    
     
     @Override
     public T read(PK id) {
