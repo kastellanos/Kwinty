@@ -7,31 +7,44 @@ package co.edu.unal.kwinty.BusinessLogic.Controller;
 
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.CredentialsDAOImpl;
 import co.edu.unal.kwinty.DataAcess.Entity.Credentials;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author franco
  */
-public class LoginUser extends HttpServlet{
+public class LoginUser {
 
     public String start(String username, String password) {
+        FacesContext context = FacesContext.getCurrentInstance();
         CredentialsDAOImpl cdi = new CredentialsDAOImpl();
         Credentials check = cdi.searchByUsername(username);
                              
         if (check != null) {
             if(check.getPassword().equals(password)){
-                // DO LOGIN              
-                // Cookie session = new Cookie("user", username);
-                return " Bienvenido " + username;
+                context.getExternalContext().getSessionMap().put("active", check);
+                return null;  
             }else{
-                return " Contraseña incorrecta";
+                return "Inicio de sesion fallido. La contraseña no es la correcta.";
             }           
         }else{
-            return " Usuario incorrecto";
+            return "Inicio de sesion fallido. Usuario '"+username+"' no existe.";
         }
             
+    }
+    
+    public String logout() {
+        HttpSession session = (HttpSession)
+             FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "index";
+        
     }
     
 }

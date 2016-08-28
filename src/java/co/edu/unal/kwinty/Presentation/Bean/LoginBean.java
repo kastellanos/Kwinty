@@ -21,9 +21,21 @@ public class LoginBean {
     public LoginBean() {
     }
     
-    public void login(){
+    public String login(){
         LoginUser log = new LoginUser();
         message = log.start(this.username, this.password);
+        if(message != null){
+            return message;
+        }else{
+            return "welcome";
+        }
+    }
+    
+    public String logout(){
+        LoginUser log = new LoginUser();
+        message = log.logout();
+        System.out.println(message);
+        return message;
     }
 
     public String getUsername() {
@@ -52,6 +64,5 @@ public class LoginBean {
     
     private String username;
     private String message;
-    private String password;
-        
+    private String password;        
 }
