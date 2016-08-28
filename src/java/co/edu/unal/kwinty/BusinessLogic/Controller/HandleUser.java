@@ -14,6 +14,7 @@ import co.edu.unal.kwinty.DataAcess.Entity.User;
  * @author Andres
  */
 public class HandleUser {
+    
     public String createAccount(String username, String idType, String role, String name, int id, String password){
         User user = new User(username,idType, role, name, id);
         Credentials credentials = new Credentials(username,password);
