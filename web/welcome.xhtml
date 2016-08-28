@@ -14,25 +14,27 @@
         <header>
             <div class="header container">
                 <div class="col-md-12 header-title">
-                <h2>K</h2>
-                <h3>winty</h3>
+                    <h2>K</h2>
+                    <h3>winty</h3>
                 </div>
                 <div class="col-md-12 header-slogan">
-                <h4>"Make easy your life"</h4>
+                    <h4>"Make easy your life"</h4>
                 </div>
             </div>    
         </header>
-        
-        <div class="container body">
-            Bienvenido ${active.username}!.
-        </div>
-        
-        <div class="form-group"> 
-            <div class="col-sm-offset-2 col-sm-10">
-                <h:commandButton action="#{loginBean.logout()}" value="Cerrar sesion" styleClass="btn btn-default"/>
+        <h:form>
+            <div class="container body">
+                Bienvenido ${active.username}!.
             </div>
-        </div>
-        
-        <a href="index.xhtml">Inicio</a><br/>  
+
+            <div class="form-group"> 
+                <div class="col-sm-offset-2 col-sm-10">
+                    <h:commandButton action="#{loginBean.logout()}" value="Cerrar sesion" styleClass="btn btn-default"/>
+                </div>
+            </div>
+
+            <a href="index.xhtml">Inicio</a><br/>  
+        </h:form>
+
     </h:body>
 </html>

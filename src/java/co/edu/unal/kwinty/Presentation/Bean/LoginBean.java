@@ -9,6 +9,8 @@ import co.edu.unal.kwinty.BusinessLogic.Controller.LoginUser;
 import javax.ejb.Handle;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,7 +36,6 @@ public class LoginBean {
     public String logout(){
         LoginUser log = new LoginUser();
         message = log.logout();
-        System.out.println(message);
         return message;
     }
 
