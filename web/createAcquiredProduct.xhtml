@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">>
+
+    <h:head>
+        <title>Adquirir producto crediticio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="base_style.css" />
+        <h:outputScript library="js" name="jquery.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap.js" target="head"/>
+    </h:head>
+    
+    <header>
+            <div class="header container">
+                <div class="col-md-12 header-title">
+                <h2>K</h2>
+                <h3>winty</h3>
+                </div>
+                <div class="col-md-12 header-slogan">
+                <h4>"Make easy your life"</h4>
+                </div>
+            </div>    
+        </header>
+    <div class="container body">
+            <div class="row">
+            <h:form styleClass="form-horizontal">
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="clientName">Nombre de usuario:</label>
+                    <div class="col-sm-5">
+                    <h:inputText value="#{createAcquiredProductBean.clientName}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="clientName" />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="productName">Producto:</label>
+                    <div class="col-sm-5">
+                       <h:selectOneMenu value="#{createAcquiredProductBean.productName}">
+                            <f:selectItems value="#{createAcquiredProductBean.products}" var="product"
+                                           itemLabel="#{product.type}" itemValue="#{product.type}"/>
+                        </h:selectOneMenu>
+
+                    <p>Selected label is #{createAcquiredProductBean.productName}</p>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="numberFees">Número de cuotas:</label>
+                    <div class="col-sm-5">
+                        <h:inputText value="#{createAcquiredProductBean.numberFees}" required="true" requiredMessage="Campo requerido" styleClass="form-control" id="numberFees" />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="amount">Valor del crédito:</label>
+                    <div class="col-sm-5">
+                        <h:inputText value="#{createAcquiredProductBean.amount}" required="true" requiredMessage="Campo requerido" styleClass="form-control" id="amount" />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="amountFee">Valor de la cuota:</label>
+                    <div class="col-sm-5">
+                        <h:inputText value="#{createAcquiredProductBean.feeAmount}" required="true" requiredMessage="Campo requerido" styleClass="form-control" id="amountfee" />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="reference">Contacto de referencia:</label>
+                    <div class="col-sm-5">
+                        <h:inputText value="#{createAcquiredProductBean.reference}" required="true" requiredMessage="Campo requerido" styleClass="form-control" id="reference" />
+                    </div>
+                </div>
+              
+                
+                 <div class="form-group"> 
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <h:commandButton action="#{createAcquiredProductBean.createAcquiredProduc()}" value="Registrar" styleClass="btn btn-default"/>
+                    </div>
+                </div>
+                
+                <label>Mensaje: </label>
+                <h:outputText value="#{createAcquiredProductBean.message}"/>
+                <br/><br/>
+                <a href="index.xhtml">Inicio</a><br/> 
+                
+            </h:form>
+            </div>
+        </div>
+</html>
+
+    

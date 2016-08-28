@@ -56,7 +56,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     }*/
     @Override
     public boolean create(T newInstance) {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = getEmf().createEntityManager();
         em.getTransaction().begin();
         try {
             em.persist(newInstance);
@@ -73,7 +73,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     
     @Override
     public T read(PK id) {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = getEmf().createEntityManager();
         T responseInstance = null;
         Query q = em.createNamedQuery("Cuenta.findByCedula");
         q.setParameter(1, id);
@@ -89,7 +89,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     @Override
     public void update(T transientObject) {
         T newInstance;
-        EntityManager em = emf.createEntityManager();  
+        EntityManager em = getEmf().createEntityManager();  
         em.getTransaction().begin();
         try {
             newInstance = em.merge(transientObject); 
@@ -106,7 +106,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     @Override
     public void delete(T transientObject) {
         T newInstance;
-        EntityManager em = emf.createEntityManager();  
+        EntityManager em = getEmf().createEntityManager();  
         em.getTransaction().begin();
         try {
             em.remove(transientObject); 
@@ -133,6 +133,20 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     @Override
     public PK getId(T transientObject) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the emf
+     */
+    public EntityManagerFactory getEmf() {
+        return emf;
+    }
+
+    /**
+     * @param emf the emf to set
+     */
+    public void setEmf(EntityManagerFactory emf) {
+        this.emf = emf;
     }
 
     

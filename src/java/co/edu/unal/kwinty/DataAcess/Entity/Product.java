@@ -6,27 +6,25 @@
 package co.edu.unal.kwinty.DataAcess.Entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Andres
+ * @author stephanie
  */
 @Entity
-@Table(name = "product")
+@Table(name = "Product")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
@@ -40,8 +38,8 @@ public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
@@ -67,8 +65,6 @@ public class Product implements Serializable {
     @NotNull
     @Column(name = "interest_rate")
     private float interestRate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    private Collection<Acquiredproduct> acquiredproductCollection;
 
     public Product() {
     }
@@ -79,6 +75,14 @@ public class Product implements Serializable {
 
     public Product(Long id, String type, String feeType, String interestType, int maxNumberFees, float interestRate) {
         this.id = id;
+        this.type = type;
+        this.feeType = feeType;
+        this.interestType = interestType;
+        this.maxNumberFees = maxNumberFees;
+        this.interestRate = interestRate;
+    }
+    
+    public Product(String type, String feeType, String interestType, int maxNumberFees, float interestRate) {
         this.type = type;
         this.feeType = feeType;
         this.interestType = interestType;
@@ -134,15 +138,6 @@ public class Product implements Serializable {
         this.interestRate = interestRate;
     }
 
-    @XmlTransient
-    public Collection<Acquiredproduct> getAcquiredproductCollection() {
-        return acquiredproductCollection;
-    }
-
-    public void setAcquiredproductCollection(Collection<Acquiredproduct> acquiredproductCollection) {
-        this.acquiredproductCollection = acquiredproductCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -165,7 +160,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.unal.kwinty.DataAcess.Entity.Product[ id=" + id + " ]";
+        return "co.edu.unal.kwinty.DataAcess.Entity.Product_1[ id=" + id + " ]";
     }
     
 }
