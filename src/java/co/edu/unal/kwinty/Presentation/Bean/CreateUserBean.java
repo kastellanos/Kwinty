@@ -24,7 +24,7 @@ public class CreateUserBean {
     public void createUser(){
         HandleUser createUser = new HandleUser();
         message = createUser.createUser(this.username, this.idType, this.role, this.name, this.id,this.password,this.phone_number,this.email,this.address,this.payment_capacity);
-    
+
     }
 
     public String getUsername() {

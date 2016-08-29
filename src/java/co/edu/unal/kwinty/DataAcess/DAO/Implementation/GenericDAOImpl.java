@@ -33,8 +33,8 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     }
     /*
     
-    */
-   /* @Override
+    
+    @Override
     public boolean create(T newInstance) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -53,7 +53,9 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
         em.persist(newInstance);
     }
         return true;
-    }*/
+    }
+    
+    */
     @Override
     public boolean create(T newInstance) {
         EntityManager em = getEmf().createEntityManager();
@@ -71,12 +73,13 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
         return true;
     }
     
+    
     @Override
     public T read(PK id) {
         EntityManager em = getEmf().createEntityManager();
         T responseInstance = null;
-        Query q = em.createNamedQuery("Cuenta.findByCedula");
-        q.setParameter(1, id);
+        Query q = em.createNamedQuery("User.findByUsername");
+        q.setParameter("username", id);
         try {
             responseInstance = (T) q.getSingleResult();
         } catch (Exception e) {
