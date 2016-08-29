@@ -23,12 +23,12 @@ public class ProductDAOImpl extends GenericDAOImpl<Product, Long> implements Pro
         EntityManager em = getEmf().createEntityManager();
         Product product = null;
         Query q = em.createNamedQuery("Product.findById");
-        q.setParameter(1, id);
+        q.setParameter("id", id);
 
         try {
             product = (Product) q.getSingleResult();
         } catch (Exception e) {
-
+            //e.printStackTrace();
         } finally {
 
         em.close();
@@ -75,5 +75,22 @@ public class ProductDAOImpl extends GenericDAOImpl<Product, Long> implements Pro
         em.close();
         }
         return products;
+    }
+
+   
+    public void deleteProduct(Product product) {
+        
+        EntityManager em = getEmf().createEntityManager();
+        em.getTransaction().begin();
+        try{
+            product = em.merge(product);
+            em.remove(product);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            //em.getTransaction().rollback();
+            e.printStackTrace();
+        }finally{
+            em.close();
+        }
     }
 }

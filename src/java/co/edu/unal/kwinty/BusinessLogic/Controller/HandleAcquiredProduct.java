@@ -15,6 +15,7 @@ import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import co.edu.unal.kwinty.DataAcess.Entity.Product;
 import co.edu.unal.kwinty.DataAcess.Entity.User;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -67,6 +68,8 @@ public class HandleAcquiredProduct {
         else
             return "El producto no pudo ser creado.";  
     }
+    
+    
  }
     
    

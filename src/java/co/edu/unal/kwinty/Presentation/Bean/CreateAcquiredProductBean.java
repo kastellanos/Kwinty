@@ -58,6 +58,8 @@ public class CreateAcquiredProductBean implements Serializable {
         return true;
     }
   
+    
+    
     public void createAcquiredProduc(){
 
         HandleAcquiredProduct createAcquiredProduct = new HandleAcquiredProduct();

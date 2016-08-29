@@ -6,6 +6,8 @@
 package co.edu.unal.kwinty.Presentation.Bean;
 
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleProduct;
+import co.edu.unal.kwinty.DataAcess.Entity.Product;
+import java.io.Serializable;
 
 /**
  *
@@ -17,7 +19,7 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class CreateProductBean {
+public class CreateProductBean implements Serializable{
     
     private String type;
     private String feeType;
@@ -25,6 +27,9 @@ public class CreateProductBean {
     private int maxNumberFees;
     private float interestRate;
     private String message;
+    private Long idProduct;
+    private Product product;
+    private String message1;
     
     //public Product(String type, String feeType, String interestType, int maxNumberFees, float interestRate) {
     
@@ -33,6 +38,20 @@ public class CreateProductBean {
     public void createProduct(){
         HandleProduct createProduct = new HandleProduct();
         setMessage(createProduct.createProduct(type, feeType,interestType, maxNumberFees, interestRate));
+    }
+    
+    public void searchProductById(){
+        HandleProduct searchProduct = new HandleProduct();
+        setProduct(searchProduct.findById(idProduct));
+        if(product == null)
+            message1 = "El producto no existe";
+        else
+            message1 = "Producto encontrado";
+        
+    }
+    public void deleteProduct(){
+        HandleProduct deleteProduct = new HandleProduct();
+        message = deleteProduct.deleteProduct(idProduct);
     }
     /**
      * @return the type
@@ -116,5 +135,47 @@ public class CreateProductBean {
      */
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    /**
+     * @return the idProduct
+     */
+    public Long getIdProduct() {
+        return idProduct;
+    }
+
+    /**
+     * @param idProduct the idProduct to set
+     */
+    public void setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    /**
+     * @return the product
+     */
+    public Product getProduct() {
+        return product;
+    }
+
+    /**
+     * @param product the product to set
+     */
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    /**
+     * @return the message1
+     */
+    public String getMessage1() {
+        return message1;
+    }
+
+    /**
+     * @param message1 the message1 to set
+     */
+    public void setMessage1(String message1) {
+        this.message1 = message1;
     }
 }

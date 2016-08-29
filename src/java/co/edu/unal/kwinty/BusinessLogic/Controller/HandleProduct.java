@@ -6,6 +6,7 @@
 package co.edu.unal.kwinty.BusinessLogic.Controller;
 
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ProductDAOImpl;
+import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
 import co.edu.unal.kwinty.DataAcess.Entity.Product;
 import java.util.List;
 
@@ -29,4 +30,23 @@ public class HandleProduct {
         ProductDAOImpl productoDAO = new ProductDAOImpl();
         return productoDAO.getAll();
     }
+    
+    public Product findById(Long id){
+        ProductDAOImpl productoDAO = new ProductDAOImpl();
+        return productoDAO.findById(id);
+    }
+    
+    public String deleteProduct(Long id){
+        
+        ProductDAOImpl productDAO = new ProductDAOImpl();
+        Product product = productDAO.findById(id);
+        if(product == null){
+            //productDAO.deleteProduct(product);
+            return "El producto no existe.";
+        }else{
+            productDAO.deleteProduct(product);
+            return "El producto ha sido borrado.";
+        }}
+        
+    
 }
