@@ -24,7 +24,7 @@ public class LoginUser {
         CredentialsDAOImpl cdi = new CredentialsDAOImpl();
         Credentials check = cdi.searchByUsername(username);
                              
-        if (check != null) {
+        if (check.equals(check)) {
             if(check.getPassword().equals(password)){
                 context.getExternalContext().getSessionMap().put("active", check);
                 return null;  

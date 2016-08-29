@@ -28,7 +28,8 @@ public class CredentialsDAOImpl extends GenericDAOImpl<Credentials, String> impl
         try {
             c = em.find(Credentials.class, uname);
         } catch (Exception e){
-
+               e.printStackTrace();
+               
         } finally {
             em.close();
         }

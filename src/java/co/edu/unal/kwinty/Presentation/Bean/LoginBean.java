@@ -26,11 +26,13 @@ public class LoginBean {
     public String login(){
         LoginUser log = new LoginUser();
         message = log.start(this.username, this.password);
+        System.out.println("Este es el mensaje"+message);
         if(message != null){
             return message;
         }else{
             return "welcome";
         }
+        
     }
     
     public String logout(){
