@@ -75,8 +75,8 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     public T read(PK id) {
         EntityManager em = getEmf().createEntityManager();
         T responseInstance = null;
-        Query q = em.createNamedQuery("Cuenta.findByCedula");
-        q.setParameter(1, id);
+        Query q = em.createNamedQuery("User.findByUsername");
+        q.setParameter("username", id);
         try {
             responseInstance = (T) q.getSingleResult();
         } catch (Exception e) {

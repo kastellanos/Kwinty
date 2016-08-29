@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition>
+        <h:form>
+        <ul class="nav nav-sidebar">
+            <li>
+                <h:commandLink actionListener="#{userPermissionsBean.setCurrent_view('Registrar un producto')}"
+                               value="Registrar un producto"></h:commandLink>
+            </li>
+            <li>
+                <h:commandLink actionListener="#{userPermissionsBean.setCurrent_view('Actualizar un producto')}" value="Actualizar un producto"></h:commandLink>
+            </li>
+            <li>
+                <h:commandLink actionListener="#{userPermissionsBean.setCurrent_view('Registrar un cliente')}" value="Registrar un cliente"></h:commandLink>
+            </li>
+            <li>
+                <h:commandLink actionListener="#{userPermissionsBean.setCurrent_view('Actualizar un producto')}" value="Actualizar un producto"></h:commandLink>
+            </li>
+            <li>
+                <h:commandLink actionListener="#{userPermissionsBean.setCurrent_view('Ver información de clientes')}" value="Ver información de clientes"></h:commandLink>
+            </li>
+            <li>
+                <h:commandLink actionListener="#{userPermissionsBean.setCurrent_view('Ver créditos de un cliente')}" value="Ver créditos de un cliente"></h:commandLink>
+            </li>
+            <li>
+                <h:commandLink actionListener="#{userPermissionsBean.setCurrent_view('Ver proyecciones')}" value="Ver proyecciones"></h:commandLink>
+            </li>
+            <li>
+                <h:commandLink actionListener="#{userPermissionsBean.setCurrent_view('Realizar pagos')}" value="Realizar pagos"></h:commandLink>
+            </li>
+        </ul>        
+    </h:form>
+    </ui:composition>
+</html>
