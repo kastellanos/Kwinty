@@ -38,7 +38,7 @@ private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Kwint
             //product = (Product) q.getSingleResult();
             List<Client> results = q.getResultList();
             if(!results.isEmpty()){
-                client = results.get(0);
+                client = (Client)results.get(0);
             }
         } catch (Exception e) {
             System.err.println(e);

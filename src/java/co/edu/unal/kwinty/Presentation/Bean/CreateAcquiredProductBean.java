@@ -48,14 +48,14 @@ public class CreateAcquiredProductBean implements Serializable {
         }
     }
     
-    public void validateClientName(){
+    public boolean validateClientName(){
         HandleClient handleClient = new HandleClient();
         
-        if(handleClient.clientExists(clientName)){
-            message = "El cliente está registrado";
-        }else{
-            message = "El cliente no está registrado";
+        if(!handleClient.clientExists(clientName)){
+            message = "El cliente no está registrado.";
+            return false;
         }
+        return true;
     }
   
     public void createAcquiredProduc(){
@@ -63,8 +63,12 @@ public class CreateAcquiredProductBean implements Serializable {
         HandleAcquiredProduct createAcquiredProduct = new HandleAcquiredProduct();
         amountPaid = 0;
         feeIncrementRate = 0;
-        message = createAcquiredProduct.createAcquiredProduct(numberFees, amount, feeAmount, amountPaid, reference, feeIncrementRate, productName,clientName);
         
+        if(validateClientName()){
+            message = createAcquiredProduct.createAcquiredProduct(numberFees, amount, feeAmount, amountPaid, reference, feeIncrementRate, productName,clientName);
+        }else{
+            message += " Debe registrar el cliente ";
+        }
 }
     
     /**
