@@ -90,7 +90,8 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     }
 
     @Override
-    public void update(T transientObject) {
+    public boolean update(T transientObject) {
+        boolean updated = false;
         T newInstance;
         EntityManager em = getEmf().createEntityManager();  
         em.getTransaction().begin();
@@ -99,11 +100,14 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
             //newInstance = em.merge(em.find(T.class, this.getId(transientObject)));
             //newInstance.setSomeVariable(transientObject.setSomeVariable);
             em.getTransaction().commit();
+            updated = true;
+            
         } catch (Exception e){
             em.getTransaction().rollback();
         } finally {
             em.close();
         }
+        return updated;
     }
 
     @Override

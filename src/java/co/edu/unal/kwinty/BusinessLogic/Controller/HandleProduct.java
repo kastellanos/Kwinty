@@ -16,6 +16,18 @@ import java.util.List;
  */
 public class HandleProduct {
     
+    
+    public String updateProduct(String type, String feeType, String interestType, int maxNumberFees, float interestRate){
+        Product product = new Product(type,feeType, interestType, maxNumberFees, interestRate);
+        ProductDAOImpl productDAOImpl = new ProductDAOImpl();
+        boolean update = productDAOImpl.update(product);
+        if ( update == true )
+            return "El producto ha sido actualizado.";
+        else
+            return "El producto no pudo ser actualizado.";  
+    }
+    
+    
     public String createProduct(String type, String feeType, String interestType, int maxNumberFees, float interestRate){
         Product product = new Product(type,feeType, interestType, maxNumberFees, interestRate);
         ProductDAOImpl productDAOImpl = new ProductDAOImpl();

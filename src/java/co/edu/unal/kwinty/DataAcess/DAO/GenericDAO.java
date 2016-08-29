@@ -17,7 +17,7 @@ public interface GenericDAO<T, PK extends Serializable> {
     
     boolean create(T newInstance);
     T read(PK id);
-    void update(T transientObject);
+    boolean update(T transientObject);
     void delete(T transientObject);
     PK getId( T transientObject );
     public List<T> getAll();
