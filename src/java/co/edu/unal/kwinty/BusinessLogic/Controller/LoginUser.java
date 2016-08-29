@@ -22,10 +22,12 @@ public class LoginUser {
     public String start(String username, String password) {
         FacesContext context = FacesContext.getCurrentInstance();
         CredentialsDAOImpl cdi = new CredentialsDAOImpl();
+        //System.out.println("Hola Mundo "+username);
         Credentials check = cdi.searchByUsername(username);
                              
-        if (check.equals(check)) {
+        if (check != null ) {
             if(check.getPassword().equals(password)){
+                
                 context.getExternalContext().getSessionMap().put("active", check);
                 return null;  
             }else{
