@@ -43,9 +43,9 @@ public class HandlePermissions {
     }
     
     /*Call it prior to perform any action to corroborate that the user has in fact permissions*/
-    public boolean checkIfHasPermissions(User user, String actionToPerform){
+    public boolean checkIfHasPermissions(String username, String actionToPerform){
         UserDAOImpl userDAO = new UserDAOImpl();
-        User userPersisted = userDAO.read(user.getUsername());
+        User userPersisted = userDAO.read(username);
         if(userPersisted == null){ 
             return false;
         }

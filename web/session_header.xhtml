@@ -17,12 +17,12 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a>Bienvenido #{userPermissionsBean.user.name}!</a></li>
+                        <li><a>Bienvenido #{loginBean.username}!</a></li>
                         <li>
                             
                             <h:commandLink actionListener="#{userPermissionsBean.setIsClient(!userPermissionsBean.isClient)}" value="button"></h:commandLink>
                         </li>
-                        <li><a>Rol: #{userPermissionsBean.isClient}</a></li>
+                        <li><a>Rol: #{userPermissionsBean.isClient ? 'Cliente' : 'Admin'}</a></li>
                         <li><a href="#">Cerrar Sesión</a></li>
                     </ul>
                 </div>

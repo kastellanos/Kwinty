@@ -18,7 +18,16 @@ import co.edu.unal.kwinty.DataAcess.Entity.User;
  * @author Andres
  */
 public class HandleUser {
-    public String createUser(String username, String idType, String role, String name, int id, String password,int phone_number,String email,String address,float payment_capacity){
+    
+    
+    public String createUser(String current_user, String username, String idType, String role, String name, int id, String password,int phone_number,String email,String address,float payment_capacity){
+        /*First check if has permissions*/
+        /*Prior to any action, is desirable to verify the permission of the current user*/
+        HandlePermissions handlePermissions = new HandlePermissions();
+        if(!handlePermissions.checkIfHasPermissions(current_user, "Registrar un cliente")){
+            return "El usuario no tiene permisos para realizar la acción solicitada";
+        }        
+        
         User user = new User(username,idType, role, name, id);
         Credentials credentials = new Credentials(username,password);
         user.setCredentials( credentials );
@@ -41,5 +50,29 @@ public class HandleUser {
             return "El usuario no pudo ser creado.";  
     }
     
+    public String createUser(String username, String idType, String role, String name, int id, String password,int phone_number,String email,String address,float payment_capacity){
+        
+        User user = new User(username,idType, role, name, id);
+        Credentials credentials = new Credentials(username,password);
+        user.setCredentials( credentials );
+        
+        boolean created = false;
+        if(role.equals("client")){
+            Client client = new Client(username, phone_number, email, payment_capacity);
+            client.setUser(user);
+            ClientDAOImpl clientDAO = new ClientDAOImpl();
+            created = clientDAO.create(client);
+        }else{
+            Admin admin = new Admin(username);
+            admin.setUser(user);
+            AdminDAOImpl adminDAO = new AdminDAOImpl();
+            created = adminDAO.create(admin);
+        }
+        if ( created == true )
+            return "El usuario ha sido creado.";
+        else
+            return "El usuario no pudo ser creado.";  
+    }
+
     
 }

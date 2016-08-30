@@ -7,17 +7,20 @@ package co.edu.unal.kwinty.Presentation.Bean;
 
 import co.edu.unal.kwinty.BusinessLogic.Controller.LoginUser;
 import javax.ejb.Handle;
+import javax.ejb.Stateful;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
 /**
  *
  * @author Andres
  */
-@ManagedBean
-@ViewScoped
+@ManagedBean(eager = true)
+@ApplicationScoped
 public class LoginBean {
 
     public LoginBean() {
@@ -68,5 +71,5 @@ public class LoginBean {
     
     private String username;
     private String message;
-    private String password;        
+    private String password;            
 }

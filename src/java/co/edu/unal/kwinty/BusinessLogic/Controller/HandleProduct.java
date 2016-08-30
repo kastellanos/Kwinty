@@ -16,6 +16,16 @@ import java.util.List;
  */
 public class HandleProduct {
     
+
+    public String updateProduct(String current_user, String type, String feeType, String interestType, int maxNumberFees, float interestRate){
+        /*First check if has permissions*/
+        /*Prior to any action, is desirable to verify the permission of the current user*/
+        HandlePermissions handlePermissions = new HandlePermissions();
+        if(!handlePermissions.checkIfHasPermissions(current_user, "Registrar un cliente")){
+            return "El usuario no tiene permisos para realizar la acción solicitada";
+        }        
+        return updateProduct(type, feeType, interestType, maxNumberFees, interestRate);
+    }    
     
     public String updateProduct(String type, String feeType, String interestType, int maxNumberFees, float interestRate){
         Product product = new Product(type,feeType, interestType, maxNumberFees, interestRate);
@@ -27,6 +37,15 @@ public class HandleProduct {
             return "El producto no pudo ser actualizado.";  
     }
     
+    public String createProduct(String current_user, String type, String feeType, String interestType, int maxNumberFees, float interestRate){
+        /*First check if has permissions*/
+        /*Prior to any action, is desirable to verify the permission of the current user*/
+        HandlePermissions handlePermissions = new HandlePermissions();
+        if(!handlePermissions.checkIfHasPermissions(current_user, "Registrar un cliente")){
+            return "El usuario no tiene permisos para realizar la acción solicitada";
+        }        
+        return createProduct(type, feeType, interestType, maxNumberFees, interestRate);
+    }
     
     public String createProduct(String type, String feeType, String interestType, int maxNumberFees, float interestRate){
         Product product = new Product(type,feeType, interestType, maxNumberFees, interestRate);
@@ -48,6 +67,25 @@ public class HandleProduct {
         return productoDAO.findById(id);
     }
     
+    public String deleteProduct(String current_user, Long id){
+        /*First check if has permissions*/
+        /*Prior to any action, is desirable to verify the permission of the current user*/
+        HandlePermissions handlePermissions = new HandlePermissions();
+        if(!handlePermissions.checkIfHasPermissions(current_user, "Registrar un cliente")){
+            return "El usuario no tiene permisos para realizar la acción solicitada";
+        }        
+        
+        ProductDAOImpl productDAO = new ProductDAOImpl();
+        Product product = productDAO.findById(id);
+        if(product == null){
+            //productDAO.deleteProduct(product);
+            return "El producto no existe.";
+        }else{
+            productDAO.deleteProduct(product);
+            return "El producto ha sido borrado.";
+        }}
+
+
     public String deleteProduct(Long id){
         
         ProductDAOImpl productDAO = new ProductDAOImpl();

@@ -35,10 +35,22 @@ public class CreateProductBean implements Serializable{
     
     //}
 
+    public void updateProduct(String user){
+        HandleProduct updateProduct = new HandleProduct();
+        message = updateProduct.updateProduct(user, type, feeType,interestType, maxNumberFees, interestRate);
+    }
+
+    
     public void updateProduct(){
         HandleProduct updateProduct = new HandleProduct();
         message = updateProduct.updateProduct(type, feeType,interestType, maxNumberFees, interestRate);
     }
+    
+    public void createProduct(String user){
+        HandleProduct createProduct = new HandleProduct();
+        setMessage(createProduct.createProduct(user, type, feeType,interestType, maxNumberFees, interestRate));
+    }
+
     
     public void createProduct(){
         HandleProduct createProduct = new HandleProduct();
@@ -54,6 +66,13 @@ public class CreateProductBean implements Serializable{
             message1 = "Producto encontrado";
         
     }
+
+    public void deleteProduct(String user){
+        HandleProduct deleteProduct = new HandleProduct();
+        message = deleteProduct.deleteProduct(idProduct);
+    }
+    
+    
     public void deleteProduct(){
         HandleProduct deleteProduct = new HandleProduct();
         message = deleteProduct.deleteProduct(idProduct);

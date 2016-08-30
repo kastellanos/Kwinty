@@ -103,6 +103,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
             updated = true;
             
         } catch (Exception e){
+            e.printStackTrace();
             em.getTransaction().rollback();
         } finally {
             em.close();

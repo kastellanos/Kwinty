@@ -8,6 +8,7 @@ package co.edu.unal.kwinty.Presentation.Bean;
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleUser;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -24,6 +25,12 @@ public class CreateUserBean {
     public void createUser(){
         HandleUser createUser = new HandleUser();
         message = createUser.createUser(this.username, this.idType, this.role, this.name, this.id,this.password,this.phone_number,this.email,this.address,this.payment_capacity);
+    }
+
+    public void createUser(String current_user){
+        HandleUser createUser = new HandleUser();
+        if(current_user == null) message = "Pailas jodido";
+        else message = createUser.createUser(current_user, this.username, this.idType, this.role, this.name, this.id,this.password,this.phone_number,this.email,this.address,this.payment_capacity);
 
     }
 
@@ -128,7 +135,5 @@ public class CreateUserBean {
     
     public String getMessage() {
         return message;
-    }
-    
-    
+    }        
 }
