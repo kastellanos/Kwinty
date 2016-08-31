@@ -8,6 +8,7 @@ package co.edu.unal.kwinty.DataAcess.DAO.Implementation;
 import co.edu.unal.kwinty.DataAcess.DAO.ClientDAO;
 import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,6 +50,25 @@ private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Kwint
    
   return client;
   }
+    
+    @Override
+    public List<Client> getAll(){
+        EntityManager em = getEmf().createEntityManager();
+        List<Client> clients = new ArrayList<Client>();
+        Query q = em.createNamedQuery("Client.findAll");
+
+        try {
+            clients = q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+
+        em.close();
+        }
+        return clients;
+    }
+    
     
   
 }

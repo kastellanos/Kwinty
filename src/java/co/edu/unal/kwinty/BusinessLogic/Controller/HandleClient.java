@@ -7,6 +7,8 @@ package co.edu.unal.kwinty.BusinessLogic.Controller;
 
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ClientDAOImpl;
 import co.edu.unal.kwinty.DataAcess.Entity.Client;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,5 +25,18 @@ public class HandleClient {
             return true;
         }
         return false;
+    }
+    
+    public List<Client> getClient(List<Client> allClients, long id){
+        ArrayList<Client> clients = new ArrayList<>();
+        for(Client c : allClients){
+            if(c.getUser().getId() == id) clients.add(c);
+        }
+        return clients;
+    }
+    
+    public List<Client> listAll(){
+        ClientDAOImpl clientDAO = new ClientDAOImpl();
+        return clientDAO.getAll();
     }
 }
