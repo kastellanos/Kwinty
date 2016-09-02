@@ -10,16 +10,6 @@
             <h3>Clientes</h3>
         </div>
             
-            <div class="col-md-8" style="margin-top: 20px">
-		    <div class="input-group">
-                
-                <input type="hidden" name="search_param" value="all" id="search_param"/>         
-                <input type="text" class="form-control" name="x" placeholder="Search term..."/>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
-        </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -110,15 +100,6 @@
 </table>
 
 <div class="clearfix"></div>
-<ul class="pagination pull-right">
-  <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-  <li class="active"><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-</ul>
                 
             </div>
             </div>
@@ -181,6 +162,14 @@
   </div>
       <!-- /.modal-dialog --> 
     </div>       
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#mytable').DataTable({
+                responsive: true
+            });
+        } );
+    </script>
         
     </ui:define>
 </ui:composition>
