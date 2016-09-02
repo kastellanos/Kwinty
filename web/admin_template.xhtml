@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html class="no-js" lang=""
+      xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Kwinty</title>
+  <meta name="description" content=""/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+   <h:outputStylesheet library="css" name="bootstrap.css"  />
+   <h:outputStylesheet library="css" name="main.css" />
+   <h:outputStylesheet library="css" name="login.css" />
+   <h:outputScript library="js" name="jquery.js" target="head"/>
+   <h:outputScript library="js" name="bootstrap.js" target="head"/>
+   <h:outputScript library="js" name="main.js" target="head"/>
+</h:head>
+<h:body>
+
+  <div class="back-header back-header-pattern"></div>
+
+  
+  <div class="container-header">
+    <div class="container-fluid">
+      <span class="piggy glyphicon glyphicon-piggy-bank"></span>
+      
+      <h1 class="h1">Kwinty</h1>
+    </div>
+  </div>
+  <div class="container-central container-central-nav">
+
+
+   <nav class="navbar navbar-inverse">
+    <div class="container">
+
+      <ul class="nav navbar-nav">
+        
+        <ui:insert name="menu-bar">
+        <li><a href="#">Home</a></li>
+        <li><h:link outcome="admin_home" value="Home" /></li>
+        <li><h:link outcome="clientes" value="Clientes" /></li>
+        <li><h:link outcome="productos" value="Productos" /></li>
+        </ui:insert>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <ui:insert name="menu-buttons">
+        
+        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ui:insert>
+      </ul>
+    </div>
+  </nav>
+</div>
+<div class="container-central body-tag">
+  <div class="container box-body">
+    <!-- Example row of columns -->
+    
+    <ui:insert name="content">
+    <div class="row">
+      <div class="col-md-12 ">
+        <h2>Bienvenido a Kwinty</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+       </div>
+        
+
+      
+    </ui:insert>
+       
+    </div>
+    
+
+  </div>
+
+
+  <footer>
+    <p>National University Developers 2016</p>
+  </footer>
+  
+  
+</h:body>
+</html>

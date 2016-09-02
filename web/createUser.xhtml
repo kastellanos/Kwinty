@@ -1,9 +1,10 @@
-<ui:composition template="/base.xhtml"
+<ui:composition template="/admin_template.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    
     <ui:define name="content">
             <div class="row">
             <h:form styleClass="form-horizontal">
@@ -95,8 +96,8 @@
                     
                 <label>Mensaje: </label>
                 <h:outputText value="#{createUserBean.message}"/>
-                <br/><br/>
-                <a href="index.xhtml">Inicio</a><br/>  
+                
+                
                 
 
             </h:form>

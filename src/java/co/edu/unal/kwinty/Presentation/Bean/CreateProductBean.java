@@ -8,19 +8,19 @@ package co.edu.unal.kwinty.Presentation.Bean;
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleProduct;
 import co.edu.unal.kwinty.DataAcess.Entity.Product;
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author stephanie
  */
-import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
-
 
 @ManagedBean
 @ViewScoped
-public class CreateProductBean implements Serializable{
-    
+public class CreateProductBean implements Serializable {
+
     private String type;
     private String feeType;
     private String interestType;
@@ -30,53 +30,50 @@ public class CreateProductBean implements Serializable{
     private Long idProduct;
     private Product product;
     private String message1;
-    
+
     //public Product(String type, String feeType, String interestType, int maxNumberFees, float interestRate) {
-    
     //}
-
-    public void updateProduct(String user){
+    public void updateProduct(String user) {
         HandleProduct updateProduct = new HandleProduct();
-        message = updateProduct.updateProduct(user, type, feeType,interestType, maxNumberFees, interestRate);
+        message = updateProduct.updateProduct(user, type, feeType, interestType, maxNumberFees, interestRate);
     }
 
-    
-    public void updateProduct(){
+    public void updateProduct() {
         HandleProduct updateProduct = new HandleProduct();
-        message = updateProduct.updateProduct(type, feeType,interestType, maxNumberFees, interestRate);
-    }
-    
-    public void createProduct(String user){
-        HandleProduct createProduct = new HandleProduct();
-        setMessage(createProduct.createProduct(user, type, feeType,interestType, maxNumberFees, interestRate));
+        message = updateProduct.updateProduct(type, feeType, interestType, maxNumberFees, interestRate);
     }
 
-    
-    public void createProduct(){
+    public void createProduct(String user) {
         HandleProduct createProduct = new HandleProduct();
-        setMessage(createProduct.createProduct(type, feeType,interestType, maxNumberFees, interestRate));
+        setMessage(createProduct.createProduct(user, type, feeType, interestType, maxNumberFees, interestRate));
     }
-    
-    public void searchProductById(){
+
+    public void createProduct() {
+        HandleProduct createProduct = new HandleProduct();
+        setMessage(createProduct.createProduct(type, feeType, interestType, maxNumberFees, interestRate));
+    }
+
+    public void searchProductById() {
         HandleProduct searchProduct = new HandleProduct();
         setProduct(searchProduct.findById(idProduct));
-        if(product == null)
+        if (product == null) {
             message1 = "El producto no existe";
-        else
+        } else {
             message1 = "Producto encontrado";
-        
+        }
+
     }
 
-    public void deleteProduct(String user){
+    public void deleteProduct(String user) {
         HandleProduct deleteProduct = new HandleProduct();
         message = deleteProduct.deleteProduct(idProduct);
     }
-    
-    
-    public void deleteProduct(){
+
+    public void deleteProduct() {
         HandleProduct deleteProduct = new HandleProduct();
         message = deleteProduct.deleteProduct(idProduct);
     }
+
     /**
      * @return the type
      */
