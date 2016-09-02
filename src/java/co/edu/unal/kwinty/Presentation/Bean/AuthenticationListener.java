@@ -17,7 +17,7 @@ import javax.faces.event.PhaseListener;
  */
 public class AuthenticationListener implements PhaseListener {
 
-    private static final String USER_LOGIN_OUTCOME = "index";
+    private static final String USER_LOGIN_OUTCOME = "index.xhtml";
 
     public void afterPhase(PhaseEvent event) {
         FacesContext context = event.getFacesContext();

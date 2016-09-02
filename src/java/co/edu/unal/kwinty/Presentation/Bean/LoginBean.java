@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -29,16 +30,17 @@ public class LoginBean {
         LoginUser log = new LoginUser();
         message = log.start(this.username, this.password);
         //return "welcome";
-        System.err.println("Este es el mensaje"+message);
+        System.err.println("Este es el mensaje"+ message);
         if(message != null){
             ;
         }else{
-            
-            try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getApplication().getNavigationHandler().handleNavigation(context, null, "admin_home.xhtml");
+            /*try {
                 FacesContext.getCurrentInstance().getExternalContext().dispatch("admin_home.xhtml");
             } catch (IOException ex) {
                 Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
         }
         
     }
