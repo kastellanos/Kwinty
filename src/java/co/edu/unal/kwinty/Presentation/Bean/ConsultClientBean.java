@@ -10,16 +10,18 @@ import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author sebchaparr
  */
-
 @ManagedBean
 @ViewScoped
-public class ConsultClientBean implements Serializable{
+
+public class ConsultClientBean implements Serializable {
+
     private long id;
     private List<Client> clients;
     private String message1;
@@ -32,7 +34,6 @@ public class ConsultClientBean implements Serializable{
         this.message1 = message1;
     }
 
-    
     public long getId() {
         return id;
     }
@@ -48,15 +49,15 @@ public class ConsultClientBean implements Serializable{
     public void setClients(List<Client> clients) {
         this.clients = clients;
     }
-    
-    public void getClient(long id){
+
+    public void getClient(long id) {
         HandleClient clientHandler = new HandleClient();
         clients = clientHandler.getClient(clients, id);
     }
-    
-    public ConsultClientBean(){
+
+    public ConsultClientBean() {
         HandleClient clientHandler = new HandleClient();
         clients = clientHandler.listAll();
     }
-    
+
 }

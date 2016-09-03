@@ -1,0 +1,61 @@
+<ui:composition template="/admin_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <ui:define name="content">
+        <div class="row">
+        <div class="col-md-2">
+            <h3>Producto X</h3>
+        </div>
+            
+            <div class="col-md-8" style="margin-top: 20px">
+		    <div class="input-group">
+                
+                <input type="hidden" name="search_param" value="all" id="search_param"/>         
+                <input type="text" class="form-control" name="x" placeholder="Search term..."/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><h:link outcome="cliente" value="Jhon" /></td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-10">
+                <h:link outcome="createPayment" value="Agregar pago" styleClass="btn btn-success"/>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

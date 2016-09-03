@@ -12,20 +12,20 @@ import co.edu.unal.kwinty.DataAcess.Entity.Product;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author stephanie
  */
-
-import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 
 //(name = "CreateAcquiredProductBean")
 @ManagedBean
 @ViewScoped
 public class CreateAcquiredProductBean implements Serializable {
-    
+
     private int numberFees;
     private float amount;
     private float feeAmount;
@@ -39,40 +39,38 @@ public class CreateAcquiredProductBean implements Serializable {
     private int clientDoc;
     private List<Product> products;
 
-    public CreateAcquiredProductBean(){
+    public CreateAcquiredProductBean() {
         HandleProduct handleProduct = new HandleProduct();
         products = handleProduct.listAll();
-        if(products != null){
+        if (products != null) {
             System.out.print("Es nulo");
-                    
+
         }
     }
-    
-    public boolean validateClientName(){
+
+    public boolean validateClientName() {
         HandleClient handleClient = new HandleClient();
-        
-        if(!handleClient.clientExists(clientName)){
+
+        if (!handleClient.clientExists(clientName)) {
             message = "El cliente no está registrado.";
             return false;
         }
         return true;
     }
-  
-    
-    
-    public void createAcquiredProduc(){
+
+    public void createAcquiredProduc() {
 
         HandleAcquiredProduct createAcquiredProduct = new HandleAcquiredProduct();
         amountPaid = 0;
         feeIncrementRate = 0;
-        
-        if(validateClientName()){
-            message = createAcquiredProduct.createAcquiredProduct(numberFees, amount, feeAmount, amountPaid, reference, feeIncrementRate, productName,clientName);
-        }else{
+
+        if (validateClientName()) {
+            message = createAcquiredProduct.createAcquiredProduct(numberFees, amount, feeAmount, amountPaid, reference, feeIncrementRate, productName, clientName);
+        } else {
             message += " Debe registrar el cliente ";
         }
-}
-    
+    }
+
     /**
      * @return the numberFees
      */
@@ -220,7 +218,7 @@ public class CreateAcquiredProductBean implements Serializable {
     public void setClientDoc(int clientDoc) {
         this.clientDoc = clientDoc;
     }
-    
+
     public void setProduct(List<Product> products) {
         this.products = products;
     }
@@ -231,5 +229,5 @@ public class CreateAcquiredProductBean implements Serializable {
     public List<Product> getProducts() {
         return products;
     }
-   
+
 }

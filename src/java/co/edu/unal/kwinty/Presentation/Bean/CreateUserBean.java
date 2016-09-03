@@ -6,8 +6,9 @@
 package co.edu.unal.kwinty.Presentation.Bean;
 
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleUser;
-
 import javax.faces.bean.ManagedBean;
+
+import javax.inject.Named;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
@@ -15,22 +16,25 @@ import javax.faces.bean.ViewScoped;
  *
  * @author Andres
  */
-@ManagedBean
+@ManagedBean( eager = true)
 @ViewScoped
 public class CreateUserBean {
 
     public CreateUserBean() {
     }
-    
-    public void createUser(){
+
+    public void createUser() {
         HandleUser createUser = new HandleUser();
-        message = createUser.createUser(this.username, this.idType, this.role, this.name, this.id,this.password,this.phone_number,this.email,this.address,this.payment_capacity);
+        message = createUser.createUser(this.username, this.idType, this.role, this.name, this.id, this.password, this.phone_number, this.email, this.address, this.payment_capacity);
     }
 
-    public void createUser(String current_user){
+    public void createUser(String current_user) {
         HandleUser createUser = new HandleUser();
-        if(current_user == null) message = "Pailas jodido";
-        else message = createUser.createUser(current_user, this.username, this.idType, this.role, this.name, this.id,this.password,this.phone_number,this.email,this.address,this.payment_capacity);
+        if (current_user == null) {
+            message = "Pailas jodido";
+        } else {
+            message = createUser.createUser(current_user, this.username, this.idType, this.role, this.name, this.id, this.password, this.phone_number, this.email, this.address, this.payment_capacity);
+        }
 
     }
 
@@ -61,8 +65,7 @@ public class CreateUserBean {
     public int getId() {
         return id;
     }
-    
-    
+
     private String username;
     private String idType;
     private String role;
@@ -82,8 +85,6 @@ public class CreateUserBean {
     }
     private String address;
     private float payment_capacity;
-    
-
 
     public String getEmail() {
         return email;
@@ -132,8 +133,8 @@ public class CreateUserBean {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
     public String getMessage() {
         return message;
-    }        
+    }
 }
