@@ -65,7 +65,7 @@ public class CreateAcquiredProductBean implements Serializable {
         feeIncrementRate = 0;
 
         if (validateClientName()) {
-            message = createAcquiredProduct.createAcquiredProduct(numberFees, amount, feeAmount, amountPaid, reference, feeIncrementRate, productName, clientName);
+            message = createAcquiredProduct.createAcquiredProduct(numberFees, amount, amountPaid, reference, feeIncrementRate, productName, clientName);
         } else {
             message += " Debe registrar el cliente ";
         }

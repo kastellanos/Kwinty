@@ -47,7 +47,7 @@ public class HandleAcquiredProduct {
     
     //private Date acquisitionDate;
 
-    public String createAcquiredProduct(int numberFees, float amount, float feeAmount, float amountPaid, String reference, float feeIncrementRate, String productType,String clientName) {
+    public String createAcquiredProduct(int numberFees, float amount, float amountPaid, String reference, float feeIncrementRate, String productType,String clientName) {
         ProductDAOImpl productDAO = new ProductDAOImpl();
         ClientDAOImpl clientDAO = new ClientDAOImpl();
         
@@ -55,6 +55,16 @@ public class HandleAcquiredProduct {
         Client client = clientDAO.findByUsername(clientName);
         if(client == null) System.err.print("Cliente encontrado" + client.toString());
         if(product == null) System.err.print("Producto encontrado: " + product.toString());
+        
+        // Product -> AcquiredProduct verifications
+        int max_fees = product.getMaxNumberFees();
+        if (numberFees > max_fees) {
+            return "El producto no fue creado. Excede numero de cuotas maximo";
+        }
+        
+        // Calculate feeAmount
+        float[] fees = calculateFees(numberFees, amount, max_fees);
+        float feeAmount = fees[1];
         
         AcquiredproductPK clientProduct = new AcquiredproductPK(clientName, product.getId());
         Date today = new Date();
