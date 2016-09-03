@@ -9,6 +9,7 @@ import co.edu.unal.kwinty.BusinessLogic.Controller.HandleAcquiredProduct;
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleClient;
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleProduct;
 import java.util.Date;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
@@ -17,7 +18,7 @@ import javax.faces.view.ViewScoped;
  * @author franco
  */
 @ManagedBean
-@ViewScoped
+@ApplicationScoped
 public class ProjectionBean {
     private float[] proyection;
     private String clientName;
