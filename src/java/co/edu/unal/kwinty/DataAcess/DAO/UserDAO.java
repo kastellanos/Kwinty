@@ -13,4 +13,6 @@ import co.edu.unal.kwinty.DataAcess.Entity.User;
  */
 public interface UserDAO extends GenericDAO<User, String>{
     
+    public String searchRoleByName(String name);
+    
 }

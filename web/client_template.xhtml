@@ -51,8 +51,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <ui:insert name="menu-buttons">
-        
-        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <h:form>            
+              <h:commandButton action="#{loginBean.logout()}" value="Logout" class="lglyphicon glyphicon-log-out"/>
+            </h:form>
+            <!--li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li-->
         </ui:insert>
       </ul>
     </div>
