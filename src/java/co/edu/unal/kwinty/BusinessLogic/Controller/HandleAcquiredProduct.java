@@ -68,6 +68,27 @@ public class HandleAcquiredProduct {
         else
             return "El producto no pudo ser creado.";  
     }
+
+    public List<Acquiredproduct> listAll(){
+        AcquiredProductDAOImpl acquiredProductDAOImpl = new AcquiredProductDAOImpl();
+        return acquiredProductDAOImpl.getAll();
+    }
+    
+    public Acquiredproduct findById(Long id){
+        AcquiredProductDAOImpl acquiredProductDAOImpl = new AcquiredProductDAOImpl();
+        return acquiredProductDAOImpl.findByPK(id);
+    }
+            
+    public void updatePayment( Acquiredproduct ap ){
+        AcquiredProductDAOImpl acquiredProductDAOImpl = new AcquiredProductDAOImpl();
+        acquiredProductDAOImpl.update(ap);
+    }
+
+    public List<Acquiredproduct> findByClient(String client){
+        AcquiredProductDAOImpl acquiredProductDAOImpl = new AcquiredProductDAOImpl();
+        return acquiredProductDAOImpl.findByClient(client);
+    }
+
     
     
  }
