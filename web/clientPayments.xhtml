@@ -6,7 +6,15 @@
     
     xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
+    
     <ui:define name="content" >
+
+        <f:metadata>
+            <f:viewParam name="product" value="#{clientPaymentsBean.product}" required="false"/>
+            <f:event type="preRenderView" listener="#{clientPaymentsBean.loadProductPayments}"/>
+        </f:metadata>
+        
+
         <div class="row">
         <div class="col-md-2">
             <h3>Mis pagos realizados</h3>

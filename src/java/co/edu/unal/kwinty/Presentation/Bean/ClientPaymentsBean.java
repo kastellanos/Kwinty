@@ -6,6 +6,7 @@
 package co.edu.unal.kwinty.Presentation.Bean;
 
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandlePayment;
+import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
 import co.edu.unal.kwinty.DataAcess.Entity.Payment;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -38,7 +39,19 @@ public class ClientPaymentsBean {
     
     
     private List<Payment> payments;
+    private long product;
 
+    public long getProduct() {
+        return product;
+    }
+
+    public void setProduct(long product) {
+        this.product = product;
+    }
+
+    
+    
+    
     public List<Payment> getPayments() {
         return payments;
     }
@@ -66,5 +79,9 @@ public class ClientPaymentsBean {
         }
     }
 
-    
+    public void loadProductPayments(){
+        if(product == 0) return;
+        HandlePayment handlePayment = new HandlePayment();
+        payments = handlePayment.listByProduct(payments, this.product);
+   }
 }

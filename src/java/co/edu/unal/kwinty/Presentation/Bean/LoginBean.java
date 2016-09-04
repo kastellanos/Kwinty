@@ -33,13 +33,15 @@ public class LoginBean {
         }else{
             HandleUser handleUser = new HandleUser();
             String role = handleUser.getRole(username);
+            
+            System.out.println("role*** " + role);
 
-            if(role.equalsIgnoreCase("Cliente")){
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.getApplication().getNavigationHandler().handleNavigation(context, null, "admin_home.xhtml");
-            }else{
+            if(role.equalsIgnoreCase("Client")){
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getApplication().getNavigationHandler().handleNavigation(context, null, "client_home.xhtml");
+            }else{
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getApplication().getNavigationHandler().handleNavigation(context, null, "admin_home.xhtml");
             }
             /*try {
                 FacesContext.getCurrentInstance().getExternalContext().dispatch("admin_home.xhtml");

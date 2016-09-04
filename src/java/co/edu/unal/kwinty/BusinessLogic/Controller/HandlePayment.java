@@ -6,6 +6,7 @@
 package co.edu.unal.kwinty.BusinessLogic.Controller;
 
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.PaymentDAOImpl;
+import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
 import co.edu.unal.kwinty.DataAcess.Entity.Payment;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,14 @@ public class HandlePayment {
         PaymentDAOImpl paymentDAOImpl = new PaymentDAOImpl();
         return paymentDAOImpl.findByClient(client);
     }
-    
+
+    public List<Payment> listByProduct(List<Payment> allPayments, long product){
+        List<Payment> payments = new ArrayList<Payment>();
+        for(Payment p : allPayments){
+            if(p.getAcquiredproduct().getAcquiredproductPK().getProductid() == product) 
+                payments.add(p);
+        }
+        return payments;
+    }
     
 }
