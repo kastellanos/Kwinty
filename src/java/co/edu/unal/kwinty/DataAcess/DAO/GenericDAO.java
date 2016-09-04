@@ -15,10 +15,11 @@ import java.util.List;
  */
 public interface GenericDAO<T, PK extends Serializable> {
     
+    
     boolean create(T newInstance);
-    T read(PK id);
+    T findByPK(PK id);
     boolean update(T transientObject);
     void delete(T transientObject);
     PK getId( T transientObject );
-    public List<T> getAll();
+    public List<T> getAll( String namedQuery );
 }

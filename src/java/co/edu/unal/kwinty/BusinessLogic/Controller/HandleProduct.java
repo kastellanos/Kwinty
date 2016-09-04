@@ -64,7 +64,7 @@ public class HandleProduct {
     
     public Product findById(Long id){
         ProductDAOImpl productoDAO = new ProductDAOImpl();
-        return productoDAO.findById(id);
+        return productoDAO.findByPK(id);
     }
     
     public String deleteProduct(String current_user, Long id){
@@ -76,12 +76,12 @@ public class HandleProduct {
         }        
         
         ProductDAOImpl productDAO = new ProductDAOImpl();
-        Product product = productDAO.findById(id);
+        Product product = productDAO.findByPK(id);
         if(product == null){
             //productDAO.deleteProduct(product);
             return "El producto no existe.";
         }else{
-            productDAO.deleteProduct(product);
+            productDAO.delete(product);
             return "El producto ha sido borrado.";
         }}
 
@@ -89,12 +89,12 @@ public class HandleProduct {
     public String deleteProduct(Long id){
         
         ProductDAOImpl productDAO = new ProductDAOImpl();
-        Product product = productDAO.findById(id);
+        Product product = productDAO.findByPK(id);
         if(product == null){
             //productDAO.deleteProduct(product);
             return "El producto no existe.";
         }else{
-            productDAO.deleteProduct(product);
+            productDAO.delete(product);
             return "El producto ha sido borrado.";
         }}
         

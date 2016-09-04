@@ -13,6 +13,7 @@ import co.edu.unal.kwinty.DataAcess.Entity.Credentials;
  */
 public interface CredentialsDAO extends GenericDAO<Credentials, String>{
     
-    public Credentials searchByUsername(String uname);
+    //public Credentials searchByUsername(String uname);
+
     
 }

@@ -8,6 +8,7 @@ package co.edu.unal.kwinty.DataAcess.DAO.Implementation;
 import co.edu.unal.kwinty.DataAcess.DAO.GenericDAO;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -27,35 +28,14 @@ import javax.validation.ValidatorFactory;
 public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T,PK>{
     
     private EntityManagerFactory emf;
-    
-    public GenericDAOImpl() {
+    private Class<T> genericClass;
+    public GenericDAOImpl(){
+        
+    }
+    protected GenericDAOImpl( Class<T> implClass ) {
         emf = Persistence.createEntityManagerFactory("KwintyPU");
+        genericClass = implClass;
     }
-    /*
-    
-    
-    @Override
-    public boolean create(T newInstance) {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-    Set<ConstraintViolation<T>> constraintViolations = validator.validate(newInstance);
-    if(constraintViolations.size() > 0){
-        Iterator<ConstraintViolation<T>> iterator = constraintViolations.iterator();
-        while(iterator.hasNext()){
-            ConstraintViolation<T> cv = iterator.next();
-            System.err.println(cv.getRootBeanClass().getName()+"."+cv.getPropertyPath() + " " +cv.getMessage());
-            System.out.println(cv.getRootBeanClass().getSimpleName()+"."+cv.getPropertyPath() + " " +cv.getMessage());
-            
-        }
-        return false;
-    }else{
-        EntityManager em = emf.createEntityManager();
-        em.persist(newInstance);
-    }
-        return true;
-    }
-    
-    */
     @Override
     public boolean create(T newInstance) {
         EntityManager em = getEmf().createEntityManager();
@@ -75,14 +55,15 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     
     
     @Override
-    public T read(PK id) {
+    public T findByPK(PK id) {
         EntityManager em = getEmf().createEntityManager();
         T responseInstance = null;
-        Query q = em.createNamedQuery("User.findByUsername");
-        q.setParameter("username", id);
+        //Query q = em.createNamedQuery(namedQuery);
+        //q.setParameter(1, id);
         try {
-            responseInstance = (T) q.getSingleResult();
+            responseInstance = (T) em.find( genericClass, id);
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             em.close();
         }
@@ -117,11 +98,13 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
         EntityManager em = getEmf().createEntityManager();  
         em.getTransaction().begin();
         try {
+            transientObject = em.merge(transientObject);
             em.remove(transientObject); 
             //newInstance = em.merge(em.find(T.class, this.getId(transientObject)));
             //newInstance.setSomeVariable(transientObject.setSomeVariable);
             em.getTransaction().commit();
         } catch (Exception e){
+            e.printStackTrace();
             em.getTransaction().rollback();
         } finally {
             em.close();
@@ -129,8 +112,21 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     }
 
     @Override
-    public List<T> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<T> getAll(String namedQuery) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = getEmf().createEntityManager();
+        List<T> objects = new ArrayList<>();
+        Query q = em.createNamedQuery("Client.findAll");
+
+        try {
+            objects = q.getResultList();
+        } catch (Exception e) {
+
+        } finally {
+
+        em.close();
+        }
+        return objects;
     }
 /*
   private Class<T> getEntityClass(){

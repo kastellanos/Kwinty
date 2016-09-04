@@ -12,5 +12,6 @@ import co.edu.unal.kwinty.DataAcess.Entity.User;
  * @author Andres
  */
 public interface UserDAO extends GenericDAO<User, String>{
-    
+
+
 }

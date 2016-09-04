@@ -17,23 +17,11 @@ import javax.persistence.Persistence;
  */
 public class CredentialsDAOImpl extends GenericDAOImpl<Credentials, String> implements CredentialsDAO {
     
-    public EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("KwintyPU");
     
-    @Override
-    public Credentials searchByUsername(String uname) {
 
-        EntityManager em = emf1.createEntityManager();
-        Credentials c = null;
-
-        try {
-            c = em.find(Credentials.class, uname);
-        } catch (Exception e){
-               e.printStackTrace();
-               
-        } finally {
-            em.close();
-        }
-        return c;
+    public CredentialsDAOImpl() {
+        super(Credentials.class);
     }
     
+
 }

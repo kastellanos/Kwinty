@@ -17,80 +17,32 @@ import javax.persistence.Query;
  * @author Stephanie
  */
 public class ProductDAOImpl extends GenericDAOImpl<Product, Long> implements ProductDAO{
-    
-    public Product findById(Long id){
-        
-        EntityManager em = getEmf().createEntityManager();
-        Product product = null;
-        Query q = em.createNamedQuery("Product.findById");
-        q.setParameter("id", id);
 
-        try {
-            product = (Product) q.getSingleResult();
-        } catch (Exception e) {
-            //e.printStackTrace();
-        } finally {
-
-        em.close();
-        }
-        return product;
+    public ProductDAOImpl() {
+        super(Product.class);
     }
-    
-    public Product findByType(String type){
-        
-        EntityManager em = getEmf().createEntityManager();
-        Product product = null;
-       
-        Query q = em.createNamedQuery("Product.findByType");
-        q.setParameter("type", type);
 
-        try {
-            //product = (Product) q.getSingleResult();
-            List<Product> results = q.getResultList();
-            if(!results.isEmpty()){
-                product = results.get(0);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-
-        em.close();
-        }
-        
-        return product;
-    }
-    
     @Override
-    public List<Product> getAll(){
+    public Product findByType(String type) {
         EntityManager em = getEmf().createEntityManager();
-        List<Product> products = new ArrayList<>();
-        Query q = em.createNamedQuery("Product.findAll");
-
+        Product responseInstance = null;
+        Query q = em.createNamedQuery(FINDBYTYPE);
+        q.setParameter(1, type);
         try {
-            products = q.getResultList();
+            responseInstance = (Product) q.getSingleResult();
         } catch (Exception e) {
-
-        } finally {
-
-        em.close();
-        }
-        return products;
-    }
-
-   
-    public void deleteProduct(Product product) {
-        
-        EntityManager em = getEmf().createEntityManager();
-        em.getTransaction().begin();
-        try{
-            product = em.merge(product);
-            em.remove(product);
-            em.getTransaction().commit();
-        }catch(Exception e){
-            //em.getTransaction().rollback();
             e.printStackTrace();
-        }finally{
+        } finally {
             em.close();
         }
+        return responseInstance;
     }
+    public List<Product> getAll(){
+        return super.getAll(FINDALL);
+    }
+    
+    private final static String FINDALL= "Product.findAll";
+    private final static String FINDBYTYPE= "Product.findByType";
+
+    
 }

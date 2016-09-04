@@ -34,7 +34,7 @@ public class HandleUser {
         
         boolean created = false;
         if(role.equals("client")){
-            Client client = new Client(username, phone_number, email, payment_capacity);
+            Client client = new Client(username, phone_number, email, address, payment_capacity);
             client.setUser(user);
             ClientDAOImpl clientDAO = new ClientDAOImpl();
             created = clientDAO.create(client);
@@ -58,7 +58,7 @@ public class HandleUser {
         
         boolean created = false;
         if(role.equals("client")){
-            Client client = new Client(username, phone_number, email, payment_capacity);
+            Client client = new Client(username, phone_number, email, address, payment_capacity);
             client.setUser(user);
             ClientDAOImpl clientDAO = new ClientDAOImpl();
             created = clientDAO.create(client);
