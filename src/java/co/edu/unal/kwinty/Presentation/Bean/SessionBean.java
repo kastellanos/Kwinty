@@ -6,6 +6,7 @@
 package co.edu.unal.kwinty.Presentation.Bean;
 
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandlePermissions;
+import co.edu.unal.kwinty.BusinessLogic.Controller.HandleSession;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.CredentialsDAOImpl;
 import co.edu.unal.kwinty.DataAcess.Entity.Credentials;
 import javax.faces.bean.ApplicationScoped;
@@ -24,10 +25,17 @@ public class SessionBean {
     private String username;
     private String message;
     private String role;
+    private boolean active;
 
     public void checkSession() {
-        HandlePermissions permission = new HandlePermissions();
-        
+        HandleSession session = new HandleSession();
+        if(session.checkSession()) {
+            active = true;
+            username = session.SessionUsername();
+            role = session.SessionRole();
+        }else{
+            active = false;
+        }
     }
 
     public void setMessage(String message) {
@@ -52,6 +60,14 @@ public class SessionBean {
 
     public String getRole() {
         return role;
+    }
+    
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isActive() {
+        return active;
     }
         
 }
