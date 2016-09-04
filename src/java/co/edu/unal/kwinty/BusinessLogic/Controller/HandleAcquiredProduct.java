@@ -25,14 +25,14 @@ public class HandleAcquiredProduct {
     
     private Client client;
     
-    public Client searchClient(int id){
+    public Client searchClient(String username){
         
         UserDAOImpl userDAO = new UserDAOImpl();
         ClientDAOImpl clientDAO = new ClientDAOImpl();
-        User user = userDAO.findById(id);
+        User user = userDAO.findByPK(username);
         Client client = null;
         if(user.getRole().equals("client")){
-            client = clientDAO.findByUsername(user.getUsername());
+            client = clientDAO.findByPK(user.getUsername());
         }
         return client;
     }
@@ -41,7 +41,7 @@ public class HandleAcquiredProduct {
         
         ProductDAOImpl productDAO = new ProductDAOImpl();
         Product product = null;
-        product = productDAO.findById(id);
+        product = productDAO.findByPK(id);
         return product;
     }
     
@@ -52,7 +52,7 @@ public class HandleAcquiredProduct {
         ClientDAOImpl clientDAO = new ClientDAOImpl();
         
         Product product = productDAO.findByType(productType);
-        Client client = clientDAO.findByUsername(clientName);
+        Client client = clientDAO.findByPK(clientName);
         if(client == null) System.err.print("Cliente encontrado" + client.toString());
         if(product == null) System.err.print("Producto encontrado: " + product.toString());
         

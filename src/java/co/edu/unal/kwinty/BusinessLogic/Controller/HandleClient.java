@@ -19,7 +19,7 @@ public class HandleClient {
     public boolean clientExists(String clientName){
         ClientDAOImpl clientDAO = new ClientDAOImpl();
         Client client = null;
-        client = clientDAO.findByUsername(clientName);
+        client = clientDAO.findByPK(clientName);
         
         if(client != null){
             return true;
@@ -35,8 +35,27 @@ public class HandleClient {
         return clients;
     }
     
+        
+    public List<Client> getClientByUsername(List<Client> allClients, String id){
+        ArrayList<Client> clients = new ArrayList<>();
+        for(Client c : allClients){
+            if(c.getUser().getUsername().equals(id) ) clients.add(c);
+        }
+        return clients;
+    }
+    
     public List<Client> listAll(){
         ClientDAOImpl clientDAO = new ClientDAOImpl();
         return clientDAO.getAll();
+    }
+    
+    public void deleteClient( Client client ){
+        ClientDAOImpl clientDAO = new ClientDAOImpl();
+        clientDAO.delete(client);
+    }
+    
+    public void updateClient( Client client ){
+        ClientDAOImpl clientDAO = new ClientDAOImpl();
+        clientDAO.update(client);
     }
 }

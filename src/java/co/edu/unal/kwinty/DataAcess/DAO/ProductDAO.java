@@ -13,4 +13,5 @@ import co.edu.unal.kwinty.DataAcess.Entity.Product;
  */
 public interface ProductDAO extends GenericDAO<Product, Long>{
 
+    public Product findByType(String type);
 }

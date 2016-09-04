@@ -15,4 +15,8 @@ import co.edu.unal.kwinty.DataAcess.Entity.Admin;
  */
 public class AdminDAOImpl extends GenericDAOImpl<Admin, String> implements AdminDAO{
     
+    public AdminDAOImpl() {
+        super(Admin.class);
+    }
+    
 }

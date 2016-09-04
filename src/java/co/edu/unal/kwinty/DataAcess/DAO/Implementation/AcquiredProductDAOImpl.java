@@ -14,5 +14,9 @@ import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
  */
 public class AcquiredProductDAOImpl extends GenericDAOImpl<Acquiredproduct, Long> implements AcquiredProductDAO{
     
+    public AcquiredProductDAOImpl() {
+        super(Acquiredproduct.class);
+    }
+    
     
 }

@@ -23,7 +23,7 @@ public class LoginUser {
         FacesContext context = FacesContext.getCurrentInstance();
         CredentialsDAOImpl cdi = new CredentialsDAOImpl();
         //System.out.println("Hola Mundo "+username);
-        Credentials check = cdi.searchByUsername(username);
+        Credentials check = cdi.findByPK(username);
                              
         if (check != null ) {
             if(check.getPassword().equals(password)){

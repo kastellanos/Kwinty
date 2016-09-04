@@ -10,8 +10,9 @@ import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
 
 /**
  *
@@ -21,11 +22,12 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 
 public class ConsultClientBean implements Serializable {
-
+    private Client editClient;
     private long id;
     private List<Client> clients;
     private String message1;
-
+    private HandleClient clientHandler;
+    
     public String getMessage1() {
         return message1;
     }
@@ -50,14 +52,43 @@ public class ConsultClientBean implements Serializable {
         this.clients = clients;
     }
 
+    public Client getEditClient() {
+        return editClient;
+    }
+
+    public void setEditClient(Client editClient) {
+        this.editClient = editClient;
+    }
+
+    
     public void getClient(long id) {
-        HandleClient clientHandler = new HandleClient();
+        //clientHandler = new HandleClient();
         clients = clientHandler.getClient(clients, id);
     }
-
+public void getClientByUsername(String id) {
+        //clientHandler = new HandleClient();
+        editClient = clientHandler.getClientByUsername(clients, id).get(0);
+        System.out.println(editClient.getClientusername());
+    }
     public ConsultClientBean() {
-        HandleClient clientHandler = new HandleClient();
+        clientHandler = new HandleClient();
         clients = clientHandler.listAll();
     }
-
+   /* public List<Client> listAllClients(){
+        
+    }*/
+    
+    public void deleteClient( Client client ){
+        System.out.println("Se eliminara el usuario " + client);
+        clientHandler.deleteClient(client);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getApplication().getNavigationHandler().handleNavigation(context, null, "clientes.xhtml");
+        
+    }
+    public void updateClient( Client client ){
+        System.out.println("Se actualizara el usuario " + client);
+        clientHandler.updateClient(client);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getApplication().getNavigationHandler().handleNavigation(context, null, "clientes.xhtml");
+    }
 }
