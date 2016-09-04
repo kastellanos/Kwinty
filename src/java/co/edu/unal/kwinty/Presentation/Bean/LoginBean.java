@@ -5,6 +5,8 @@
  */
 package co.edu.unal.kwinty.Presentation.Bean;
 
+import co.edu.unal.kwinty.BusinessLogic.Controller.HandleClient;
+import co.edu.unal.kwinty.BusinessLogic.Controller.HandleUser;
 import co.edu.unal.kwinty.BusinessLogic.Controller.LoginUser;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -29,8 +31,16 @@ public class LoginBean {
         if(message != null){
             ;
         }else{
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.getApplication().getNavigationHandler().handleNavigation(context, null, "admin_home.xhtml");
+            HandleUser handleUser = new HandleUser();
+            String role = handleUser.getRole(username);
+
+            if(role.equalsIgnoreCase("Cliente")){
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getApplication().getNavigationHandler().handleNavigation(context, null, "admin_home.xhtml");
+            }else{
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getApplication().getNavigationHandler().handleNavigation(context, null, "client_home.xhtml");
+            }
             /*try {
                 FacesContext.getCurrentInstance().getExternalContext().dispatch("admin_home.xhtml");
             } catch (IOException ex) {

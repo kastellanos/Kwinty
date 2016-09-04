@@ -116,7 +116,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         EntityManager em = getEmf().createEntityManager();
         List<T> objects = new ArrayList<>();
-        Query q = em.createNamedQuery("Client.findAll");
+        Query q = em.createNamedQuery(namedQuery);
 
         try {
             objects = q.getResultList();

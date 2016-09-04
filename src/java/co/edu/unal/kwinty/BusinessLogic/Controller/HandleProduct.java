@@ -8,6 +8,7 @@ package co.edu.unal.kwinty.BusinessLogic.Controller;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ProductDAOImpl;
 import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
 import co.edu.unal.kwinty.DataAcess.Entity.Product;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +16,15 @@ import java.util.List;
  * @author stephanie
  */
 public class HandleProduct {
+
+
+    public List<Product> getProductById(List<Product> allProducts, Long id){
+        ArrayList<Product> products = new ArrayList<>();
+        for(Product c : allProducts){
+            if(c.getId().equals(id) ) products.add(c);
+        }
+        return products;
+    }
     
 
     public String updateProduct(String current_user, String type, String feeType, String interestType, int maxNumberFees, float interestRate){
@@ -98,5 +108,18 @@ public class HandleProduct {
             return "El producto ha sido borrado.";
         }}
         
+    public List<Product> getProduct(List<Product> allProducts, long id){
+        ArrayList<Product> products = new ArrayList<>();
+        for(Product c : allProducts){
+            if(c.getId() == id) products.add(c);
+        }
+        return products;
+    }
+
+    public void updateProduct( Product product ){
+        ProductDAOImpl productDAO = new ProductDAOImpl();
+        productDAO.update(product);
+    }
+
     
 }

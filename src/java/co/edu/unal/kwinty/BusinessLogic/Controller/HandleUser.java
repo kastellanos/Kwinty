@@ -74,5 +74,12 @@ public class HandleUser {
             return "El usuario no pudo ser creado.";  
     }
 
-    
+    public String getRole(String username){
+        UserDAOImpl userDAO = new UserDAOImpl();
+        User userPersisted = userDAO.findByPK(username);
+        if(userPersisted == null){ 
+            return null;
+        }
+        return userPersisted.getRole();
+    }
 }
