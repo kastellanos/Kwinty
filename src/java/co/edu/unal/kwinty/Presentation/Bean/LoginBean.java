@@ -16,7 +16,7 @@ import javax.faces.context.FacesContext;
  *
  * @author Andres
  */
-@ManagedBean
+@ManagedBean(name="loginBean",eager = true)
 @ApplicationScoped
 public class LoginBean {
 
