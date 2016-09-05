@@ -17,6 +17,7 @@ import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import co.edu.unal.kwinty.DataAcess.Entity.Payment;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -50,9 +51,12 @@ public class HandlePayment {
         float currentPaid = ap.getAmountPaid();
         currentPaid += amount;
         
-        if (currentPaid <= ap.getAmount()) {
+        if (ap.getPaymentCollection().size() <= ap.getNumberFees() ) {
             boolean created = paymentDAO.create(payment);
             ap.setAmountPaid(currentPaid);
+            Collection<Payment> temp = ap.getPaymentCollection();
+            temp.add(payment);
+            ap.setPaymentCollection(temp);
             apDAO.update(ap);
             if ( created == true ){          
                 return "El producto ha sido creado.";
@@ -91,7 +95,7 @@ public class HandlePayment {
     public List<Payment> listByProduct(List<Payment> allPayments, long product){
         List<Payment> payments = new ArrayList<Payment>();
         for(Payment p : allPayments){
-            if(p.getAcquiredproductid().getProductid().getId() == product){ 
+            if(p.getAcquiredproductid().getId() == product){ 
                 payments.add(p);
             }
         }
