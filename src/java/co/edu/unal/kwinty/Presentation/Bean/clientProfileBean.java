@@ -23,7 +23,7 @@ public class clientProfileBean {
     
     @PostConstruct
     public void init(){
-        client = new HandleClient().clientGetClient(loginBean.getUsername());
+        //client = new HandleClient().clientGetClient(loginBean.getUsername());
         System.out.println("Hello World init " +loginBean.getUsername());
         
     }
