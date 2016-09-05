@@ -71,7 +71,11 @@ public class Payment implements Serializable {
         this.date = date;
         this.amount = amount;
     }
-
+public Payment( Date date, float amount) {
+        
+        this.date = date;
+        this.amount = amount;
+    }
     public Long getId() {
         return id;
     }
