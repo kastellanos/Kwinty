@@ -71,6 +71,10 @@ public class CreateAcquiredProductBean implements Serializable {
         }
     }
 
+    public void prepareClient() {
+
+        System.out.println("Prepare: " + clientName);
+    }
     /**
      * @return the numberFees
      */
