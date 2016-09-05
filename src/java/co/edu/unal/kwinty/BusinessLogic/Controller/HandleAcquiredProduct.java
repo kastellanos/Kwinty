@@ -47,7 +47,7 @@ public class HandleAcquiredProduct {
     
     //private Date acquisitionDate;
 
-    public String createAcquiredProduct(int numberFees, float amount, float feeAmount, float amountPaid, String reference, float feeIncrementRate, String productType,String clientName) {
+    public String createAcquiredProduct(int numberFees, float amount, float amountPaid, String reference, float feeIncrementRate, String productType,String clientName) {
         ProductDAOImpl productDAO = new ProductDAOImpl();
         ClientDAOImpl clientDAO = new ClientDAOImpl();
         
@@ -55,6 +55,16 @@ public class HandleAcquiredProduct {
         Client client = clientDAO.findByPK(clientName);
         if(client == null) System.err.print("Cliente encontrado" + client.toString());
         if(product == null) System.err.print("Producto encontrado: " + product.toString());
+        
+        // Product -> AcquiredProduct verifications
+        int max_fees = product.getMaxNumberFees();
+        if (numberFees > max_fees) {
+            return "El producto no fue creado. Excede numero de cuotas maximo";
+        }
+        
+        // Calculate feeAmount
+        float[] fees = calculateFees(numberFees, amount, max_fees);
+        float feeAmount = fees[1];
         
         AcquiredproductPK clientProduct = new AcquiredproductPK(clientName, product.getId());
         Date today = new Date();
@@ -89,6 +99,54 @@ public class HandleAcquiredProduct {
         return acquiredProductDAOImpl.findByClient(client);
     }
 
+    
+    public float[] calculateFees(int numberFees, float amount, long productID ){
+        Product currentProduct = searchProduct(productID);
+        String fee_type = currentProduct.getFeeType();
+        String interest_type = currentProduct.getInterestType();
+        float interest = currentProduct.getInterestRate();
+        float paid = 0;
+        float[] fees = new float[numberFees];
+        
+        /* Interest type */
+        if (interest_type.equals("Simple")) {
+            paid = amount + (amount * interest);                                
+        }else if (interest_type.equals("Compuesto")) {
+            paid = (float) (amount * Math.pow(1 + interest, numberFees));    
+        }
+        
+        /* Fee type */
+        switch (fee_type) {
+            case "Cuota inicial":
+                {
+                    fees[0] = (float) (paid * 0.2);
+                    paid -= paid * 0.2;
+                    float feed = paid / (numberFees - 1);
+                    for (int i = 1; i < numberFees; i++) {
+                        fees[i] = feed;
+                    }       break;
+                }
+            case "Sin cuota inicial":
+                {
+                    fees[0] = 0;
+                    float feed = paid / (numberFees - 1);
+                    for (int i = 1; i < numberFees; i++) {
+                        fees[i] = feed;
+                    }       break;
+                }            
+            case "Fija":
+                {
+                    float feed = paid / numberFees;
+                    for (int i = 1; i < numberFees; i++) {
+                        fees[i] = feed;
+                    }       break;
+                }
+            default:
+                break;
+        }
+        
+        return fees;
+    }
     
     
  }
