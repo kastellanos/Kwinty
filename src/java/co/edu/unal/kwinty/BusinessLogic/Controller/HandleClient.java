@@ -19,7 +19,8 @@ public class HandleClient {
     public boolean clientExists(String clientName){
         ClientDAOImpl clientDAO = new ClientDAOImpl();
         Client client = null;
-        client = clientDAO.findByPK(clientName);
+        client = clientDAO.findByUsername(clientName);
+        
         
         if(client != null){
             return true;

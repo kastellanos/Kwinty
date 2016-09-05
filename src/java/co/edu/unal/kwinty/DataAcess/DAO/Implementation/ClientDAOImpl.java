@@ -30,6 +30,12 @@ public class ClientDAOImpl extends GenericDAOImpl<Client, String> implements Cli
 
     @Override
     public List<Acquiredproduct> getClientAdquiredProducts(String username) {
+        List<Acquiredproduct> products;
+        if(super.findByPK(username).getAcquiredproductCollection() == null){
+            System.err.println("Nulo!!!!!!!!!!!!!!!!");
+            return new ArrayList<>();
+        }
+        
         return (List<Acquiredproduct>) super.findByPK(username).getAcquiredproductCollection();
     }
 
@@ -42,10 +48,23 @@ public class ClientDAOImpl extends GenericDAOImpl<Client, String> implements Cli
         }
         return returnList;
     }
+    
+     public Client findByUsername(String username){
+        EntityManager em = getEmf().createEntityManager();
+        Client client = null;
+        Query q = em.createNamedQuery(FINDBYUSERNAME);
+        q.setParameter("username", username);
+        try {
+            client = (Client) q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return client;
+    }
 
-  
-
-
+     private final static String FINDBYUSERNAME = "Client.findByUsername";
 
     }
 

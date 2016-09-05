@@ -27,7 +27,7 @@ public class ProductDAOImpl extends GenericDAOImpl<Product, Long> implements Pro
         EntityManager em = getEmf().createEntityManager();
         Product responseInstance = null;
         Query q = em.createNamedQuery(FINDBYTYPE);
-        q.setParameter(1, type);
+        q.setParameter("type", type);
         try {
             responseInstance = (Product) q.getSingleResult();
         } catch (Exception e) {
