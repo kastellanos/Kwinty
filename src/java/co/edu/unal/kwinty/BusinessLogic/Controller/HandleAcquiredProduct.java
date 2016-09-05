@@ -10,7 +10,6 @@ import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ClientDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ProductDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.UserDAOImpl;
 import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
-import co.edu.unal.kwinty.DataAcess.Entity.AcquiredproductPK;
 import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import co.edu.unal.kwinty.DataAcess.Entity.Product;
 import co.edu.unal.kwinty.DataAcess.Entity.User;
@@ -66,10 +65,12 @@ public class HandleAcquiredProduct {
         float[] fees = calculateFees(numberFees, amount, max_fees);
         float feeAmount = fees[1];
         
-        AcquiredproductPK clientProduct = new AcquiredproductPK(clientName, product.getId());
-        Date today = new Date();
-        Acquiredproduct acquiredproduct = new Acquiredproduct(clientProduct,numberFees,amount, feeAmount, amountPaid, today, feeIncrementRate);
         
+        Date today = new Date();
+        Acquiredproduct acquiredproduct = new Acquiredproduct(numberFees,amount, feeAmount, amountPaid, today, feeIncrementRate);
+         acquiredproduct.setUsernameId(client);
+         acquiredproduct.setProductid(product);
+         
         AcquiredProductDAOImpl acquiredProductDAOImpl = new AcquiredProductDAOImpl();
         boolean created = acquiredProductDAOImpl.create(acquiredproduct);
         
@@ -96,11 +97,13 @@ public class HandleAcquiredProduct {
 
     public List<Acquiredproduct> findByClient(String client){
         AcquiredProductDAOImpl acquiredProductDAOImpl = new AcquiredProductDAOImpl();
-        return acquiredProductDAOImpl.findByClient(client);
+        ClientDAOImpl clientDAOImpl = new ClientDAOImpl();
+        return clientDAOImpl.getClientAdquiredProducts(client);
     }
 
     
     public float[] calculateFees(int numberFees, float amount, long productID ){
+        
         Product currentProduct = searchProduct(productID);
         String fee_type = currentProduct.getFeeType();
         String interest_type = currentProduct.getInterestType();

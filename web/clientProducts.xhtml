@@ -23,6 +23,7 @@
               <table id="mytable" class="table table-bordred table-striped">
                    
                    <thead>
+                     <th>Proyección</th>  
                      <th>Pagos</th>                   
                      <th>Id</th>
                      <th>Fecha</th>
@@ -40,23 +41,32 @@
               <ui:repeat var="product" value="#{clientProductsBean.acquiredproducts}" rendered="true">
 							<tr>
                                                             
+                                                            <td><h:form>
+                                                                
+                                                                    
+                                                                    <h:link outcome="proyeccion"  styleClass="btn btn-primary btn-xs"  value="proyección" >
+                                                                
+                                                                        <f:param name="adquired_product" value="#{product.id}"></f:param>
+                                                                </h:link>
                                                             
+                                                            </h:form>
+                                                            </td>
                                                             <td><h:form>
                                                                 <p data-placement="top" data-toggle="tooltip" title="Consult"> 
                                                                     
                                                                 <h:button outcome="clientPayments"  styleClass="btn btn-primary btn-xs" a:data-title="E" a:data-toggle="modal" a:data-target="#consult" >
                                                                 <span class="glyphicon glyphicon-search"></span>
-                                                                <f:param name="product" value="#{product.acquiredproductPK.productid}"></f:param>
+                                                                <f:param name="product" value="#{product.id}"></f:param>
                                                                 </h:button></p>
                                                             
                                                             </h:form>
                                                             </td>
 
 
-                                                            <td>#{product.acquiredproductPK.productid}</td>
+                                                            <td>#{product.productid.id}</td>
                                                             <td>#{product.acquisitionDate}</td>
-                                                            <td>#{product.product.type}</td>
-                                                            <td>#{product.product.interestRate}</td>
+                                                            <td>#{product.productid.type}</td>
+                                                            <td>#{product.productid.interestRate}</td>
                                                             <td>#{product.numberFees}</td>
                                                             <td>#{product.amount}</td>
                                                             <td>#{product.amountPaid}</td>

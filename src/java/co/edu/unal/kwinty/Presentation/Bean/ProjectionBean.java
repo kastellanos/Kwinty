@@ -84,5 +84,9 @@ public class ProjectionBean {
     public void setMessage(String message) {
         this.message = message;
     }
-
+    public void createProjection(){
+        HandleAcquiredProduct viewProyection = new HandleAcquiredProduct();
+        //proyection = viewProyection.calculateFees(productID);
+        
+    }
 }

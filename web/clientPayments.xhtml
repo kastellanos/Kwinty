@@ -43,11 +43,11 @@
               
               <ui:repeat var="payment" value="#{clientPaymentsBean.payments}" rendered="true">
 							<tr>
-                                                            <td>#{payment.paymentPK.id}</td>
+                                                            <td>#{payment.id}</td>
                                                             <td>#{payment.date}</td>
-                                                            <td>#{payment.acquiredproduct.product.type}</td>
+                                                            <td>#{payment.acquiredproductid.productid.type}</td>
                                                             <td>#{payment.amount}</td>
-                                                            <td>#{payment.paymentPK.adminusername}</td>
+                                                            <td>#{payment.adminusername.username}</td>
 							</tr>
 						</ui:repeat>
 

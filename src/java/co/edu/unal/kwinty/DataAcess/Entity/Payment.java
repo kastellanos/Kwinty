@@ -9,10 +9,11 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,17 +32,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p"),
-    @NamedQuery(name = "Payment.findById", query = "SELECT p FROM Payment p WHERE p.paymentPK.id = :id"),
-    @NamedQuery(name = "Payment.findByClientusername", query = "SELECT p FROM Payment p WHERE p.paymentPK.clientusername = :clientusername"),
-    @NamedQuery(name = "Payment.findByProductid", query = "SELECT p FROM Payment p WHERE p.paymentPK.productid = :productid"),
-    @NamedQuery(name = "Payment.findByAdminusername", query = "SELECT p FROM Payment p WHERE p.paymentPK.adminusername = :adminusername"),
+    @NamedQuery(name = "Payment.findById", query = "SELECT p FROM Payment p WHERE p.id = :id"),
     @NamedQuery(name = "Payment.findByDate", query = "SELECT p FROM Payment p WHERE p.date = :date"),
     @NamedQuery(name = "Payment.findByAmount", query = "SELECT p FROM Payment p WHERE p.amount = :amount")})
 public class Payment implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected PaymentPK paymentPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Long id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date")
@@ -51,38 +52,32 @@ public class Payment implements Serializable {
     @NotNull
     @Column(name = "amount")
     private float amount;
-    @JoinColumns({
-        @JoinColumn(name = "Client_username", referencedColumnName = "Client_username", insertable = false, updatable = false),
-        @JoinColumn(name = "Product_id", referencedColumnName = "Product_id", insertable = false, updatable = false)})
+    @JoinColumn(name = "Acquiredproduct_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Acquiredproduct acquiredproduct;
-    @JoinColumn(name = "Admin_username", referencedColumnName = "Admin_username", insertable = false, updatable = false)
+    private Acquiredproduct acquiredproductid;
+    @JoinColumn(name = "Admin_username", referencedColumnName = "username")
     @ManyToOne(optional = false)
-    private Admin admin;
+    private Admin adminusername;
 
     public Payment() {
     }
 
-    public Payment(PaymentPK paymentPK) {
-        this.paymentPK = paymentPK;
+    public Payment(Long id) {
+        this.id = id;
     }
 
-    public Payment(PaymentPK paymentPK, Date date, float amount) {
-        this.paymentPK = paymentPK;
+    public Payment(Long id, Date date, float amount) {
+        this.id = id;
         this.date = date;
         this.amount = amount;
     }
 
-    public Payment(long id, String clientusername, long productid, String adminusername) {
-        this.paymentPK = new PaymentPK(id, clientusername, productid, adminusername);
+    public Long getId() {
+        return id;
     }
 
-    public PaymentPK getPaymentPK() {
-        return paymentPK;
-    }
-
-    public void setPaymentPK(PaymentPK paymentPK) {
-        this.paymentPK = paymentPK;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getDate() {
@@ -101,26 +96,26 @@ public class Payment implements Serializable {
         this.amount = amount;
     }
 
-    public Acquiredproduct getAcquiredproduct() {
-        return acquiredproduct;
+    public Acquiredproduct getAcquiredproductid() {
+        return acquiredproductid;
     }
 
-    public void setAcquiredproduct(Acquiredproduct acquiredproduct) {
-        this.acquiredproduct = acquiredproduct;
+    public void setAcquiredproductid(Acquiredproduct acquiredproductid) {
+        this.acquiredproductid = acquiredproductid;
     }
 
-    public Admin getAdmin() {
-        return admin;
+    public Admin getAdminusername() {
+        return adminusername;
     }
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
+    public void setAdminusername(Admin adminusername) {
+        this.adminusername = adminusername;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (paymentPK != null ? paymentPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -131,7 +126,7 @@ public class Payment implements Serializable {
             return false;
         }
         Payment other = (Payment) object;
-        if ((this.paymentPK == null && other.paymentPK != null) || (this.paymentPK != null && !this.paymentPK.equals(other.paymentPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -139,7 +134,7 @@ public class Payment implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.unal.kwinty.DataAcess.Entity.Payment[ paymentPK=" + paymentPK + " ]";
+        return "paparazi.Payment[ id=" + id + " ]";
     }
     
 }

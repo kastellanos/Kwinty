@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a"),
-    @NamedQuery(name = "Admin.findByAdminusername", query = "SELECT a FROM Admin a WHERE a.adminusername = :adminusername")})
+    @NamedQuery(name = "Admin.findByUsername", query = "SELECT a FROM Admin a WHERE a.username = :username"),
+    @NamedQuery(name = "Admin.findByBranchOffice", query = "SELECT a FROM Admin a WHERE a.branchOffice = :branchOffice")})
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,35 +41,38 @@ public class Admin implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-    @Column(name = "Admin_username")
-    private String adminusername;
-    @JoinColumn(name = "Admin_username", referencedColumnName = "username", insertable = false, updatable = false)
-    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
-    private User user;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "admin")
+    @Column(name = "username")
+    private String username;
+    @Size(max = 45)
+    @Column(name = "branch_office")
+    private String branchOffice;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adminusername")
     private Collection<Payment> paymentCollection;
+    @JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST )
+    private User user;
 
     public Admin() {
     }
 
-    public Admin(String adminusername) {
-        this.adminusername = adminusername;
+    public Admin(String username) {
+        this.username = username;
     }
 
-    public String getAdminusername() {
-        return adminusername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAdminusername(String adminusername) {
-        this.adminusername = adminusername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public User getUser() {
-        return user;
+    public String getBranchOffice() {
+        return branchOffice;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setBranchOffice(String branchOffice) {
+        this.branchOffice = branchOffice;
     }
 
     @XmlTransient
@@ -80,10 +84,18 @@ public class Admin implements Serializable {
         this.paymentCollection = paymentCollection;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (adminusername != null ? adminusername.hashCode() : 0);
+        hash += (username != null ? username.hashCode() : 0);
         return hash;
     }
 
@@ -94,7 +106,7 @@ public class Admin implements Serializable {
             return false;
         }
         Admin other = (Admin) object;
-        if ((this.adminusername == null && other.adminusername != null) || (this.adminusername != null && !this.adminusername.equals(other.adminusername))) {
+        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
             return false;
         }
         return true;
@@ -102,7 +114,7 @@ public class Admin implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.unal.kwinty.DataAcess.Entity.Admin[ adminusername=" + adminusername + " ]";
+        return "paparazi.Admin[ username=" + username + " ]";
     }
     
 }

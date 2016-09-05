@@ -20,7 +20,7 @@ public class AcquiredProductDAOImpl extends GenericDAOImpl<Acquiredproduct, Long
     public AcquiredProductDAOImpl() {
         super(Acquiredproduct.class);
     }
-
+/*
     public List<Acquiredproduct> findByClient(String username) {
         EntityManager em = getEmf().createEntityManager();
         List<Acquiredproduct> responseInstance = null;
@@ -34,7 +34,22 @@ public class AcquiredProductDAOImpl extends GenericDAOImpl<Acquiredproduct, Long
             em.close();
         }
         return responseInstance;
-    }
+    }*/
+    
+      /*  public List<Acquiredproduct> findByClient(String username) {
+        EntityManager em = getEmf().createEntityManager();
+        List<Acquiredproduct> responseInstance = null;
+        Query q = em.createNamedQuery(FINDBYCLIENT);
+        q.setParameter("clientusername", username);
+        try {
+            responseInstance =  q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return responseInstance;
+    }*/
     
     
     public List<Acquiredproduct> getAll(){
@@ -42,7 +57,7 @@ public class AcquiredProductDAOImpl extends GenericDAOImpl<Acquiredproduct, Long
     }
     
     private final static String FINDALL= "Acquiredproduct.findAll";
-    private final static String FINDBYCLIENT= "Acquiredproduct.findByClientusername";
+    private final static String FINDBYCLIENT= "Client.findByUsername";
     
     
 }

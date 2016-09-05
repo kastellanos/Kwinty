@@ -66,8 +66,7 @@ public class User implements Serializable {
     private Admin admin;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Client client;
-    @JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
-    @OneToOne(optional = false,cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Credentials credentials;
 
     public User() {
@@ -171,7 +170,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.unal.kwinty.DataAcess.Entity.User[ username=" + username + " ]";
+        return "paparazi.User[ username=" + username + " ]";
     }
     
 }
