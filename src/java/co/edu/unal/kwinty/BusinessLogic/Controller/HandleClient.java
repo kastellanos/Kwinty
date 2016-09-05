@@ -35,7 +35,7 @@ public class HandleClient {
         return clients;
     }
     
-        
+   
     public List<Client> getClientByUsername(List<Client> allClients, String id){
         ArrayList<Client> clients = new ArrayList<>();
         for(Client c : allClients){
@@ -57,5 +57,10 @@ public class HandleClient {
     public void updateClient( Client client ){
         ClientDAOImpl clientDAO = new ClientDAOImpl();
         clientDAO.update(client);
+    }
+    
+    public Client clientGetClient( String username ){
+        ClientDAOImpl clientDAO = new ClientDAOImpl();
+        return clientDAO.findByPK(username);
     }
 }
