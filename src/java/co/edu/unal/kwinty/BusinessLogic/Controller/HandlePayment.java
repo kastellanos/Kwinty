@@ -5,10 +5,16 @@
  */
 package co.edu.unal.kwinty.BusinessLogic.Controller;
 
+import co.edu.unal.kwinty.DataAcess.DAO.Implementation.AcquiredProductDAOImpl;
+import co.edu.unal.kwinty.DataAcess.DAO.Implementation.AdminDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.PaymentDAOImpl;
 import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
+import co.edu.unal.kwinty.DataAcess.Entity.Admin;
+import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import co.edu.unal.kwinty.DataAcess.Entity.Payment;
+import co.edu.unal.kwinty.DataAcess.Entity.PaymentPK;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +22,40 @@ import java.util.List;
  * @author sebchaparr
  */
 public class HandlePayment {
+    
+    public String registerPayment(Long apID, String admin){
+        AcquiredProductDAOImpl apDAO = new AcquiredProductDAOImpl();
+        Acquiredproduct ap = apDAO.findByPK(apID);
+        AdminDAOImpl adi = new AdminDAOImpl();
+        PaymentDAOImpl pay = new PaymentDAOImpl();
+        Admin ad = adi.findByPK(admin);
+        Client client = ap.getClient();
+        float amount = ap.getFeeAmount();
+        String user = client.getClientusername();
+        long id = pay.getAll().size();
+        
+        if(ap == null) System.err.print("Product doesnt exist" + ap.toString());
+        if(ad == null) System.err.print("Admin doesnt exist: " + ad.toString());
+        
+        PaymentPK payPK = new PaymentPK(id, user, apID, admin);
+        Date today = new Date();
+        Payment payment = new Payment(payPK, today, amount);
+        
+        PaymentDAOImpl paymentDAO = new PaymentDAOImpl();
+        float currentPaid = ap.getAmountPaid();
+        currentPaid += amount;
+        
+        if (currentPaid <= ap.getAmount()) {
+            boolean created = paymentDAO.create(payment);
+            ap.setAmountPaid(currentPaid);
+            if ( created == true ){          
+                return "El producto ha sido creado.";
+            }          
+            else
+                return "El producto no pudo ser creado.";  
+        }else
+            return "La deuda ya ha sido saldada";      
+    } 
     
     public List<Payment> listAll(){
         PaymentDAOImpl paymentoDAO = new PaymentDAOImpl();
