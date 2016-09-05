@@ -19,6 +19,21 @@ public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO
     public UserDAOImpl() {
         super(User.class);
     }
-
-    private final static String FINDBYUSERNAME = "User.findByUsername";
+    
+    @Override
+    public String searchRoleByName(String name){
+        EntityManager em = getEmf().createEntityManager();
+        User u = null;
+        String role = null;
+        try {
+            u = em.find(User.class, name);
+            role = u.getRole();
+        } catch (Exception e){
+               e.printStackTrace();               
+        } finally {
+            em.close();
+        }
+        return role;
+    }
+        
 }

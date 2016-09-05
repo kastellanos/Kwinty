@@ -13,6 +13,7 @@ import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
 import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import co.edu.unal.kwinty.DataAcess.Entity.Product;
 import co.edu.unal.kwinty.DataAcess.Entity.User;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -62,8 +63,8 @@ public class HandleAcquiredProduct {
         }
         
         // Calculate feeAmount
-        float[] fees = calculateFees(numberFees, amount, max_fees);
-        float feeAmount = fees[1];
+        List<Float> fees = calculateFees(numberFees, amount, max_fees);
+        float feeAmount = fees.get(1);
         
         
         Date today = new Date();
@@ -102,46 +103,46 @@ public class HandleAcquiredProduct {
     }
 
     
-    public float[] calculateFees(int numberFees, float amount, long productID ){
+    public List<Float> calculateFees(int numberFees, float amount, long productID ){
         
         Product currentProduct = searchProduct(productID);
         String fee_type = currentProduct.getFeeType();
         String interest_type = currentProduct.getInterestType();
         float interest = currentProduct.getInterestRate();
         float paid = 0;
-        float[] fees = new float[numberFees];
+        List<Float> fees = new ArrayList(numberFees);
         
         /* Interest type */
-        if (interest_type.equals("Simple")) {
+        if (interest_type.equals("simple")) {
             paid = amount + (amount * interest);                                
-        }else if (interest_type.equals("Compuesto")) {
+        }else if (interest_type.equals("compuesto")) {
             paid = (float) (amount * Math.pow(1 + interest, numberFees));    
         }
         
         /* Fee type */
         switch (fee_type) {
-            case "Cuota inicial":
+            case "inicial":
                 {
-                    fees[0] = (float) (paid * 0.2);
+                    fees.set(0, (float) (paid * 0.2)) ;
                     paid -= paid * 0.2;
                     float feed = paid / (numberFees - 1);
                     for (int i = 1; i < numberFees; i++) {
-                        fees[i] = feed;
+                        fees.set(i, feed);
                     }       break;
                 }
-            case "Sin cuota inicial":
+            case "sin":
                 {
-                    fees[0] = 0;
+                    fees.set(0, (float)0);
                     float feed = paid / (numberFees - 1);
                     for (int i = 1; i < numberFees; i++) {
-                        fees[i] = feed;
+                        fees.set(i, feed);
                     }       break;
                 }            
-            case "Fija":
+            case "fija":
                 {
                     float feed = paid / numberFees;
                     for (int i = 1; i < numberFees; i++) {
-                        fees[i] = feed;
+                        fees.set(i, feed);
                     }       break;
                 }
             default:
