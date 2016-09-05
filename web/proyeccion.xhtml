@@ -14,7 +14,22 @@
             <f:event type="preRenderView" listener="#{projectionBean.createProjection}"/>
         </f:metadata>
         
-
+<h:outputStylesheet>
+ 
+            .demo-container {
+            border: 1px solid #ddd;
+            height: 450px;
+            margin: 15px auto 30px;
+            padding: 20px 15px 15px;
+            width: 850px;
+            }
+            .demo-placeholder {
+            font-size: 14px;
+            height: 100%;
+            width: 100%;
+            }
+ 
+        </h:outputStylesheet>
         <div class="row">
         <div class="col-md-2">
             <h3>Proyección Genial</h3>
@@ -36,7 +51,7 @@
                 <ui:repeat value="#{projectionBean.projection}" var="value">
                     d1.push([i++, #{value}]);
                 </ui:repeat>
- 
+                
                 $.plot("#placeholder", [d1]);
                  
             });
