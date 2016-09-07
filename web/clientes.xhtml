@@ -39,15 +39,23 @@
               
         <ui:repeat var="client" value="#{consultClientBean.clients}" rendered="true">
 							<tr>
-                                                            <td><p data-placement="top" data-toggle="tooltip" title="Consult"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#consult" ><span class="glyphicon glyphicon-search"></span></button></p></td>
-                                                            <td>#{client.clientusername} </td>
+                                                            <td><h:form>
+                                                                <p data-placement="top" data-toggle="tooltip" title="Consult">      
+                                                                <h:button outcome="producto_de_cliente"  styleClass="btn btn-primary btn-xs" a:data-title="E" a:data-toggle="modal" a:data-target="#consult" >
+                                                                <span class="glyphicon glyphicon-search"></span>
+                                                                <f:param name="cliente" value="#{client.username}"></f:param>
+                                                                </h:button></p>
+                                                            
+                                                            </h:form>
+                                                            </td>
+                                                            <td>#{client.username} </td>
                                                             <td>#{client.address}</td>
                                                             <td>#{client.email}</td>
                                                             <td>#{client.phonenumber}</td>
                                                             <td>#{client.paymentCapacity}</td>
                                                             <td><h:form>
                                                                 <p data-placement="top" data-toggle="tooltip" title="Edit"> 
-                                                                <h:commandLink action="#{consultClientBean.getClientByUsername(client.clientusername)}"  styleClass="btn btn-primary btn-xs" a:data-title="E" a:data-toggle="modal" a:data-target="#edit" >
+                                                                <h:commandLink action="#{consultClientBean.getClientByUsername(client.username)}"  styleClass="btn btn-primary btn-xs" a:data-title="E" a:data-toggle="modal" a:data-target="#edit" >
                                                                     <f:ajax 
                                                                         execute="@form"
                                                                         render=":clientEditForm"
@@ -59,7 +67,7 @@
                                                             </td>
                                                             <td><h:form>
                                                                 <p data-placement="top" data-toggle="tooltip" title="Edit"> 
-                                                                <h:commandLink action="#{consultClientBean.getClientByUsername(client.clientusername)}"  styleClass="btn btn-danger btn-xs" a:data-title="Delete" a:data-toggle="modal" a:data-target="#delete" >
+                                                                <h:commandLink action="#{consultClientBean.getClientByUsername(client.username)}"  styleClass="btn btn-danger btn-xs" a:data-title="Delete" a:data-toggle="modal" a:data-target="#delete" >
                                                                     <f:ajax 
                                                                         execute="@form"
                                                                         render=":clientEditForm"

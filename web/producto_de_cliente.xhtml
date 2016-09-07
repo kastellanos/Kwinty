@@ -2,60 +2,100 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-
-    <ui:define name="content">
+    <ui:define name="content" >
+        <f:metadata>
+            <f:viewParam name="cliente" value="#{consultAcquiredProductBean.clientUsername}" required="false"/>
+            <f:event type="preRenderView" listener="#{consultAcquiredProductBean.consultByClient}"/>
+        </f:metadata>    
         <div class="row">
         <div class="col-md-2">
-            <h3>Producto X</h3>
+            <h3>Productos adquiridos</h3>
+
         </div>
+         
+        
             
-            <div class="col-md-8" style="margin-top: 20px">
-		    <div class="input-group">
-                
-                <input type="hidden" name="search_param" value="all" id="search_param"/>         
-                <input type="text" class="form-control" name="x" placeholder="Search term..."/>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
-        </div>
         </div>
         <div class="row">
+
             <div class="col-md-12">
-            <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><h:link outcome="cliente" value="Jhon" /></td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+            <div class="table-responsive">
+
+           
+              <table id="mytable" class="table table-bordred table-striped">
+                   
+                   <thead>
+                     <th>Pagos</th>                   
+                     <th>Id</th>
+                     <th>Fecha</th>
+                     <th>Producto</th>
+                     <th>Interés</th>
+                     <th>No. Cuotas</th>
+                     <th>Monto</th>
+                     <th>Pagado</th>
+                     <th>Valor de la cuota</th>
+                     <th>Referencia</th>
+                   </thead>
+ 
+          <tbody  >
+              
+              <ui:repeat var="product" value="#{consultAcquiredProductBean.acquiredProduct}" rendered="true">
+		<tr> 
+                    <td><h:form>
+                                                                    
+                            <h:commandLink action="#{createPaymentBean.createPayment(product.id, createPaymentBean.loginBean.username)}" styleClass="btn btn-warning"> <span class="glyphicon glyphicon-baby-formula"> </span> Registrar pago</h:commandLink>
+                        </h:form>
+                    </td>
+
+                    <td>#{product.productid.id}</td>
+                    <td>#{product.acquisitionDate}</td>
+                    <td>#{product.productid.type}</td>
+                    <td>#{product.productid.interestRate}</td>
+                    <td>#{product.numberFees}</td>
+                    <td>#{product.amount}</td>
+                    <td>#{product.amountPaid}</td>
+                    <td>#{product.feeAmount}</td>
+                    <td>#{product.reference}</td>
+                </tr>
+            </ui:repeat>
+
+
     </tbody>
-  </table>
+        
+</table>
+
+<div class="clearfix"></div>
+                
+            </div>
+            </div>
+
+        </div>
+   
+        <div class="row " style="margin-bottom: 20px; margin-right:2px;">
+            <div class="pull-right col-md-offset-10" >
+                <h:form>
+        <h:button outcome="createAcquiredProduct" value="Agregar producto" styleClass="btn btn-success">
+    <f:param name="cliente" value="#{consultAcquiredProductBean.clientUsername}"></f:param>
+        </h:button>
+    </h:form>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-offset-10">
-                <h:link outcome="createPayment" value="Agregar pago" styleClass="btn btn-success"/>
-            </div>
-        </div>
+    
+
+    <script type="text/javascript">
+     
+     
+        $(document).ready(function() {
+            $('#mytable').DataTable({
+                responsive: true
+            });
+        } );
+    
+    </script>
+        
     </ui:define>
 </ui:composition>

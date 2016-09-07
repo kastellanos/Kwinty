@@ -5,11 +5,18 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="cliente" value="#{createAcquiredProductBean.clientName}" required="false"/>
+            <f:event type="preRenderView" listener="#{createAcquiredProductBean.prepareClient}"/>
+        </f:metadata>
         <div class="row">
         <div class="col-sm-12">
         <h3>Agregar crédito</h3>
         </div>
         </div>
+        
+        
+        
         <div class="row">
         <div class="col-sm-12 responsive-box"> 
         <h:form styleClass="form-horizontal">
@@ -17,7 +24,8 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="clientName">Nombre de usuario:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{createAcquiredProductBean.clientName}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="clientName" />
+                        <p>#{createAcquiredProductBean.clientName}</p>
+                        <!--<h:inputText value="#{createAcquiredProductBean.clientName}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="clientName" disabled="true" />-->
                     </div>
                 </div>
                 
@@ -47,14 +55,12 @@
                     </div>
                 </div>
                 
-                <!--
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="amountFee">Valor de la cuota:</label>
                     <div class="col-sm-5">
                         <h:inputText value="#{createAcquiredProductBean.feeAmount}" required="true" requiredMessage="Campo requerido" styleClass="form-control" id="amountfee" />
                     </div>
                 </div>
-                -->
                 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="reference">Contacto de referencia:</label>

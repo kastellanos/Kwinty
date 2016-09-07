@@ -68,7 +68,7 @@ public class ConsultClientBean implements Serializable {
 public void getClientByUsername(String id) {
         //clientHandler = new HandleClient();
         editClient = clientHandler.getClientByUsername(clients, id).get(0);
-        System.out.println(editClient.getClientusername());
+        System.out.println(editClient.getUsername());
     }
     public ConsultClientBean() {
         clientHandler = new HandleClient();

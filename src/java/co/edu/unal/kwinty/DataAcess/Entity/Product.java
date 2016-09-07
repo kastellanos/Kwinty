@@ -6,7 +6,9 @@
 package co.edu.unal.kwinty.DataAcess.Entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Product.findByFeeType", query = "SELECT p FROM Product p WHERE p.feeType = :feeType"),
     @NamedQuery(name = "Product.findByInterestType", query = "SELECT p FROM Product p WHERE p.interestType = :interestType"),
     @NamedQuery(name = "Product.findByMaxNumberFees", query = "SELECT p FROM Product p WHERE p.maxNumberFees = :maxNumberFees"),
-    @NamedQuery(name = "Product.findByInterestRate", query = "SELECT p FROM Product p WHERE p.interestRate = :interestRate")})
+    @NamedQuery(name = "Product.findByInterestRate", query = "SELECT p FROM Product p WHERE p.interestRate = :interestRate"),
+    @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,6 +70,11 @@ public class Product implements Serializable {
     @NotNull
     @Column(name = "interest_rate")
     private float interestRate;
+    @Size(max = 1000)
+    @Column(name = "description")
+    private String description;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")
+    private Collection<Acquiredproduct> acquiredproductCollection;
 
     public Product() {
     }
@@ -81,15 +91,14 @@ public class Product implements Serializable {
         this.maxNumberFees = maxNumberFees;
         this.interestRate = interestRate;
     }
-    
-    public Product(String type, String feeType, String interestType, int maxNumberFees, float interestRate) {
+    public Product( String type, String feeType, String interestType, int maxNumberFees, float interestRate) {
+        
         this.type = type;
         this.feeType = feeType;
         this.interestType = interestType;
         this.maxNumberFees = maxNumberFees;
         this.interestRate = interestRate;
     }
-
     public Long getId() {
         return id;
     }
@@ -138,6 +147,23 @@ public class Product implements Serializable {
         this.interestRate = interestRate;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @XmlTransient
+    public Collection<Acquiredproduct> getAcquiredproductCollection() {
+        return acquiredproductCollection;
+    }
+
+    public void setAcquiredproductCollection(Collection<Acquiredproduct> acquiredproductCollection) {
+        this.acquiredproductCollection = acquiredproductCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -160,7 +186,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.unal.kwinty.DataAcess.Entity.Product_1[ id=" + id + " ]";
+        return "paparazi.Product[ id=" + id + " ]";
     }
     
 }

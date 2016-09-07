@@ -28,7 +28,7 @@ public class LoginUser {
         if (check != null ) {
             if(check.getPassword().equals(password)){
                 
-                context.getExternalContext().getSessionMap().put("active", check);
+                context.getExternalContext().getSessionMap().put("active", username);
                 return null;  
             }else{
                 return "Inicio de sesion fallido. La contraseña no es la correcta.";
@@ -46,7 +46,7 @@ public class LoginUser {
             session.invalidate();
         }
         return "index";
-        
     }
+    
     
 }

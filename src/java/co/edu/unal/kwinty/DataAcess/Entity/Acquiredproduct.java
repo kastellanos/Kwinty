@@ -11,8 +11,10 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -35,8 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Acquiredproduct.findAll", query = "SELECT a FROM Acquiredproduct a"),
-    @NamedQuery(name = "Acquiredproduct.findByClientusername", query = "SELECT a FROM Acquiredproduct a WHERE a.acquiredproductPK.clientusername = :clientusername"),
-    @NamedQuery(name = "Acquiredproduct.findByProductid", query = "SELECT a FROM Acquiredproduct a WHERE a.acquiredproductPK.productid = :productid"),
+    @NamedQuery(name = "Acquiredproduct.findById", query = "SELECT a FROM Acquiredproduct a WHERE a.id = :id"),
     @NamedQuery(name = "Acquiredproduct.findByNumberFees", query = "SELECT a FROM Acquiredproduct a WHERE a.numberFees = :numberFees"),
     @NamedQuery(name = "Acquiredproduct.findByAmount", query = "SELECT a FROM Acquiredproduct a WHERE a.amount = :amount"),
     @NamedQuery(name = "Acquiredproduct.findByFeeAmount", query = "SELECT a FROM Acquiredproduct a WHERE a.feeAmount = :feeAmount"),
@@ -47,8 +48,11 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Acquiredproduct implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected AcquiredproductPK acquiredproductPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Long id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "number_fees")
@@ -77,24 +81,24 @@ public class Acquiredproduct implements Serializable {
     @NotNull
     @Column(name = "fee_increment_rate")
     private float feeIncrementRate;
-    @JoinColumn(name = "Client_username", referencedColumnName = "Client_username", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Client client;
-    @JoinColumn(name = "Product_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Product product;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "acquiredproduct")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "acquiredproductid")
     private Collection<Payment> paymentCollection;
+    @JoinColumn(name = "username_id", referencedColumnName = "username")
+    @ManyToOne(optional = false)
+    private Client usernameId;
+    @JoinColumn(name = "Product_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Product productid;
 
     public Acquiredproduct() {
     }
 
-    public Acquiredproduct(AcquiredproductPK acquiredproductPK) {
-        this.acquiredproductPK = acquiredproductPK;
+    public Acquiredproduct(Long id) {
+        this.id = id;
     }
 
-    public Acquiredproduct(AcquiredproductPK acquiredproductPK, int numberFees, float amount, float feeAmount, float amountPaid, Date acquisitionDate, float feeIncrementRate) {
-        this.acquiredproductPK = acquiredproductPK;
+    public Acquiredproduct(Long id, int numberFees, float amount, float feeAmount, float amountPaid, Date acquisitionDate, float feeIncrementRate) {
+        this.id = id;
         this.numberFees = numberFees;
         this.amount = amount;
         this.feeAmount = feeAmount;
@@ -102,17 +106,21 @@ public class Acquiredproduct implements Serializable {
         this.acquisitionDate = acquisitionDate;
         this.feeIncrementRate = feeIncrementRate;
     }
-
-    public Acquiredproduct(String clientusername, long productid) {
-        this.acquiredproductPK = new AcquiredproductPK(clientusername, productid);
+public Acquiredproduct( int numberFees, float amount, float feeAmount, float amountPaid, Date acquisitionDate, float feeIncrementRate) {
+        
+        this.numberFees = numberFees;
+        this.amount = amount;
+        this.feeAmount = feeAmount;
+        this.amountPaid = amountPaid;
+        this.acquisitionDate = acquisitionDate;
+        this.feeIncrementRate = feeIncrementRate;
+    }
+    public Long getId() {
+        return id;
     }
 
-    public AcquiredproductPK getAcquiredproductPK() {
-        return acquiredproductPK;
-    }
-
-    public void setAcquiredproductPK(AcquiredproductPK acquiredproductPK) {
-        this.acquiredproductPK = acquiredproductPK;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public int getNumberFees() {
@@ -171,22 +179,6 @@ public class Acquiredproduct implements Serializable {
         this.feeIncrementRate = feeIncrementRate;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     @XmlTransient
     public Collection<Payment> getPaymentCollection() {
         return paymentCollection;
@@ -196,10 +188,26 @@ public class Acquiredproduct implements Serializable {
         this.paymentCollection = paymentCollection;
     }
 
+    public Client getUsernameId() {
+        return usernameId;
+    }
+
+    public void setUsernameId(Client usernameId) {
+        this.usernameId = usernameId;
+    }
+
+    public Product getProductid() {
+        return productid;
+    }
+
+    public void setProductid(Product productid) {
+        this.productid = productid;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (acquiredproductPK != null ? acquiredproductPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -210,7 +218,7 @@ public class Acquiredproduct implements Serializable {
             return false;
         }
         Acquiredproduct other = (Acquiredproduct) object;
-        if ((this.acquiredproductPK == null && other.acquiredproductPK != null) || (this.acquiredproductPK != null && !this.acquiredproductPK.equals(other.acquiredproductPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -218,7 +226,7 @@ public class Acquiredproduct implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct[ acquiredproductPK=" + acquiredproductPK + " ]";
+        return "paparazi.Acquiredproduct[ id=" + id + " ]";
     }
     
 }

@@ -21,6 +21,8 @@
    <h:outputScript library="js" name="main.js" target="head"/>
    <h:outputScript library="js" name="jquery.dataTables.min.js" target="head"/>
    <h:outputScript library="js" name="dataTables.bootstrap.min.js" target="head"/>
+   <h:outputScript library="js" name="jquery.flot.js" target="head"/>
+   
 </h:head>
 <h:body>
 
@@ -46,13 +48,18 @@
         <li ><h:link outcome="client_home" value="Home" /></li>
         <li ><h:link outcome="clientProducts" value="Mis productos" /></li>
         <li ><h:link outcome="clientPayments" value="Mis pagos" /></li>
-        <li ><h:link outcome="clientProfile" value="Perfil" /></li>
+        <!--<li ><h:link outcome="clientProfile" value="Perfil" /></li>-->
         </ui:insert>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <ui:insert name="menu-buttons">
-        
-        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li>
+            <h:form>            
+                <h:commandLink action="#{loginBean.logout()}" styleClass="btn btn-primary" style="margin-top: 10px;">
+                    <span class="glyphicon glyphicon-log-out" ></span> Logout
+                </h:commandLink>
+            </h:form>        
+            </li>
         </ui:insert>
       </ul>
     </div>

@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -44,7 +45,8 @@ public class Credentials implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "password")
     private String password;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "credentials")
+    @JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST )
     private User user;
 
     public Credentials() {
@@ -105,7 +107,7 @@ public class Credentials implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.unal.kwinty.DataAcess.Entity.Credentials[ username=" + username + " ]";
+        return "paparazi.Credentials[ username=" + username + " ]";
     }
     
 }

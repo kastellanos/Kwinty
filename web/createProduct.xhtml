@@ -17,13 +17,22 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="type">Tipo de crédito:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{createProductBean.type}" required="true" requiredMessage="¡El tipo de crédito es requerido!" styleClass="form-control" id="type" />
+                    
+                    <h:selectOneMenu value="#{createProductBean.type}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="type">
+                            <f:selectItem itemValue="simple" itemLabel="Simple" />
+                            <f:selectItem itemValue="complejo" itemLabel="Complejo" />	   							
+                        </h:selectOneMenu>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="feeType">Tipo de cuota:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{createProductBean.feeType}" required="true" requiredMessage="¡El tipo de cuota es requerido!" styleClass="form-control" id="feeType"/>
+                    
+                    <h:selectOneMenu value="#{createProductBean.feeType}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="feeType">
+                            <f:selectItem itemValue="sin" itemLabel="Sin Couta inicial" />
+                            <f:selectItem itemValue="inicial" itemLabel="Con cuota inicial" />	   							
+                            <f:selectItem itemValue="fijo" itemLabel="Cuota fija" />	   							
+                        </h:selectOneMenu>
                     </div>
                 </div>
                 <div class="form-group">

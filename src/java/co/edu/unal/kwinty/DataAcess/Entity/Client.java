@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
-    @NamedQuery(name = "Client.findByClientusername", query = "SELECT c FROM Client c WHERE c.clientusername = :clientusername"),
+    @NamedQuery(name = "Client.findByUsername", query = "SELECT c FROM Client c WHERE c.username = :username"),
     @NamedQuery(name = "Client.findByPhonenumber", query = "SELECT c FROM Client c WHERE c.phonenumber = :phonenumber"),
     @NamedQuery(name = "Client.findByEmail", query = "SELECT c FROM Client c WHERE c.email = :email"),
     @NamedQuery(name = "Client.findByAddress", query = "SELECT c FROM Client c WHERE c.address = :address"),
@@ -44,8 +44,8 @@ public class Client implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-    @Column(name = "Client_username")
-    private String clientusername;  
+    @Column(name = "username")
+    private String username;
     @Basic(optional = false)
     @NotNull
     @Column(name = "phonenumber")
@@ -63,33 +63,38 @@ public class Client implements Serializable {
     @NotNull
     @Column(name = "payment_capacity")
     private float paymentCapacity;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usernameId")
     private Collection<Acquiredproduct> acquiredproductCollection;
-    @JoinColumn(name = "Client_username", referencedColumnName = "username", insertable = false, updatable = false)
-    @OneToOne(optional = false,cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST )
     private User user;
 
     public Client() {
     }
 
-    public Client(String clientusername) {
-        this.clientusername = clientusername;
+    public Client(String username) {
+        this.username = username;
     }
 
-    public Client(String clientusername, int phonenumber, String email, String address, float paymentCapacity) {
-        this.clientusername = clientusername;
+    public Client(String username, int phonenumber, String email, float paymentCapacity) {
+        this.username = username;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.paymentCapacity = paymentCapacity;
+    }
+    public Client(String username, int phonenumber, String email, String address, float paymentCapacity) {
+        this.username = username;
         this.phonenumber = phonenumber;
         this.email = email;
         this.address = address;
         this.paymentCapacity = paymentCapacity;
     }
-
-    public String getClientusername() {
-        return clientusername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setClientusername(String clientusername) {
-        this.clientusername = clientusername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getPhonenumber() {
@@ -144,7 +149,7 @@ public class Client implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (clientusername != null ? clientusername.hashCode() : 0);
+        hash += (username != null ? username.hashCode() : 0);
         return hash;
     }
 
@@ -155,7 +160,7 @@ public class Client implements Serializable {
             return false;
         }
         Client other = (Client) object;
-        if ((this.clientusername == null && other.clientusername != null) || (this.clientusername != null && !this.clientusername.equals(other.clientusername))) {
+        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
             return false;
         }
         return true;
@@ -163,7 +168,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.unal.kwinty.DataAcess.Entity.Client[ clientusername=" + clientusername + " ]";
+        return "paparazi.Client[ username=" + username + " ]";
     }
     
 }
