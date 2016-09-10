@@ -15,13 +15,9 @@
         <h:form styleClass="form-horizontal">
                 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="type">Tipo de crédito:</label>
+                    <label class="control-label col-sm-2" for="type">Nombre de crédito:</label>
                     <div class="col-sm-5">
-                    
-                    <h:selectOneMenu value="#{createProductBean.type}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="type">
-                            <f:selectItem itemValue="simple" itemLabel="Simple" />
-                            <f:selectItem itemValue="complejo" itemLabel="Complejo" />	   							
-                        </h:selectOneMenu>
+                        <h:inputText value="#{createProductBean.type}" required="true" requiredMessage="¡El tipo de interés es requerido!" styleClass="form-control" id="type"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -38,7 +34,10 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="interestType">Tipo de interés:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{createProductBean.interestType}" required="true" requiredMessage="¡El tipo de interés es requerido!" styleClass="form-control" id="interestType"/>
+                        <h:selectOneMenu value="#{createProductBean.interestType}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="interestType">
+                            <f:selectItem itemValue="simple" itemLabel="Simple" />
+                            <f:selectItem itemValue="complejo" itemLabel="Complejo" />	   							
+                        </h:selectOneMenu>
                     </div>
                 </div>
                

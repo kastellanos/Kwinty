@@ -9,12 +9,14 @@ import co.edu.unal.kwinty.DataAcess.DAO.Implementation.AcquiredProductDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.AdminDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ClientDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.PaymentDAOImpl;
+import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ProductDAOImpl;
 
 import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
 import co.edu.unal.kwinty.DataAcess.Entity.Admin;
 import co.edu.unal.kwinty.DataAcess.Entity.Client;
 
 import co.edu.unal.kwinty.DataAcess.Entity.Payment;
+import co.edu.unal.kwinty.DataAcess.Entity.Product;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,16 +33,12 @@ public class HandlePayment {
         AcquiredProductDAOImpl apDAO = new AcquiredProductDAOImpl();
         Acquiredproduct ap = apDAO.findByPK(apID);
         AdminDAOImpl adi = new AdminDAOImpl();
-        PaymentDAOImpl pay = new PaymentDAOImpl();
         Admin ad = adi.findByPK(admin);
-        Client client = ap.getUsernameId();
         float amount = ap.getFeeAmount();
-        String user = client.getUsername();
-        long id = pay.getAll().size();
-        
+        float total = ap.getAmount();
+                
         if(ap == null) System.err.print("Product doesnt exist" + ap.toString());
         if(ad == null) System.err.print("Admin doesnt exist: " + ad.toString());
-        
         
         Date today = new Date();
         Payment payment = new Payment( today, amount);
@@ -49,14 +47,23 @@ public class HandlePayment {
         
         PaymentDAOImpl paymentDAO = new PaymentDAOImpl();
         float currentPaid = ap.getAmountPaid();
+        float numberFees = ap.getNumberFees();
+        float totalPaid = 0;
         currentPaid += amount;
         
-        if (ap.getPaymentCollection().size() <= ap.getNumberFees() ) {
+        Product productAcquired = ap.getProductid();
+        String iType = productAcquired.getInterestType();
+        float interest = productAcquired.getInterestRate();
+        
+        if (iType.equals("simple")) {
+            totalPaid = total + (total * interest);                                
+        }else if (iType.equals("compuesto")) {
+            totalPaid = (float) (total * Math.pow(1 + interest, numberFees));    
+        }
+        
+        if (currentPaid < totalPaid ) {
             boolean created = paymentDAO.create(payment);
             ap.setAmountPaid(currentPaid);
-            Collection<Payment> temp = ap.getPaymentCollection();
-            temp.add(payment);
-            ap.setPaymentCollection(temp);
             apDAO.update(ap);
             if ( created == true ){          
                 return "El producto ha sido creado.";
