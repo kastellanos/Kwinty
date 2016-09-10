@@ -38,13 +38,20 @@ public class AuthenticationListener implements PhaseListener {
             }else{
                 USER_LOGIN_OUTCOME = "client_home.xhtml";
             }
-            if (requestingSecureView(context)) {
+            if (requestingSecureView(context, role)) {
                 context.getApplication().
                     getNavigationHandler().handleNavigation(context, 
                                                                 null, 
                                                                 USER_LOGIN_OUTCOME);
             }
                       
+        }else{
+        /*    if (!requestingSecureView(context, role)) {
+                context.getApplication().
+                    getNavigationHandler().handleNavigation(context, 
+                                                                null, 
+                                                                USER_LOGIN_OUTCOME);
+            }*/
         }
     }
 
@@ -67,10 +74,25 @@ public class AuthenticationListener implements PhaseListener {
         return (String)session.getAttribute("active");
     }
     
-    private boolean requestingSecureView(FacesContext context) {
+    private boolean requestingSecureView(FacesContext context, String role) {
         ExternalContext extContext = context.getExternalContext();
         String path = extContext.getRequestPathInfo();
         System.out.println(path);
-        return ("/index.xhtml".equals(path));
+        //if(role == null) return ("/login.xhtml".equals(path));
+        if(role.equals("admin")){
+            // Client's views
+            return ("/index.xhtml".equals(path)||
+                    "/client_home.xhtml".equals(path)||
+                    "/clientProducts.xhtml".equals(path)||
+                    "/clientPayments.xhtml".equals(path));
+        }else{
+            // Admin's views
+            return ("/index.xhtml".equals(path)||
+                    "/admin_home.xhtml".equals(path)||
+                    "/clientes.xhtml".equals(path)||
+                    "/productos.xhtml".equals(path)||
+                    "/createProduct.xhtml".equals(path)||
+                    "/createUser.xhtml".equals(path));
+        }
     }
 }
