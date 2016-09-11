@@ -50,11 +50,9 @@ public class HandleAcquiredProduct {
     public String createAcquiredProduct(int numberFees, float amount, float amountPaid, String reference, float feeIncrementRate, String productType,String clientName) {
         ProductDAOImpl productDAO = new ProductDAOImpl();
         ClientDAOImpl clientDAO = new ClientDAOImpl();
-        System.out.println("typeee"+numberFees);
+        
         Product product = productDAO.findByType(productType);
         Client client = clientDAO.findByPK(clientName);
-        if(client == null) System.err.print("Cliente encontrado" + client.toString());
-        if(product == null) System.err.print("Producto encontrado: " + product.toString());
         
         // Product -> AcquiredProduct verifications
         int max_fees = product.getMaxNumberFees();
@@ -104,9 +102,9 @@ public class HandleAcquiredProduct {
 
     
     public List<Float> calculateFees(int numberFees, float amount, long productID ){
-        System.out.println("aaaaaaa!!!"+productID);
+        
         Product currentProduct = searchProduct(productID);
-        if(currentProduct==null){System.out.println("eeeeee!!!"+productID);}
+        
         String fee_type = currentProduct.getFeeType();
         String interest_type = currentProduct.getInterestType();
         float interest = currentProduct.getInterestRate();
@@ -115,7 +113,7 @@ public class HandleAcquiredProduct {
         for (int i = 0; i < numberFees; i++) {
             fees.add((float)0);
         }
-        System.out.println("wwwwww!!!"+fees.size());
+        
         /* Interest type */
         if (interest_type.equals("simple")) {
             paid = amount + (amount * interest);                                

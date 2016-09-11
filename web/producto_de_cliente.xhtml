@@ -29,7 +29,8 @@
               <table id="mytable" class="table table-bordred table-striped">
                    
                    <thead>
-                     <th>Pagos</th>                   
+                     <th>Pagos</th>
+                     <th>Proyección</th>
                      <th>Id</th>
                      <th>Fecha</th>
                      <th>Producto</th>
@@ -50,6 +51,16 @@
                             <h:commandLink action="#{createPaymentBean.createPayment(product.id, createPaymentBean.loginBean.username)}" styleClass="btn btn-warning"> <span class="glyphicon glyphicon-baby-formula"> </span> Registrar pago</h:commandLink>
                         </h:form>
                     </td>
+                                                            <td><h:form>
+                                                                
+                                                                    
+                                                                    <h:link outcome="admin_projection"  styleClass="btn btn-primary btn-xs"  value="proyección" >
+                                                                
+                                                                        <f:param name="adquired_product" value="#{product.id}"></f:param>
+                                                                </h:link>
+                                                            
+                                                            </h:form>
+                                                            </td>
 
                     <td>#{product.productid.id}</td>
                     <td>#{product.acquisitionDate}</td>

@@ -12,17 +12,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
    <h:outputStylesheet library="css" name="bootstrap.css"  />
-   <link rel="stylesheet" type="text/css" 
-           href="#{request.contextPath}/resources/css/dataTables.bootstrap.min.css"/>
+   
    <h:outputStylesheet library="css" name="main.css" />
    <h:outputStylesheet library="css" name="login.css" />
    <h:outputScript library="js" name="jquery.js" target="head"/>
    <h:outputScript library="js" name="bootstrap.js" target="head"/>
-   <h:outputScript library="js" name="main.js" target="head"/>
-   <h:outputScript library="js" name="jquery.dataTables.min.js" target="head"/>
-   <h:outputScript library="js" name="dataTables.bootstrap.min.js" target="head"/>
-   <h:outputScript library="js" name="jquery.flot.js" target="head"/>
    
+   
+   
+   
+   <h:outputScript library="js" name="Chart.js" target="head"/>
 </h:head>
 <h:body>
 
@@ -92,10 +91,39 @@
   </div>
 
 
-  <footer>
-    <p>National University Developers 2016</p>
-  </footer>
-  
+<footer class="container-footer">
+      <div class='container-fluid'>
+          <div class='row'>
+              <div class='col-md-3 box-pipe'>
+                  <h4>Contactenos</h4>
+                  <p><span class='glyphicon glyphicon-envelope'></span> correoimportante@masimportante.com</p>
+                  <p><span class='glyphicon glyphicon-earphone'></span> (+57) 315 666 95 36 </p>
+                  <p><span class='glyphicon glyphicon-home'></span> Av Siempreviva - Springfield</p>
+                  
+              </div>
+              <div class='col-md-3 box-pipe'>
+                  <h4>Asesores disponibles</h4>
+                  <p><span class='glyphicon glyphicon-user'></span> Carico Lamano   <a href="mailto:example@tutorialspark.com">Envia un correo </a></p> 
+                  <p><span class='glyphicon glyphicon-user'></span> Perito Calata       <a href="mailto:example@tutorialspark.com">Envia un correo </a></p>
+                  <p><span class='glyphicon glyphicon-user'></span> Remisio Pupo     <a href="mailto:example@tutorialspark.com">Envia un correo </a></p>
+                  
+              </div>
+              <div class='col-md-4 box-pipe'>
+                  <h4>Proyecto en redes sociales</h4>
+                  <p>Puedes encontrarnos en las siguiente redes sociales</p>
+                  <p>Twitter</p>
+                  <p>Facebook</p>
+                  
+                  
+              </div>
+              <div class='col-md-2 '>
+                  <h4>Soportado por</h4>
+                    <p>National University Developers 2016</p>
+              </div>
+          </div>
+      </div>
+    
+  </footer>  
   
 </h:body>
 </html>
