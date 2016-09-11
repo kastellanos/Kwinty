@@ -37,8 +37,7 @@ public class HandlePayment {
         float amount = ap.getFeeAmount();
         float total = ap.getAmount();
                 
-        if(ap == null) System.err.print("Product doesnt exist" + ap.toString());
-        if(ad == null) System.err.print("Admin doesnt exist: " + ad.toString());
+        
         
         Date today = new Date();
         Payment payment = new Payment( today, amount);

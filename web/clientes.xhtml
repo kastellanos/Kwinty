@@ -1,4 +1,4 @@
-<ui:composition template="/admin_template.xhtml"
+    <ui:composition template="/admin_template.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -39,14 +39,16 @@
               
         <ui:repeat var="client" value="#{consultClientBean.clients}" rendered="true">
 							<tr>
-                                                            <td><h:form>
-                                                                <p data-placement="top" data-toggle="tooltip" title="Consult">      
-                                                                <h:button outcome="producto_de_cliente"  styleClass="btn btn-primary btn-xs" a:data-title="E" a:data-toggle="modal" a:data-target="#consult" >
-                                                                <span class="glyphicon glyphicon-search"></span>
+                                                            <td>
+                                                                
+                                                                    <h:form>
+                                                                    <h:button outcome="producto_de_cliente"   value="Consultar" styleClass="btn btn-danger">
+                                                                
                                                                 <f:param name="cliente" value="#{client.username}"></f:param>
-                                                                </h:button></p>
+                                                                </h:button>
+                                                                        </h:form>
+                                                                    
                                                             
-                                                            </h:form>
                                                             </td>
                                                             <td>#{client.username} </td>
                                                             <td>#{client.address}</td>

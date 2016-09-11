@@ -22,7 +22,7 @@ public class LoginUser {
     public String start(String username, String password) {
         FacesContext context = FacesContext.getCurrentInstance();
         CredentialsDAOImpl cdi = new CredentialsDAOImpl();
-        //System.out.println("Hola Mundo "+username);
+        
         Credentials check = cdi.findByPK(username);
                              
         if (check != null ) {

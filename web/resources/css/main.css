@@ -27,6 +27,15 @@
 	z-index: 99;
 }
 
+
+.container-footer{
+    
+        color: black;
+	width: 96%;
+	margin: 0px auto; 
+        margin-top: 20px;
+
+}
 .container-central-nav{
 	
 	border-radius: 5px 5px 0 0;
@@ -50,6 +59,15 @@
 	/*border-width: 2px;
 	border-style: solid;
 	border-color: rgb(255,0,0);*/
+}
+.box-pipe{
+    border-right-color: #d9d9d9;
+    border-right-width: 1px;
+    border-right-style: solid;
+}
+.box-pipe p{
+    margin-top: 20px;
+    white-space: pre-wrap;
 }
 
 .h1{
