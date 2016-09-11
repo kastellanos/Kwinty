@@ -6,39 +6,36 @@
 package co.edu.unal.kwinty.DataAcess.DAO.Implementation;
 
 import co.edu.unal.kwinty.DataAcess.DAO.GenericDAO;
+import co.edu.unal.kwinty.DataAcess.common.EMF;
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 /**
  *
  * @author Andres
+ * @param <T>
+ * @param <PK>
  */
 public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T,PK>{
     
-    private EntityManagerFactory emf;
+    
     private Class<T> genericClass;
     public GenericDAOImpl(){
         
     }
     protected GenericDAOImpl( Class<T> implClass ) {
-        emf = Persistence.createEntityManagerFactory("KwintyPU");
+
+        //emf = Persistence.createEntityManagerFactory("KwintyPU");
         genericClass = implClass;
     }
     @Override
     public boolean create(T newInstance) {
-        EntityManager em = getEmf().createEntityManager();
+        EntityManager em = getEntityManager();
         em.getTransaction().begin();
         try {
             em.persist(newInstance);
@@ -56,7 +53,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     
     @Override
     public T findByPK(PK id) {
-        EntityManager em = getEmf().createEntityManager();
+        EntityManager em = getEntityManager();
         T responseInstance = null;
         //Query q = em.createNamedQuery(namedQuery);
         //q.setParameter(1, id);
@@ -74,7 +71,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     public boolean update(T transientObject) {
         boolean updated = false;
         T newInstance;
-        EntityManager em = getEmf().createEntityManager();  
+        EntityManager em = getEntityManager();
         em.getTransaction().begin();
         try {
             newInstance = em.merge(transientObject); 
@@ -95,7 +92,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     @Override
     public void delete(T transientObject) {
         T newInstance;
-        EntityManager em = getEmf().createEntityManager();  
+        EntityManager em = getEntityManager();
         em.getTransaction().begin();
         try {
             transientObject = em.merge(transientObject);
@@ -114,7 +111,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     @Override
     public List<T> getAll(String namedQuery) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        EntityManager em = getEmf().createEntityManager();
+        EntityManager em = getEntityManager();
         List<T> objects = new ArrayList<>();
         Query q = em.createNamedQuery(namedQuery);
 
@@ -142,17 +139,17 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     /**
      * @return the emf
      */
-    public EntityManagerFactory getEmf() {
-        return emf;
-    }
-
+    
     /**
      * @param emf the emf to set
      */
-    public void setEmf(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-
     
+
+
+    public static EntityManager getEntityManager() 
+      {
+
+        return EMF.createEntityManager();
+      }
     
 }

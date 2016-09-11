@@ -49,22 +49,7 @@ public class ClientDAOImpl extends GenericDAOImpl<Client, String> implements Cli
         return returnList;
     }
     
-     public Client findByUsername(String username){
-        EntityManager em = getEmf().createEntityManager();
-        Client client = null;
-        Query q = em.createNamedQuery(FINDBYUSERNAME);
-        q.setParameter("username", username);
-        try {
-            client = (Client) q.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            em.close();
-        }
-        return client;
-    }
-
-     private final static String FINDBYUSERNAME = "Client.findByUsername";
+ 
 
     }
 

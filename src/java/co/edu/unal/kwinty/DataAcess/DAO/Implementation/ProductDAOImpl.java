@@ -24,7 +24,7 @@ public class ProductDAOImpl extends GenericDAOImpl<Product, Long> implements Pro
 
     @Override
     public Product findByType(String type) {
-        EntityManager em = getEmf().createEntityManager();
+        EntityManager em = getEntityManager();
         Product responseInstance = null;
         Query q = em.createNamedQuery(FINDBYTYPE);
         q.setParameter("type", type);

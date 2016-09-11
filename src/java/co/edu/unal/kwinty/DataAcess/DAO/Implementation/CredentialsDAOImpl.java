@@ -7,9 +7,6 @@ package co.edu.unal.kwinty.DataAcess.DAO.Implementation;
 
 import co.edu.unal.kwinty.DataAcess.DAO.CredentialsDAO;
 import co.edu.unal.kwinty.DataAcess.Entity.Credentials;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *

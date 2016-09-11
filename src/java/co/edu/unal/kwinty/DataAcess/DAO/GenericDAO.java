@@ -7,6 +7,7 @@ package co.edu.unal.kwinty.DataAcess.DAO;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -22,4 +23,10 @@ public interface GenericDAO<T, PK extends Serializable> {
     void delete(T transientObject);
     PK getId( T transientObject );
     public List<T> getAll( String namedQuery );
+
+    /**
+     *
+     * @return
+     */
+    
 }

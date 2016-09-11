@@ -21,7 +21,7 @@ public class PaymentDAOImpl extends GenericDAOImpl<Payment, Long> implements Pay
     }
 
     public List<Payment> findByClient(String username) {
-        EntityManager em = getEmf().createEntityManager();
+        EntityManager em = getEntityManager();
         List<Payment> responseInstance = null;
         Query q = em.createNamedQuery(FINDBYCLIENT);
         q.setParameter("clientusername", username);

@@ -22,7 +22,7 @@ public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO
     
     @Override
     public String searchRoleByName(String name){
-        EntityManager em = getEmf().createEntityManager();
+        EntityManager em = getEntityManager();
         User u = null;
         String role = null;
         try {
