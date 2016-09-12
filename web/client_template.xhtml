@@ -12,11 +12,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
    <h:outputStylesheet library="css" name="bootstrap.css"  />
-   
+   <link rel="stylesheet" type="text/css" 
+           href="#{request.contextPath}/resources/css/dataTables.bootstrap.min.css"/>   
    <h:outputStylesheet library="css" name="main.css" />
    <h:outputStylesheet library="css" name="login.css" />
    <h:outputScript library="js" name="jquery.js" target="head"/>
    <h:outputScript library="js" name="bootstrap.js" target="head"/>
+   <h:outputScript library="js" name="main.js" target="head"/>   
+   <h:outputScript library="js" name="jquery.dataTables.min.js" target="head"/>
+   <h:outputScript library="js" name="dataTables.bootstrap.min.js" target="head"/>   
    
    
    
@@ -44,7 +48,7 @@
       <ul class="nav navbar-nav">
         
         <ui:insert name="menu-bar">
-        <li ><h:link outcome="client_home" value="Home" /></li>
+        <li ><h:link outcome="client_home" value="Inicio" /></li>
         <li ><h:link outcome="clientProducts" value="Mis productos" /></li>
         <li ><h:link outcome="clientPayments" value="Mis pagos" /></li>
         <!--<li ><h:link outcome="clientProfile" value="Perfil" /></li>-->
@@ -55,7 +59,7 @@
             <li>
             <h:form>            
                 <h:commandLink action="#{loginBean.logout()}" styleClass="btn btn-primary" style="margin-top: 10px;">
-                    <span class="glyphicon glyphicon-log-out" ></span> Logout
+                    <span class="glyphicon glyphicon-log-out" ></span> Cerrar sesión
                 </h:commandLink>
             </h:form>        
             </li>
@@ -95,7 +99,7 @@
       <div class='container-fluid'>
           <div class='row'>
               <div class='col-md-3 box-pipe'>
-                  <h4>Contactenos</h4>
+                  <h4>Contáctenos</h4>
                   <p><span class='glyphicon glyphicon-envelope'></span> correoimportante@masimportante.com</p>
                   <p><span class='glyphicon glyphicon-earphone'></span> (+57) 315 666 95 36 </p>
                   <p><span class='glyphicon glyphicon-home'></span> Av Siempreviva - Springfield</p>

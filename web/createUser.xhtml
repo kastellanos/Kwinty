@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="doc_type">Tipo Documento:</label>
+                    <label class="control-label col-sm-2" for="doc_type">Tipo de documento:</label>
                     <div class="col-sm-5">
                        <h:selectOneMenu value="#{createUserBean.idType}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="doc_type">
                             <f:selectItem itemValue="cedula" itemLabel="C.C" />
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="doc_number">Número documento:</label>
+                    <label class="control-label col-sm-2" for="doc_number">Número de documento:</label>
                     <div class="col-sm-5">
                     <h:inputText value="#{createUserBean.id}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="doc_number"/>
                     </div>
@@ -56,7 +56,7 @@
                 <h:panelGroup id="results">
                     <h:panelGroup rendered="#{createUserBean.role eq 'client'}">
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="phone_number">Número de Telefono:</label>
+                            <label class="control-label col-sm-2" for="phone_number">Número de Teléfono:</label>
                             <div class="col-sm-5">
                             <h:inputText value="#{createUserBean.phone_number}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="phone_number"/>
                             </div>
@@ -91,7 +91,7 @@
                 
                 <div class="form-group"> 
                     <div class="col-sm-offset-2 col-sm-10">
-                        <h:commandButton action="#{createUserBean.createUser()}" value="Crear" styleClass="btn btn-default"/>
+                        <h:commandButton action="#{createUserBean.createUser()}" value="Crear usuario" styleClass="btn btn-default"/>
                     </div>
                 </div>
                 

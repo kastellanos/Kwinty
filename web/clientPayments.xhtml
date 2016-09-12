@@ -35,8 +35,8 @@
                      <th>Id</th>
                      <th>Fecha</th>
                      <th>Producto</th>
-                     <th>Monto</th>
-                     <th>Realizado por</th>
+                     <th>Valor</th>
+                     <th>Atendido por</th>
                    </thead>
  
           <tbody  >
@@ -67,10 +67,31 @@
        
 
     <script type="text/javascript">
-     
-     
         $(document).ready(function() {
             $('#mytable').DataTable({
+                language: {
+                    "processing":     "Cargando...",
+                    "search":         "Buscar:",
+                    "lengthMenu":     "Mostrar _MENU_ registros",
+                    "info":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "infoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "infoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "infoPostFix":    "",
+                    "loadingRecords": "Chargement en cours...",
+                    "zeroRecords":    "No se encontraron resultados",
+                    "emptyTable":     "Ningún dato disponible en esta tabla",
+                    "paginate": {
+                        "first":      "Primero",
+                        "previous":   "Anterior",
+                        "next":       "Siguiente",
+                        "last":       "Último"
+                    },
+                    "aria": {
+                       "sortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                       "sortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                
                 responsive: true
             });
         } );

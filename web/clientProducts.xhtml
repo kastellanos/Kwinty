@@ -9,7 +9,7 @@
     <ui:define name="content" >
         <div class="row">
         <div class="col-md-2">
-            <h3>Mis pagos realizados</h3>
+            <h3>Mis productos</h3>
             <h4>Cliente: #{loginBean.username}</h4>
         </div>
             
@@ -23,15 +23,15 @@
               <table id="mytable" class="table table-bordred table-striped">
                    
                    <thead>
-                     <th>Proyección</th>  
-                     <th>Pagos</th>                   
+                     <th>Ver proyección</th>  
+                     <th>Ver pagos</th>                   
                      <th>Id</th>
                      <th>Fecha</th>
                      <th>Producto</th>
                      <th>Interés</th>
                      <th>No. Cuotas</th>
-                     <th>Monto</th>
-                     <th>Pagado</th>
+                     <th>Valor</th>
+                     <th>Valor Pagado</th>
                      <th>Valor de la cuota</th>
                      <th>Referencia</th>
                    </thead>
@@ -95,6 +95,29 @@
      
         $(document).ready(function() {
             $('#mytable').DataTable({
+                language: {
+                    "processing":     "Cargando...",
+                    "search":         "Buscar:",
+                    "lengthMenu":     "Mostrar _MENU_ registros",
+                    "info":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "infoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "infoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "infoPostFix":    "",
+                    "loadingRecords": "Chargement en cours...",
+                    "zeroRecords":    "No se encontraron resultados",
+                    "emptyTable":     "Ningún dato disponible en esta tabla",
+                    "paginate": {
+                        "first":      "Primero",
+                        "previous":   "Anterior",
+                        "next":       "Siguiente",
+                        "last":       "Último"
+                    },
+                    "aria": {
+                       "sortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                       "sortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                
                 responsive: true
             });
         } );

@@ -13,7 +13,7 @@
         </f:metadata>    
         <div class="row">
         <div class="col-md-2">
-            <h3>Productos adquiridos</h3>
+            <h3>Productos del cliente</h3>
 
         </div>
          
@@ -29,15 +29,15 @@
               <table id="mytable" class="table table-bordred table-striped">
                    
                    <thead>
-                     <th>Pagos</th>
-                     <th>Proyección</th>
+                     <th>Ver pagos</th>
+                     <th>Ver Proyecciones</th>
                      <th>Id</th>
                      <th>Fecha</th>
-                     <th>Producto</th>
-                     <th>Interés</th>
-                     <th>No. Cuotas</th>
-                     <th>Monto</th>
-                     <th>Pagado</th>
+                     <th>Nombre del Producto</th>
+                     <th>Tasa de interés</th>
+                     <th>No. de Cuotas</th>
+                     <th>Valor</th>
+                     <th>Valor Pagado</th>
                      <th>Valor de la cuota</th>
                      <th>Referencia</th>
                    </thead>
@@ -89,7 +89,7 @@
         <div class="row " style="margin-bottom: 20px; margin-right:2px;">
             <div class="pull-right col-md-offset-10" >
                 <h:form>
-        <h:button outcome="createAcquiredProduct" value="Agregar producto" styleClass="btn btn-success">
+        <h:button outcome="createAcquiredProduct" value="Agregar un producto" styleClass="btn btn-success">
     <f:param name="cliente" value="#{consultAcquiredProductBean.clientUsername}"></f:param>
         </h:button>
     </h:form>
@@ -102,6 +102,29 @@
      
         $(document).ready(function() {
             $('#mytable').DataTable({
+                language: {
+                    "processing":     "Cargando...",
+                    "search":         "Buscar:",
+                    "lengthMenu":     "Mostrar _MENU_ registros",
+                    "info":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "infoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "infoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "infoPostFix":    "",
+                    "loadingRecords": "Chargement en cours...",
+                    "zeroRecords":    "No se encontraron resultados",
+                    "emptyTable":     "Ningún dato disponible en esta tabla",
+                    "paginate": {
+                        "first":      "Primero",
+                        "previous":   "Anterior",
+                        "next":       "Siguiente",
+                        "last":       "Último"
+                    },
+                    "aria": {
+                       "sortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                       "sortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+
                 responsive: true
             });
         } );
