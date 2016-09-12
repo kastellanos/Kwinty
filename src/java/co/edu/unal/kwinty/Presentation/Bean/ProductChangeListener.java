@@ -17,9 +17,9 @@ public class ProductChangeListener implements ValueChangeListener {
    @Override
    public void processValueChange(ValueChangeEvent event)
       throws AbortProcessingException {
-      //access country bean directly
+
       CreateAcquiredProductBean productBean = (CreateAcquiredProductBean) FacesContext.getCurrentInstance().
-         getExternalContext().getSessionMap().get("userData");
+         getExternalContext().getSessionMap().get("productBean");
       
       productBean.setSelectedProduct(event.getNewValue().toString());
 
