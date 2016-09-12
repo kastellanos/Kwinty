@@ -35,5 +35,41 @@ public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO
         }
         return role;
     }
+    
+    @Override
+    public User findByUsername(String username){
+        EntityManager em = getEntityManager();
+        User u = null;
+        Query q = em.createNamedQuery(FINDBYUSERNAME);
+        q.setParameter("username", username);
+        try {
+            u =  (User)q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return u;
+    }
+   
+
+    @Override
+    public User findById(int id) {
+        EntityManager em = getEntityManager();
+        User u = null;
+        Query q = em.createNamedQuery(FINDBYID);
+        q.setParameter("id", id);
+        try {
+            u =  (User)q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return u;
+    }
+    
+    private static final String FINDBYUSERNAME = "User.findByUsername";
+    private static final String FINDBYID = "User.findById";
         
 }

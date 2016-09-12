@@ -30,27 +30,28 @@ public class CreateProductBean implements Serializable {
     private Long idProduct;
     private Product product;
     private String message1;
+    private String description;
 
     //public Product(String type, String feeType, String interestType, int maxNumberFees, float interestRate) {
     //}
     public void updateProduct(String user) {
         HandleProduct updateProduct = new HandleProduct();
-        message = updateProduct.updateProduct(user, type, feeType, interestType, maxNumberFees, interestRate);
+        message = updateProduct.updateProduct(user, type, feeType, interestType, maxNumberFees, interestRate, description);
     }
 
     public void updateProduct() {
         HandleProduct updateProduct = new HandleProduct();
-        message = updateProduct.updateProduct(type, feeType, interestType, maxNumberFees, interestRate);
+        message = updateProduct.updateProduct(type, feeType, interestType, maxNumberFees, interestRate, description);
     }
 
     public void createProduct(String user) {
         HandleProduct createProduct = new HandleProduct();
-        setMessage(createProduct.createProduct(user, type, feeType, interestType, maxNumberFees, interestRate));
+        setMessage(createProduct.createProduct(user, type, feeType, interestType, maxNumberFees, interestRate, description));
     }
 
     public void createProduct() {
         HandleProduct createProduct = new HandleProduct();
-        setMessage(createProduct.createProduct(type, feeType, interestType, maxNumberFees, interestRate));
+        setMessage(createProduct.createProduct(type, feeType, interestType, maxNumberFees, interestRate, description));
     }
 
     public void searchProductById() {
@@ -198,5 +199,19 @@ public class CreateProductBean implements Serializable {
      */
     public void setMessage1(String message1) {
         this.message1 = message1;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

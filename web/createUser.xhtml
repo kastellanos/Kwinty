@@ -12,8 +12,8 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="username">Nombre de usuario:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{createUserBean.username}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="username" />
-                    </div>
+                    <h:inputText value="#{createUserBean.username}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="usernameId" />
+                    </div>                   
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="name">Nombre completo:</label>
@@ -64,7 +64,10 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Correo electrónico:</label>
                             <div class="col-sm-5">
-                            <h:inputText value="#{createUserBean.email}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="email" p:type="email" />
+                            <h:inputText value="#{createUserBean.email}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="email" validatorMessage="Correo inválido">
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </h:inputText>
+                            <h:message for="email" style="color:red" />    
                             </div>
                         </div>
                         <div class="form-group">
@@ -92,14 +95,20 @@
                     </div>
                 </div>
                 
-                
-                    
                 <label>Mensaje: </label>
-                <h:outputText value="#{createUserBean.message}"/>
+                 <h:panelGroup rendered="#{createUserBean.message eq 'El usuario ha sido creado.'}">
+                     <h:outputText value="#{createUserBean.message}" style="color :blue" />
+                 </h:panelGroup>
                 
+                <h:panelGroup rendered="#{createUserBean.message eq 'El documento ya está registrado.'}">
+                     <h:outputText value="#{createUserBean.message}" style="color :red" />
+                 </h:panelGroup>
                 
+                <h:panelGroup rendered="#{createUserBean.message eq 'El nombre de usuario ya existe.'}">
+                     <h:outputText value="#{createUserBean.message}" style="color :red" />
+                 </h:panelGroup>
                 
-
+               
             </h:form>
                </div>
 </ui:define>
