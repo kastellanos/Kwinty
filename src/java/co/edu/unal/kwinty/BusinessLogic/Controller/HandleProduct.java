@@ -27,18 +27,18 @@ public class HandleProduct {
     }
     
 
-    public String updateProduct(String current_user, String type, String feeType, String interestType, int maxNumberFees, float interestRate){
+    public String updateProduct(String current_user, String type, String feeType, String interestType, int maxNumberFees, float interestRate, String description){
         /*First check if has permissions*/
         /*Prior to any action, is desirable to verify the permission of the current user*/
         HandlePermissions handlePermissions = new HandlePermissions();
         if(!handlePermissions.checkIfHasPermissions(current_user, "Registrar un cliente")){
             return "El usuario no tiene permisos para realizar la acción solicitada";
         }        
-        return updateProduct(type, feeType, interestType, maxNumberFees, interestRate);
+        return updateProduct(type, feeType, interestType, maxNumberFees, interestRate, description);
     }    
     
-    public String updateProduct(String type, String feeType, String interestType, int maxNumberFees, float interestRate){
-        Product product = new Product(type,feeType, interestType, maxNumberFees, interestRate);
+    public String updateProduct(String type, String feeType, String interestType, int maxNumberFees, float interestRate, String description){
+        Product product = new Product(type,feeType, interestType, maxNumberFees, interestRate, description);
         ProductDAOImpl productDAOImpl = new ProductDAOImpl();
         boolean update = productDAOImpl.update(product);
         if ( update == true )
@@ -47,18 +47,18 @@ public class HandleProduct {
             return "El producto no pudo ser actualizado.";  
     }
     
-    public String createProduct(String current_user, String type, String feeType, String interestType, int maxNumberFees, float interestRate){
+    public String createProduct(String current_user, String type, String feeType, String interestType, int maxNumberFees, float interestRate, String description){
         /*First check if has permissions*/
         /*Prior to any action, is desirable to verify the permission of the current user*/
         HandlePermissions handlePermissions = new HandlePermissions();
         if(!handlePermissions.checkIfHasPermissions(current_user, "Registrar un cliente")){
             return "El usuario no tiene permisos para realizar la acción solicitada";
         }        
-        return createProduct(type, feeType, interestType, maxNumberFees, interestRate);
+        return createProduct(type, feeType, interestType, maxNumberFees, interestRate, description);
     }
     
-    public String createProduct(String type, String feeType, String interestType, int maxNumberFees, float interestRate){
-        Product product = new Product(type,feeType, interestType, maxNumberFees, interestRate);
+    public String createProduct(String type, String feeType, String interestType, int maxNumberFees, float interestRate, String description){
+        Product product = new Product(type,feeType, interestType, maxNumberFees, interestRate, description);
         ProductDAOImpl productDAOImpl = new ProductDAOImpl();
         boolean created = productDAOImpl.create(product);
         if ( created == true )
@@ -121,5 +121,9 @@ public class HandleProduct {
         productDAO.update(product);
     }
 
+    public Product findByType(String type){
+        ProductDAOImpl productoDAO = new ProductDAOImpl();
+        return productoDAO.findByType(type);
+    }
     
 }

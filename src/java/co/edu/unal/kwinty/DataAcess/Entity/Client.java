@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -55,6 +56,10 @@ public class Client implements Serializable {
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "email")
+    /*@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+        +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+             message="Introduzca dirreccion valida")*/
     private String email;
     @Size(max = 50)
     @Column(name = "address")

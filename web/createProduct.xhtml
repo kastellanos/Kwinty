@@ -20,6 +20,16 @@
                         <h:inputText value="#{createProductBean.type}" required="true" requiredMessage="¡El tipo de interés es requerido!" styleClass="form-control" id="type"/>
                     </div>
                 </div>
+            
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="description">Descripción:</label>
+                    <div class="col-sm-5">
+                        
+                        <h:inputTextarea value="#{createProductBean.description}" rows="5" required="true" cols="50" id="description" styleClass="form-control"/>
+                        
+                    </div>
+                </div>
+            
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="feeType">Tipo de cuota:</label>
                     <div class="col-sm-5">

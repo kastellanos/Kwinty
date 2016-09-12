@@ -82,4 +82,24 @@ public class HandleUser {
         }
         return userPersisted.getRole();
     }
+    
+    public boolean userExists(String username){
+        UserDAOImpl userDAO = new UserDAOImpl();
+        User user = null;
+        user = userDAO.findByUsername(username);
+        if(user != null){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean idDuplicate(int id) {
+        UserDAOImpl userDAO = new UserDAOImpl();
+        User user = null;
+        user = userDAO.findById(id);
+        if(user != null){
+            return true;
+        }
+        return false;
+    }
 }

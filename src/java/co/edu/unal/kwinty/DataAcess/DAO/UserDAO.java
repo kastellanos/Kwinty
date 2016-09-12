@@ -15,4 +15,8 @@ public interface UserDAO extends GenericDAO<User, String>{
     
     public String searchRoleByName(String name);
     
+    public User findByUsername(String username);
+    
+    public User findById(int id);
+    
 }

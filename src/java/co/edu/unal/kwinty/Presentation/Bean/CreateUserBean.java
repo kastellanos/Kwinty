@@ -6,11 +6,12 @@
 package co.edu.unal.kwinty.Presentation.Bean;
 
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleUser;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-
 import javax.inject.Named;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -25,6 +26,22 @@ public class CreateUserBean {
 
     public void createUser() {
         HandleUser createUser = new HandleUser();
+        message = "";
+        boolean isExist = createUser.userExists(username);
+        boolean docDuplicate = createUser.idDuplicate(id);
+        if(isExist){
+            System.err.println("El usuario existe " +  username);
+           message += "El nombre de usuario ya existe.";
+           return;
+            /*
+            FacesMessage faceMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario ya existe", null );
+            FacesContext.getCurrentInstance().addMessage(null, faceMsg);
+            return;*/
+        }
+        if(docDuplicate){
+            message += "El documento ya está registrado.";
+            return;
+        }
         message = createUser.createUser(this.username, this.idType, this.role, this.name, this.id, this.password, this.phone_number, this.email, this.address, this.payment_capacity);
     }
 

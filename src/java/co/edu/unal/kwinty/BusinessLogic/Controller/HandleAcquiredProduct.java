@@ -13,9 +13,14 @@ import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
 import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import co.edu.unal.kwinty.DataAcess.Entity.Product;
 import co.edu.unal.kwinty.DataAcess.Entity.User;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -63,8 +68,7 @@ public class HandleAcquiredProduct {
         // Calculate feeAmount
         List<Float> fees = calculateFees(numberFees, amount, product.getId());
         float feeAmount = fees.get(1);
-        
-        
+
         Date today = new Date();
         Acquiredproduct acquiredproduct = new Acquiredproduct(numberFees,amount, feeAmount, amountPaid, today, feeIncrementRate);
          acquiredproduct.setUsernameId(client);

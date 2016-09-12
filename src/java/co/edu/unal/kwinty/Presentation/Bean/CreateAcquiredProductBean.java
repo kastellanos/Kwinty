@@ -20,8 +20,9 @@ import javax.faces.bean.ManagedBean;
  */
 import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ValueChangeEvent;
 
-//(name = "CreateAcquiredProductBean")
+
 @ManagedBean
 @ViewScoped
 public class CreateAcquiredProductBean implements Serializable {
@@ -38,7 +39,8 @@ public class CreateAcquiredProductBean implements Serializable {
     private String message;
     private int clientDoc;
     private List<Product> products;
-
+    private String selectedProduct = "";
+    
     public CreateAcquiredProductBean() {
         HandleProduct handleProduct = new HandleProduct();
         products = handleProduct.listAll();
@@ -70,6 +72,15 @@ public class CreateAcquiredProductBean implements Serializable {
             message += " Debe registrar el cliente ";
         }
     }
+    
+    public void productChanged(ValueChangeEvent e){
+      //assign new value to country
+     selectedProduct = e.getNewValue().toString();
+     HandleProduct handleProduct = new HandleProduct();
+     Product product = handleProduct.findByType(selectedProduct);
+     selectedProduct = product.getDescription();   
+     
+   }
 
     public void prepareClient() {
 
@@ -232,6 +243,20 @@ public class CreateAcquiredProductBean implements Serializable {
      */
     public List<Product> getProducts() {
         return products;
+    }
+
+    /**
+     * @return the selectedProduct
+     */
+    public String getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    /**
+     * @param selectedProduct the selectedProduct to set
+     */
+    public void setSelectedProduct(String selectedProduct) {
+        this.selectedProduct = selectedProduct;
     }
 
 }

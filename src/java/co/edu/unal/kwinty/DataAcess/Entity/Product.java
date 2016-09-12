@@ -91,13 +91,14 @@ public class Product implements Serializable {
         this.maxNumberFees = maxNumberFees;
         this.interestRate = interestRate;
     }
-    public Product( String type, String feeType, String interestType, int maxNumberFees, float interestRate) {
+    public Product( String type, String feeType, String interestType, int maxNumberFees, float interestRate, String description) {
         
         this.type = type;
         this.feeType = feeType;
         this.interestType = interestType;
         this.maxNumberFees = maxNumberFees;
         this.interestRate = interestRate;
+        this.description = description;
     }
     public Long getId() {
         return id;
