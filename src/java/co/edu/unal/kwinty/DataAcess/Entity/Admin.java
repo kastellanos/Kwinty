@@ -40,10 +40,10 @@ public class Admin implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 25)
+    
     @Column(name = "username")
     private String username;
-    @Size(max = 45)
+    
     @Column(name = "branch_office")
     private String branchOffice;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "adminusername")

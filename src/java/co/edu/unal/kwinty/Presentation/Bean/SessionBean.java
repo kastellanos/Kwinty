@@ -5,14 +5,9 @@
  */
 package co.edu.unal.kwinty.Presentation.Bean;
 
-import co.edu.unal.kwinty.BusinessLogic.Controller.HandlePermissions;
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleSession;
-import co.edu.unal.kwinty.DataAcess.DAO.Implementation.CredentialsDAOImpl;
-import co.edu.unal.kwinty.DataAcess.Entity.Credentials;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,7 +29,7 @@ public class SessionBean {
             username = session.SessionUsername();
             role = session.SessionRole();
         }else{
-            active = false;
+            active = true;
         }
     }
 

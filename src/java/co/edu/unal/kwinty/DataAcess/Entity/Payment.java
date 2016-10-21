@@ -52,7 +52,7 @@ public class Payment implements Serializable {
     @NotNull
     @Column(name = "amount")
     private float amount;
-    @JoinColumn(name = "Acquiredproduct_id", referencedColumnName = "id")
+    @JoinColumn(name = "Acquiredproduct", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Acquiredproduct acquiredproductid;
     @JoinColumn(name = "Admin_username", referencedColumnName = "username")

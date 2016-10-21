@@ -5,6 +5,7 @@
  */
 package co.edu.unal.kwinty.DataAcess.DAO.Implementation;
 
+import static co.edu.unal.kwinty.DataAcess.DAO.Implementation.GenericDAOImpl.getEntityManager;
 import co.edu.unal.kwinty.DataAcess.DAO.PaymentDAO;
 import co.edu.unal.kwinty.DataAcess.Entity.Payment;
 import java.util.List;
