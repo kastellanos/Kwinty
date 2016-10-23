@@ -54,6 +54,12 @@ public class HandleAcquiredProduct {
         Product product = productDAO.findByType(productType);
         Client client = clientDAO.findByPK(clientName);
         
+        if (client == null) {
+            System.out.println("Lala--------------");
+        }else{
+            System.out.println(client.toString());
+        }
+                
         // Product -> AcquiredProduct verifications
         int max_fees = product.getMaxNumberFees();
         if (numberFees > max_fees) {
