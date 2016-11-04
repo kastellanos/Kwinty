@@ -105,8 +105,9 @@
  
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="type">Nombre del producto:</label>
-                    <div class="col-sm-5">
-                        <h:inputText value="#{consultProductBean.editProduct.type}" required="true" requiredMessage="¡El tipo de crédito es requerido!" styleClass="form-control" id="type" />
+                     <div class="col-sm-5">
+                        <h:inputText value="#{consultProductBean.editProduct.type}" required="true" requiredMessage="¡El nombre del producto es requerido!" styleClass="form-control" id="type" maxlength="12" />
+                        <h:message for="type" style="color:red" />    
                     </div>
                 </div>
               
@@ -114,7 +115,8 @@
                     <label class="control-label col-sm-2" for="description">Decripción:</label>
                     <div class="col-sm-5">
                         <h:panelGrid>
-                            <h:inputTextarea value="#{consultProductBean.editProduct.description}" rows="5" required="true" cols="50" id="description" styleClass="form-control"/>
+                            <h:inputTextarea value="#{consultProductBean.editProduct.description}" rows="5" required="true" cols="50" id="description" styleClass="form-control" a:maxlenght='1000'/>
+                            
                         </h:panelGrid>
                     </div>
                 </div>
@@ -122,27 +124,42 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="feeType">Tipo de cuota:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{consultProductBean.editProduct.feeType}" required="true" requiredMessage="¡El tipo de cuota es requerido!" styleClass="form-control" id="feeType"/>
+                    <h:selectOneMenu value="#{consultProductBean.editProduct.feeType}" required="true" requiredMessage="¡El tipo de cuota es requerido!" styleClass="form-control" id="feeType">
+                            <f:selectItem itemValue="sin" itemLabel="Sin Couta inicial" />
+                            <f:selectItem itemValue="inicial" itemLabel="Con cuota inicial" />	   							
+                            <f:selectItem itemValue="fijo" itemLabel="Cuota fija" />	   							
+                        </h:selectOneMenu>
+                    <h:message for="feeType" style="color:red" />    
+                        
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="interestType">Tipo de interés:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{consultProductBean.editProduct.interestType}" required="true" requiredMessage="¡El tipo de interés es requerido!" styleClass="form-control" id="interestType"/>
+                        <h:selectOneMenu value="#{consultProductBean.editProduct.interestType}" required="true" requiredMessage="¡El tipo de interes es requerido!" styleClass="form-control" id="interestType">
+                            <f:selectItem itemValue="simple" itemLabel="Simple" />
+                            <f:selectItem itemValue="compuesto" itemLabel="Compuesto" />	   							
+                        </h:selectOneMenu>
+                        <h:message for="interestType" style="color:red" />    
                     </div>
                 </div>
                
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="maxNumberFees">Número máximo de cuotas:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{consultProductBean.editProduct.maxNumberFees}" required="true" requiredMessage="¡El número máximo de cuostas es requerido!" styleClass="form-control" id="maxNumberFees"/>
+                        <h:inputText value="#{consultProductBean.editProduct.maxNumberFees}" required="true" requiredMessage="¡El número máximo de cuotas es requerido!" styleClass="form-control" id="maxNumberFees" maxlength="11" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
+                        <h:message for="maxNumberFees" style="color:red" />    
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="interestRate">Tasa de interés:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{consultProductBean.editProduct.interestRate}" required="true" requiredMessage="¡La tase de interés es requerida!" styleClass="form-control" id="interestRate"/>
+                    <h:inputText value="#{consultProductBean.editProduct.interestRate}" required="true" requiredMessage="¡La tase de interés es requerida!" styleClass="form-control" id="interestRate" validatorMessage="El valor no es un numero">
+                        <f:convertNumber />
+                        <f:validateDoubleRange minimum="0"/>
+                    </h:inputText>  
+                    <h:message for="interestRate" style="color:red" />    
                     </div>
                 </div>
                 

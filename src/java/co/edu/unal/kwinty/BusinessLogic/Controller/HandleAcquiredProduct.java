@@ -60,11 +60,15 @@ public class HandleAcquiredProduct {
             System.out.println(client.toString());
         }
                 
+        if(numberFees <= 0) return "El producto no fue creado. El numero de cuotas debe ser mayor a 0";
+        if(amount <= 0) return "El producto no fue creado. El valor del producto debe ser mayor a 0";
+        
         // Product -> AcquiredProduct verifications
         int max_fees = product.getMaxNumberFees();
         if (numberFees > max_fees) {
             return "El producto no fue creado. Excede numero de cuotas maximo";
         }
+        
         
         // Calculate feeAmount
         List<Float> fees = calculateFees(numberFees, amount, product.getId());

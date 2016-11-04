@@ -43,6 +43,16 @@ public class CreateUserBean {
             return;
         }
         message = createUser.createUser(this.username, this.idType, this.role, this.name, this.id, this.password, this.phone_number, this.email, this.address, this.payment_capacity);
+        this.username = "";
+        this.idType = "";
+        this.role = "";
+        this.name = "";
+        this.id = 0;
+        this.password = "";
+        this.phone_number = 0;
+        this.email = "";
+        this.address = "";
+        this.payment_capacity = 0;
     }
 
     public void createUser(String current_user) {

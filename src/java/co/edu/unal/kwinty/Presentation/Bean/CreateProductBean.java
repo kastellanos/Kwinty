@@ -52,6 +52,9 @@ public class CreateProductBean implements Serializable {
     public void createProduct() {
         HandleProduct createProduct = new HandleProduct();
         setMessage(createProduct.createProduct(type, feeType, interestType, maxNumberFees, interestRate, description));
+        type = "";
+        feeType = "";
+        interestType = ""; maxNumberFees = 0; interestRate = 0; description = "";
     }
 
     public void searchProductById() {
