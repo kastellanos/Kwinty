@@ -8,6 +8,8 @@ package co.edu.unal.kwinty.Presentation.Bean;
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleClient;
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleUser;
 import co.edu.unal.kwinty.BusinessLogic.Controller.LoginUser;
+import co.edu.unal.kwinty.BusinessLogic.Controller.LoginLdap;
+
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -21,6 +23,31 @@ import javax.faces.context.FacesContext;
 public class LoginBean {
 
     public LoginBean() {
+    }
+    
+    
+    
+    public void loginLdap(){
+        LoginLdap login = new LoginLdap();
+        message = login.login(username, password);
+        System.err.println("++++++++" + message);
+        if(message.equalsIgnoreCase("Inicio de sesión satisfactorio.")){
+            HandleUser handleUser = new HandleUser();
+            String role = handleUser.getRole(username);
+            
+            System.out.println("role*** " + role);
+
+            if(role.equalsIgnoreCase("Client")){
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getApplication().getNavigationHandler().handleNavigation(context, null, "client_home.xhtml");
+            }else{
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getApplication().getNavigationHandler().handleNavigation(context, null, "admin_home.xhtml");
+            }
+        }else{
+            login();
+        }
+        
     }
     
     public void login(){

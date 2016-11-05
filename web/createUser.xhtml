@@ -37,7 +37,11 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="doc_number">Número de documento:</label>
                     <div class="col-sm-5">
-                        <h:inputText value="#{createUserBean.id}" required="true" requiredMessage="¡El documento es requerido!" styleClass="form-control" id="doc_number" maxlength="11" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
+                        <h:inputText value="#{createUserBean.id}" required="true" requiredMessage="¡El documento es requerido!" styleClass="form-control" id="doc_number" maxlength="11" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" validatorMessage="El valor no es un numero o no esta dentro del rango">
+                            <f:convertNumber />
+                            <f:validateLongRange minimum="0" maximum="2147483647"/>
+                        </h:inputText>  
+
                         <h:message for="doc_number" style="color:red" />    
                     </div>
                 </div>
@@ -65,8 +69,12 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="phone_number">Número de Teléfono:</label>
                             <div class="col-sm-5">
-                            <h:inputText value="#{createUserBean.phone_number}" required="true" requiredMessage="¡El numero de telefono es requerido!" styleClass="form-control" id="phone_number" maxlength="10" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
-                            <h:message for="phone_number" style="color:red" />    
+                                <h:inputText value="#{createUserBean.phone_number}" required="true" requiredMessage="¡El numero de telefono es requerido!" styleClass="form-control" id="phone_number" maxlength="10" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" validatorMessage="El valor no es un numero o no esta dentro del rango" >
+                                    <f:convertNumber />
+                                    <f:validateLongRange minimum="0" maximum="2147483647"/>
+                                </h:inputText>  
+
+                                <h:message for="phone_number" style="color:red" />    
 
                             </div>
                         </div>

@@ -16,7 +16,7 @@
                 <h:inputText value="#{loginBean.username}" required="true"  a:placeholder="Nombre de usuario" />
               <h:inputSecret value="#{loginBean.password}" required="true"  a:placeholder="Contraseña"/>
               
-              <h:commandButton action="#{loginBean.login()}" value="Iniciar sesión" styleClass="login loginmodal-submit"/>
+              <h:commandButton action="#{loginBean.loginLdap()}" value="Iniciar sesión" styleClass="login loginmodal-submit"/>
             </h:form>
 
             <div class="login-help">
