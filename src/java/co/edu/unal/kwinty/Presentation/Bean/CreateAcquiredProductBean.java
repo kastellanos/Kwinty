@@ -40,7 +40,15 @@ public class CreateAcquiredProductBean implements Serializable {
     private int clientDoc;
     private List<Product> products;
     private String selectedProduct = "";
-    
+    private Boolean externClient;
+
+    public Boolean getExternClient() {
+        return externClient;
+    }
+
+    public void setExternClient(Boolean externClient) {
+        this.externClient = externClient;
+    }
     public CreateAcquiredProductBean() {
         HandleProduct handleProduct = new HandleProduct();
         products = handleProduct.listAll();
@@ -66,10 +74,12 @@ public class CreateAcquiredProductBean implements Serializable {
         amountPaid = 0;
         feeIncrementRate = 0;
 
-        if (validateClientName()) {
-            message = createAcquiredProduct.createAcquiredProduct(numberFees, amount, amountPaid, reference, feeIncrementRate, productName, clientName);
+        if (validateClientName() ) {
+            message = createAcquiredProduct.createAcquiredProduct(numberFees, amount, amountPaid, reference, feeIncrementRate, productName, clientName,externClient);
         } else {
+            
             message += " Debe registrar el cliente ";
+            
         }
     }
     

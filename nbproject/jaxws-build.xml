@@ -32,4 +32,48 @@
                 JAX-WS WSIMPORT SECTION
                 ===================
             -->
+    <target name="wsimport-init" depends="init">
+        <fail if="${wsimport.bad.version}" message="WsImport ant task defined in the classpath ${j2ee.platform.wsimport.classpath} has a serious bug. See http://wiki.netbeans.org/MetroIssue for details."/>
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <property name="j2ee.platform.wsimport.classpath" value="${libs.jaxws21.classpath}"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${java.home}/../lib/tools.jar:${j2ee.platform.wsimport.classpath}:${javac.classpath}"/>
+        </taskdef>
+        <condition property="conf-dir" value="${conf.dir}/" else="">
+            <isset property="conf.dir"/>
+        </condition>
+    </target>
+    <target name="wsimport-client-SalewCreditWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/SalewCreditWS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/SalewCreditWS" destdir="${build.generated.dir}/jax-wsCache/SalewCreditWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/SalewCreditWS/wsdl/192.168.2.211_8080/concesionario-unal-master/SalewCreditWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://192.168.2.211:8080/concesionario-unal-master/SalewCreditWS?wsdl" xnocompile="true" xendorsed="true" package="BusinessLogic.Service.Consume">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/SalewCreditWS/wsdl/192.168.2.211_8080/concesionario-unal-master/SalewCreditWS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/SalewCreditWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/SalewCreditWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-SalewCreditWS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/BusinessLogic/Service/Consume"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/SalewCreditWS"/>
+    </target>
+    <target name="wsimport-client-Bus1Port" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/Bus1Port"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Bus1Port" destdir="${build.generated.dir}/jax-wsCache/Bus1Port" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/Bus1Port/wsdl/192.168.2.218_9089/Bus1Service/Bus1Port.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://192.168.2.218:9089/Bus1Service/Bus1Port?wsdl" xnocompile="true" xendorsed="true" package="BusinessLogic.Service.Bus">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/Bus1Port/wsdl/192.168.2.218_9089/Bus1Service/Bus1Port.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/Bus1Port"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/Bus1Port">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-Bus1Port" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/BusinessLogic/Service/Bus"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/Bus1Port"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-SalewCreditWS, wsimport-client-Bus1Port"/>
 </project>

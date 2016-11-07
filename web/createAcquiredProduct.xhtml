@@ -26,7 +26,15 @@
                         <!--<h:inputText value="#{createAcquiredProductBean.clientName}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="clientName" disabled="true" />-->
                     </div>
                 </div>
-                
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="clientExtern">Cliente de concesionario:</label>
+                    <div class="col-sm-5">
+                    <h:selectOneRadio id="clientExtern" value="#{createAcquiredProductBean.externClient}">
+                        <f:selectItem itemLabel="Sí" itemValue="#{true}"/>
+                        <f:selectItem itemLabel="No" itemValue="#{false}"/>
+                    </h:selectOneRadio>
+                        </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="productName">Producto:</label>
                     <div class="col-sm-5">

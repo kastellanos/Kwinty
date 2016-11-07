@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://Services.business/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Services.business/">
+
+<xs:element name="sellVehicle" type="tns:sellVehicle"/>
+
+<xs:element name="sellVehicleResponse" type="tns:sellVehicleResponse"/>
+
+<xs:complexType name="sellVehicle">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+<xs:element name="arg3" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sellVehicleResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:autoMResponseMessage" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="autoMResponseMessage">
+<xs:sequence>
+<xs:element name="brand" type="xs:string" minOccurs="0"/>
+<xs:element name="chasis" type="xs:string" minOccurs="0"/>
+<xs:element name="color" type="xs:string" minOccurs="0"/>
+<xs:element name="data">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:string"/>
+<xs:element name="value" minOccurs="0" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="engine" type="xs:string" minOccurs="0"/>
+<xs:element name="model" type="xs:string" minOccurs="0"/>
+<xs:element name="price" type="xs:string" minOccurs="0"/>
+<xs:element name="response" type="xs:string" minOccurs="0"/>
+<xs:element name="succesfull" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

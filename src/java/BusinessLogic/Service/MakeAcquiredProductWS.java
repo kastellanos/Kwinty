@@ -36,7 +36,7 @@ public class MakeAcquiredProductWS {
             message = "No se encontró el producto";
             System.out.println("No se encontró el producto");
         } else{
-            message = createAcquiredProduct.createAcquiredProduct(numberFees, amount, amountPaid, "", product.getInterestRate(), productName, clientName);
+            message = createAcquiredProduct.createAcquiredProduct(numberFees, amount, amountPaid, "", product.getInterestRate(), productName, clientName,false);
         }
         return message;
 

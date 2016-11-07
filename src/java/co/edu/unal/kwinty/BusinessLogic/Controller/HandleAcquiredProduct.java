@@ -5,6 +5,8 @@
  */
 package co.edu.unal.kwinty.BusinessLogic.Controller;
 
+
+import BusinessLogic.Service.Bus.ResponseMessage;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.AcquiredProductDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ClientDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ProductDAOImpl;
@@ -16,6 +18,7 @@ import co.edu.unal.kwinty.DataAcess.Entity.User;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.xml.ws.Holder;
 
 /**
  *
@@ -47,7 +50,7 @@ public class HandleAcquiredProduct {
     
     //private Date acquisitionDate;
 
-    public String createAcquiredProduct(int numberFees, float amount, float amountPaid, String reference, float feeIncrementRate, String productType,String clientName) {
+    public String createAcquiredProduct(int numberFees, float amount, float amountPaid, String reference, float feeIncrementRate, String productType,String clientName,Boolean externalClient) {
         ProductDAOImpl productDAO = new ProductDAOImpl();
         ClientDAOImpl clientDAO = new ClientDAOImpl();
         
@@ -73,15 +76,29 @@ public class HandleAcquiredProduct {
         // Calculate feeAmount
         List<Float> fees = calculateFees(numberFees, amount, product.getId());
         float feeAmount = fees.get(1);
-
+        //Service eated
+        
         Date today = new Date();
         Acquiredproduct acquiredproduct = new Acquiredproduct(numberFees,amount, feeAmount, amountPaid, today, feeIncrementRate);
          acquiredproduct.setUsernameId(client);
          acquiredproduct.setProductid(product);
-         
+         acquiredproduct.setReference(reference);
+         boolean created = false;
         AcquiredProductDAOImpl acquiredProductDAOImpl = new AcquiredProductDAOImpl();
-        boolean created = acquiredProductDAOImpl.create(acquiredproduct);
+        if( externalClient == true){
+        javax.xml.ws.Holder<BusinessLogic.Service.Bus.ResponseMessage> createClient = new Holder<>();
+        bus1Operation(clientName, clientName, client.getEmail(), Integer.toString(client.getPhonenumber()), client.getAddress(), feeAmount, true, createClient);
+        //bus1Operation(clientName, clientName, clientName, clientName, reference, amount, reference, clientName, reference, clientName, createClient);
         
+        System.out.println(createClient.value.isSuccees() +" "+createClient.value.getDescription());
+        //System.out.println(createClient.toString());
+        if( createClient.value.isSuccees()){
+            
+            created = acquiredProductDAOImpl.create(acquiredproduct);
+        }
+        }else{
+            created = acquiredProductDAOImpl.create(acquiredproduct);
+        }
         if ( created == true )
             return "El producto ha sido creado.";
         else
@@ -163,6 +180,23 @@ public class HandleAcquiredProduct {
         
         return fees;
     }
+
+   /* private static ResponseMessage createClient(java.lang.String theName, java.lang.String theLastName, java.lang.String theEmail, java.lang.String thePhone, java.lang.String theAddress, float availableMoney) {
+        BusinessLogic.Service.Consume.SalewCreditWS_Service service = new BusinessLogic.Service.Consume.SalewCreditWS_Service();
+        BusinessLogic.Service.Consume.SalewCreditWS port = service.getSalewCreditWSPort();
+        return port.createClient(theName, theLastName, theEmail, thePhone, theAddress, availableMoney);
+    }*/
+
+    private static void bus1Operation(java.lang.String nombre, java.lang.String apellido, java.lang.String correo, java.lang.String telefono, java.lang.String direccion, float monto, boolean hola, javax.xml.ws.Holder<BusinessLogic.Service.Bus.ResponseMessage> responseMessage) {
+        BusinessLogic.Service.Bus.Bus1Service service = new BusinessLogic.Service.Bus.Bus1Service();
+        BusinessLogic.Service.Bus.Bus1PortType port = service.getBus1Port();
+        javax.xml.ws.Holder<BusinessLogic.Service.Bus.AutoMResponseMessage> maResponseMessage = new Holder<>();
+        port.bus1Operation(nombre, apellido, correo, telefono, direccion, monto, "vacio", "vacio", "vacio", "vacio", hola, responseMessage, maResponseMessage);
+    }
+
+
+   
+
     
     
  }

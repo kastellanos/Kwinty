@@ -5,5 +5,78 @@
       <implementation-class>BusinessLogic.Service.MakeAcquiredProductWS</implementation-class>
     </service>
   </services>
-  <clients/>
+  <clients>
+    <client name="SalewCreditWS">
+      <wsdl-url>http://192.168.2.211:8080/concesionario-unal-master/SalewCreditWS?wsdl</wsdl-url>
+      <local-wsdl-file>192.168.2.211_8080/concesionario-unal-master/SalewCreditWS.wsdl</local-wsdl-file>
+      <package-name forceReplace="true">BusinessLogic.Service.Consume</package-name>
+      <catalog-file>catalog.xml</catalog-file>
+      <wsimport-options>
+        <wsimport-option>
+          <wsimport-option-name>extension</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>verbose</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>fork</wsimport-option-name>
+          <wsimport-option-value>false</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>wsdlLocation</wsimport-option-name>
+          <wsimport-option-value>http://192.168.2.211:8080/concesionario-unal-master/SalewCreditWS?wsdl</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xnocompile</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xendorsed</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>package</wsimport-option-name>
+          <wsimport-option-value>BusinessLogic.Service.Consume</wsimport-option-value>
+        </wsimport-option>
+      </wsimport-options>
+    </client>
+    <client name="Bus1Port">
+      <wsdl-url>http://192.168.2.218:9089/Bus1Service/Bus1Port?wsdl</wsdl-url>
+      <local-wsdl-file>192.168.2.218_9089/Bus1Service/Bus1Port.wsdl</local-wsdl-file>
+      <package-name forceReplace="true">BusinessLogic.Service.Bus</package-name>
+      <catalog-file>catalog.xml</catalog-file>
+      <wsimport-options>
+        <wsimport-option>
+          <wsimport-option-name>extension</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>verbose</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>fork</wsimport-option-name>
+          <wsimport-option-value>false</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>wsdlLocation</wsimport-option-name>
+          <wsimport-option-value>http://192.168.2.218:9089/Bus1Service/Bus1Port?wsdl</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xnocompile</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xendorsed</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>package</wsimport-option-name>
+          <wsimport-option-value>BusinessLogic.Service.Bus</wsimport-option-value>
+        </wsimport-option>
+      </wsimport-options>
+    </client>
+  </clients>
 </jax-ws>
