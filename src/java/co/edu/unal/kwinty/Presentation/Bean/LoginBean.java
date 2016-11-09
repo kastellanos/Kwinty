@@ -8,7 +8,13 @@ package co.edu.unal.kwinty.Presentation.Bean;
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleClient;
 import co.edu.unal.kwinty.BusinessLogic.Controller.HandleUser;
 import co.edu.unal.kwinty.BusinessLogic.Controller.LoginUser;
+import javax.faces.application.FacesMessage;
 import co.edu.unal.kwinty.BusinessLogic.Controller.LoginLdap;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.event.ActionEvent;
+import org.primefaces.context.*;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -27,7 +33,9 @@ public class LoginBean {
     
     
     
-    public void loginLdap(){
+    public void loginLdap(ActionEvent event){
+        FacesMessage messageF = null;
+
         LoginLdap login = new LoginLdap();
         message = login.login(username, password);
         System.err.println("++++++++" + message);
@@ -36,18 +44,31 @@ public class LoginBean {
             String role = handleUser.getRole(username);
             
             System.out.println("role*** " + role);
+            messageF = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido!", this.username);
+            FacesContext context = FacesContext.getCurrentInstance();
 
             if(role.equalsIgnoreCase("Client")){
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.getApplication().getNavigationHandler().handleNavigation(context, null, "client_home.xhtml");
+                try {
+                    context.getExternalContext().redirect("client_home.xhtml");
+                    //context.getApplication().getNavigationHandler().handleNavigation(context, null, "client_home.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.getApplication().getNavigationHandler().handleNavigation(context, null, "admin_home.xhtml");
+                try {
+                    context.getExternalContext().redirect("admin_home.xhtml");
+                    //context.getApplication().getNavigationHandler().handleNavigation(context, null, "admin_home.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         }else{
-            login();
+            messageF = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Usuario y/o contraseña invalidos");
+            
+            //login();
         }
-        
+        FacesContext.getCurrentInstance().addMessage(null, messageF);
     }
     
     public void login(){

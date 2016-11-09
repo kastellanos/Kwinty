@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
-    <Scope Scope="Project"/>
+    <Scope Scope="Project">
+        <Node id="index.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="updateProduct.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="deleteProduct.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="admin_template.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="clientProfile.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="clientes.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="producto_de_cliente.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="client_home.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="admin_projection.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="createPayment.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="login.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="clientProducts.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="client_template.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="productos.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="createProduct.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="admin_home.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="template.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="clientPayments.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="createUser.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="cliente.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="proyeccion.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="createAcquiredProduct.xhtml" x="900" y="450" zoom="true"/>
+    </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

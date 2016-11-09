@@ -27,12 +27,12 @@ import java.io.UnsupportedEncodingException;
 public class HandleUser {
     private LDAPConnection lc = new LDAPConnection();
     
-    public Boolean createUserLdap(String username, String passwordUser){
+    public Boolean createUserLdap(String username, String passwordUser, String role){
 
         String ldapHost = "192.168.2.170";
         String dn = "cn=admin,dc=kwinty, dc=com";
         String password = "admin";
-        String group = "Usuario";
+        String group = !role.equals("Client") ? "500" : "501";
 
         int ldapPort =  LDAPConnection.DEFAULT_PORT;
         int ldapVersion = LDAPConnection.LDAP_V3;
@@ -48,6 +48,7 @@ public class HandleUser {
         attributeSet.add(new LDAPAttribute("sn", username));
         attributeSet.add(new LDAPAttribute("givenname", username));
         attributeSet.add(new LDAPAttribute("userpassword", passwordUser));
+        //attributeSet.add(new LDAPAttribute("gidNumber", group));
 
         String dnUser = "cn=" + username + ",ou=Kwinty,dc=kwinty,dc=com";
         LDAPEntry newEntry = new LDAPEntry(dnUser, attributeSet);
@@ -125,7 +126,7 @@ public class HandleUser {
             created = adminDAO.create(admin);
         }
         if ( created == true ){
-            createUserLdap(username, password);            
+            createUserLdap(username, password, role);            
             return "El usuario ha sido creado.";
         }
         else
