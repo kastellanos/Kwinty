@@ -9,6 +9,7 @@ import static co.edu.unal.kwinty.DataAcess.DAO.Implementation.GenericDAOImpl.get
 import co.edu.unal.kwinty.DataAcess.DAO.UserDAO;
 import co.edu.unal.kwinty.DataAcess.Entity.User;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -45,9 +46,12 @@ public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO
         q.setParameter("username", username);
         try {
             u =  (User)q.getSingleResult();
-        } catch (Exception e) {
+        } catch ( NoResultException e) {
+            System.out.println("no hay registros del usuario");
+        } catch (Exception e){
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             em.close();
         }
         return u;
@@ -62,7 +66,9 @@ public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO
         q.setParameter("id", id);
         try {
             u =  (User)q.getSingleResult();
-        } catch (Exception e) {
+        } catch ( NoResultException e) {
+            System.out.println("no hay registros del usuario");
+        } catch (Exception e){
             e.printStackTrace();
         } finally {
             em.close();

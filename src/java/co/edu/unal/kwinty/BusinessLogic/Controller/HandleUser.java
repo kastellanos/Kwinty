@@ -12,12 +12,66 @@ import co.edu.unal.kwinty.DataAcess.Entity.Admin;
 import co.edu.unal.kwinty.DataAcess.Entity.Client;
 import co.edu.unal.kwinty.DataAcess.Entity.Credentials;
 import co.edu.unal.kwinty.DataAcess.Entity.User;
+import com.novell.ldap.LDAPAttribute;
+import com.novell.ldap.LDAPAttributeSet;
+import com.novell.ldap.LDAPConnection;
+import com.novell.ldap.LDAPEntry;
+import com.novell.ldap.LDAPException;
+import com.novell.ldap.LDAPModification;
+import java.io.UnsupportedEncodingException;
 
 /**
  *
  * @author Andres
  */
 public class HandleUser {
+    private LDAPConnection lc = new LDAPConnection();
+    
+    public Boolean createUserLdap(String username, String passwordUser, String role){
+
+        String ldapHost = "192.168.2.170";
+        String dn = "cn=admin,dc=kwinty, dc=com";
+        String password = "admin";
+        String group = !role.equals("Client") ? "500" : "501";
+
+        int ldapPort =  LDAPConnection.DEFAULT_PORT;
+        int ldapVersion = LDAPConnection.LDAP_V3;
+
+        boolean status = false;
+        boolean correct = false;
+        
+        LDAPAttribute attribute = null;
+        LDAPAttributeSet attributeSet = new LDAPAttributeSet();
+        attributeSet.add(new LDAPAttribute("objectclass", "inetOrgPerson"));
+        attributeSet.add(new LDAPAttribute("cn", username + " " + username));
+        attributeSet.add(new LDAPAttribute("uid", username));
+        attributeSet.add(new LDAPAttribute("sn", username));
+        attributeSet.add(new LDAPAttribute("givenname", username));
+        attributeSet.add(new LDAPAttribute("userpassword", passwordUser));
+        //attributeSet.add(new LDAPAttribute("gidNumber", group));
+
+        String dnUser = "cn=" + username + ",ou=Kwinty,dc=kwinty,dc=com";
+        LDAPEntry newEntry = new LDAPEntry(dnUser, attributeSet);
+        
+        try {
+            lc.connect(ldapHost, ldapPort);
+            System.out.println("==== Conectado al servidor LDAP ====");
+            lc.bind(ldapVersion, dn, password.getBytes("UTF8"));
+            System.out.println("==== Autenticado en el servidor ====");
+            lc.add(newEntry);
+            lc.disconnect();
+        } catch(LDAPException ex){
+            ex.printStackTrace();
+        } 
+        catch (UnsupportedEncodingException ex) {
+            System.out.println("==== ERROR al conectarse al servidor LDAP ====");
+            ex.printStackTrace();
+            return false;
+        } 
+
+        return correct;
+    }
+    
     
     
     public String createUser(String current_user, String username, String idType, String role, String name, int id, String password,int phone_number,String email,String address,float payment_capacity){
@@ -44,10 +98,13 @@ public class HandleUser {
             AdminDAOImpl adminDAO = new AdminDAOImpl();
             created = adminDAO.create(admin);
         }
-        if ( created == true )
+        if ( created == true ){
+            //createUserLdap(username, password);
             return "El usuario ha sido creado.";
-        else
+        }
+        else{
             return "El usuario no pudo ser creado.";  
+        }
     }
     
     public String createUser(String username, String idType, String role, String name, int id, String password,int phone_number,String email,String address,float payment_capacity){
@@ -68,8 +125,10 @@ public class HandleUser {
             AdminDAOImpl adminDAO = new AdminDAOImpl();
             created = adminDAO.create(admin);
         }
-        if ( created == true )
+        if ( created == true ){
+            createUserLdap(username, password, role);            
             return "El usuario ha sido creado.";
+        }
         else
             return "El usuario no pudo ser creado.";  
     }
@@ -102,4 +161,5 @@ public class HandleUser {
         }
         return false;
     }
+
 }
