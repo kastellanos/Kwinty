@@ -12,34 +12,39 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="username">Nombre de usuario:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{createUserBean.username}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="usernameId" />
+                        <h:inputText value="#{createUserBean.username}" required="true" requiredMessage="¡El nombre de usuario es requerido!" styleClass="form-control" id="usernameId" maxlength="25" />
+                        <h:message for="usernameId" style="color:red" />    
                     </div>                   
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="name">Nombre completo:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{createUserBean.name}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="name"/>
+                        <h:inputText value="#{createUserBean.name}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="name" maxlength="50"/>
+                        <h:message for="name" style="color:red" />    
+
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="doc_type">Tipo de documento:</label>
                     <div class="col-sm-5">
-                       <h:selectOneMenu value="#{createUserBean.idType}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="doc_type">
+                       <h:selectOneMenu value="#{createUserBean.idType}" required="true" requiredMessage="¡El tipo de documento es requerido!" styleClass="form-control" id="doc_type">
                             <f:selectItem itemValue="cc" itemLabel="C.C" />
                             <f:selectItem itemValue="ti" itemLabel="T.I" />	   							
                         </h:selectOneMenu>
+                        <h:message for="doc_type" style="color:red" />    
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="doc_number">Número de documento:</label>
                     <div class="col-sm-5">
-                    <h:inputText value="#{createUserBean.id}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="doc_number"/>
+                        <h:inputText value="#{createUserBean.id}" required="true" requiredMessage="¡El documento es requerido!" styleClass="form-control" id="doc_number" maxlength="11" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
+                        <h:message for="doc_number" style="color:red" />    
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="rol">Rol:</label>
                     <div class="col-sm-5">
-                        <h:selectOneMenu value="#{createUserBean.role}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="rol">
+                        <h:selectOneMenu value="#{createUserBean.role}" required="true" requiredMessage="¡El rol es requerido!" styleClass="form-control" id="rol">
                             <f:selectItem itemValue="admin" itemLabel="Administrador" />
                             <f:selectItem itemValue="client" itemLabel="Cliente" />
                             <f:ajax render="results" />
@@ -50,7 +55,9 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="password">Contraseña:</label>
                     <div class="col-sm-5">
-                    <h:inputSecret value="#{createUserBean.password}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="password"/>
+                    <h:inputSecret value="#{createUserBean.password}" required="true" requiredMessage="¡La contraseña es requerida!" styleClass="form-control" id="password" maxlength="45"/>
+                    <h:message for="password" style="color:red" />    
+
                     </div>
                 </div>
                 <h:panelGroup id="results">
@@ -58,13 +65,15 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="phone_number">Número de Teléfono:</label>
                             <div class="col-sm-5">
-                            <h:inputText value="#{createUserBean.phone_number}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="phone_number"/>
+                            <h:inputText value="#{createUserBean.phone_number}" required="true" requiredMessage="¡El numero de telefono es requerido!" styleClass="form-control" id="phone_number" maxlength="10" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
+                            <h:message for="phone_number" style="color:red" />    
+
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Correo electrónico:</label>
                             <div class="col-sm-5">
-                            <h:inputText value="#{createUserBean.email}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="email" validatorMessage="Correo inválido">
+                            <h:inputText value="#{createUserBean.email}" required="true" requiredMessage="¡El correo proporcionado es invalido!" styleClass="form-control" id="email" validatorMessage="Correo inválido" maxlength="50">
                             <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                             </h:inputText>
                             <h:message for="email" style="color:red" />    
@@ -73,13 +82,20 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="address">Dirección:</label>
                             <div class="col-sm-5">
-                            <h:inputText value="#{createUserBean.address}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="address"  />
+                            <h:inputText value="#{createUserBean.address}" required="true" requiredMessage="¡La direccion es requerida!" styleClass="form-control" id="address" maxlength="50"/>
+                            <h:message for="address" style="color:red" />    
+                            
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="payment_capacity">Capacidad de pago:</label>
                             <div class="col-sm-5">
-                            <h:inputText value="#{createUserBean.payment_capacity}" required="true" requiredMessage="¡El nombre es requerido!" styleClass="form-control" id="payment_capacity"  />
+                                <h:inputText value="#{createUserBean.payment_capacity}" required="true" requiredMessage="¡La capacidad de pago debe ser un numero!" styleClass="form-control" id="payment_capacity" validatorMessage="El valor no es un numero o no esta dentro del rango (minimo 20000)">
+                                    <f:convertNumber />
+                                    <f:validateDoubleRange minimum="20000"/>
+                                </h:inputText>  
+                                <h:message for="payment_capacity" style="color:red" />    
+
                             </div>
                         </div>
                     </h:panelGroup>

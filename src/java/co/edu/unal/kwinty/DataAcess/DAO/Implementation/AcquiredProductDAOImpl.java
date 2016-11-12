@@ -8,8 +8,6 @@ package co.edu.unal.kwinty.DataAcess.DAO.Implementation;
 import co.edu.unal.kwinty.DataAcess.DAO.AcquiredProductDAO;
 import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 /**
  *

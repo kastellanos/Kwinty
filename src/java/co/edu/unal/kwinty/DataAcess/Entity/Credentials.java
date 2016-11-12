@@ -17,7 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -37,12 +37,12 @@ public class Credentials implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 25)
+    
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    
     @Column(name = "password")
     private String password;
     @JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)

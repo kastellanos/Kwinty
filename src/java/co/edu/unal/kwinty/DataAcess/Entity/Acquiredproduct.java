@@ -24,7 +24,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -69,7 +68,7 @@ public class Acquiredproduct implements Serializable {
     @NotNull
     @Column(name = "amount_paid")
     private float amountPaid;
-    @Size(max = 50)
+    
     @Column(name = "reference")
     private String reference;
     @Basic(optional = false)

@@ -9,17 +9,14 @@ import co.edu.unal.kwinty.DataAcess.DAO.Implementation.AcquiredProductDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.AdminDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ClientDAOImpl;
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.PaymentDAOImpl;
-import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ProductDAOImpl;
 
 import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
 import co.edu.unal.kwinty.DataAcess.Entity.Admin;
-import co.edu.unal.kwinty.DataAcess.Entity.Client;
 
 import co.edu.unal.kwinty.DataAcess.Entity.Payment;
 import co.edu.unal.kwinty.DataAcess.Entity.Product;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 

@@ -6,7 +6,6 @@
 package co.edu.unal.kwinty.BusinessLogic.Controller;
 
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.ProductDAOImpl;
-import co.edu.unal.kwinty.DataAcess.Entity.Acquiredproduct;
 import co.edu.unal.kwinty.DataAcess.Entity.Product;
 import java.util.ArrayList;
 import java.util.List;

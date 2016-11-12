@@ -18,9 +18,12 @@ public class HandleSession {
     public boolean checkSession() {
         HttpSession session = (HttpSession)
              FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        if(session != null) {
+        
+        
+        if(!session.isNew() ) {
             return true;
         }
+        FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         return false;
     }
     

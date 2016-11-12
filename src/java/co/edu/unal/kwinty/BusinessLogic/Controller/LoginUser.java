@@ -7,10 +7,7 @@ package co.edu.unal.kwinty.BusinessLogic.Controller;
 
 import co.edu.unal.kwinty.DataAcess.DAO.Implementation.CredentialsDAOImpl;
 import co.edu.unal.kwinty.DataAcess.Entity.Credentials;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -44,8 +41,9 @@ public class LoginUser {
              FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         if (session != null) {
             session.invalidate();
+            FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         }
-        return "index";
+        return "index?faces-redirect=true";
     }
     
     

@@ -5,9 +5,9 @@
  */
 package co.edu.unal.kwinty.DataAcess.DAO.Implementation;
 
+import static co.edu.unal.kwinty.DataAcess.DAO.Implementation.GenericDAOImpl.getEntityManager;
 import co.edu.unal.kwinty.DataAcess.DAO.ProductDAO;
 import co.edu.unal.kwinty.DataAcess.Entity.Product;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

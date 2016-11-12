@@ -19,7 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -49,17 +49,17 @@ public class Product implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 12)
+    
     @Column(name = "type")
     private String type;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 12)
+    
     @Column(name = "fee_type")
     private String feeType;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 12)
+    
     @Column(name = "interest_type")
     private String interestType;
     @Basic(optional = false)
@@ -70,7 +70,7 @@ public class Product implements Serializable {
     @NotNull
     @Column(name = "interest_rate")
     private float interestRate;
-    @Size(max = 1000)
+    
     @Column(name = "description")
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")

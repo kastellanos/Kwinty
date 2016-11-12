@@ -11,8 +11,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
@@ -35,15 +33,19 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
     }
     @Override
     public boolean create(T newInstance) {
+        
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
         try {
             em.persist(newInstance);
+            //newInstance = em.merge(em.find(T.class, this.getId(transientObject)));
+            //newInstance.setSomeVariable(transientObject.setSomeVariable);
             em.getTransaction().commit();
-        } catch(Exception e) {
+            
+            
+        } catch (Exception e){
             e.printStackTrace();
             em.getTransaction().rollback();
-            return false;
         } finally {
             em.close();
         }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/concesionario-unal-master/SalewCreditWS?wsdl" uri="src/conf/xml-resources/web-service-references/SalewCreditWS/wsdl/localhost_8080/concesionario-unal-master/SalewCreditWS.wsdl"/>
+    <system systemId="http://localhost:8080/concesionario-unal-master/SalewCreditWS?xsd=1" uri="src/conf/xml-resources/web-service-references/SalewCreditWS/wsdl/localhost_8080/concesionario-unal-master/SalewCreditWS.xsd_1.xsd"/>
+    <system systemId="http://192.168.2.211:8080/concesionario-unal-master/SalewCreditWS?wsdl" uri="src/conf/xml-resources/web-service-references/SalewCreditWS/wsdl/192.168.2.211_8080/concesionario-unal-master/SalewCreditWS.wsdl"/>
+    <system systemId="http://192.168.2.211:8080/concesionario-unal-master/SalewCreditWS?xsd=1" uri="src/conf/xml-resources/web-service-references/SalewCreditWS/wsdl/192.168.2.211_8080/concesionario-unal-master/SalewCreditWS.xsd_1.xsd"/>
+    <system systemId="http://192.168.2.218:9089/BusWSService/BusWSPort?wsdl" uri="src/conf/xml-resources/web-service-references/BusWSPort/wsdl/192.168.2.218_9089/BusWSService/BusWSPort.wsdl"/>
+    <system systemId="http://192.168.2.218:9089/Bus1Service/Bus1Port?wsdl" uri="src/conf/xml-resources/web-service-references/Bus1Port/wsdl/192.168.2.218_9089/Bus1Service/Bus1Port.wsdl"/>
+    <system systemId="http://192.168.2.218:9089/BusWService/BusWPort?wsdl" uri="src/conf/xml-resources/web-service-references/BusWPort/wsdl/192.168.2.218_9089/BusWService/BusWPort.wsdl"/>
+    <system systemId="http://192.168.2.133:8080/Sector-Mayorista/autoMarketWS?xsd=1" uri="src/conf/xml-resources/web-service-references/BusWPort/wsdl/192.168.2.133_8080/Sector-Mayorista/autoMarketWS.xsd_1.xsd"/>
+    <system systemId="http://192.168.2.218:9089/LeB1Service/LeB1Port?wsdl" uri="src/conf/xml-resources/web-service-references/LeB1Port/wsdl/192.168.2.218_9089/LeB1Service/LeB1Port.wsdl"/>
+    <system systemId="http://192.168.2.214:8080/concesionario-unal-master/SalewCreditWS?xsd=1" uri="src/conf/xml-resources/web-service-references/LeB1Port/wsdl/192.168.2.214_8080/concesionario-unal-master/SalewCreditWS.xsd_1.xsd"/>
+</catalog>
