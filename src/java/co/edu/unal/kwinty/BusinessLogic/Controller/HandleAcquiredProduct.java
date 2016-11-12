@@ -18,7 +18,6 @@ import co.edu.unal.kwinty.DataAcess.Entity.User;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.xml.ws.Holder;
 
 /**
  *
@@ -86,16 +85,17 @@ public class HandleAcquiredProduct {
          boolean created = false;
         AcquiredProductDAOImpl acquiredProductDAOImpl = new AcquiredProductDAOImpl();
         if( externalClient == true){
-        javax.xml.ws.Holder<BusinessLogic.Service.Bus.ResponseMessage> createClient = new Holder<>();
-        bus1Operation(clientName, clientName, client.getEmail(), Integer.toString(client.getPhonenumber()), client.getAddress(), feeAmount, true, createClient);
+        //javax.xml.ws.Holder<BusinessLogic.Service.Bus.ResponseMessage> createClient = new Holder<>();
+        //bus1Operation(clientName, clientName, client.getEmail(), Integer.toString(client.getPhonenumber()), client.getAddress(), feeAmount, true, createClient);
         //bus1Operation(clientName, clientName, clientName, clientName, reference, amount, reference, clientName, reference, clientName, createClient);
-        
-        System.out.println(createClient.value.isSuccees() +" "+createClient.value.getDescription());
+            ResponseMessage bus;
+            bus = leB1Operation(clientName, clientName, clientName, clientName, reference, amount);
+        //System.out.println(createClient.value.isSuccees() +" "+createClient.value.getDescription());
         //System.out.println(createClient.toString());
-        if( createClient.value.isSuccees()){
+            if( bus.isSuccees()){
             
             created = acquiredProductDAOImpl.create(acquiredproduct);
-        }
+            }
         }else{
             created = acquiredProductDAOImpl.create(acquiredproduct);
         }
@@ -174,6 +174,14 @@ public class HandleAcquiredProduct {
                     }       
                     break;
                 }
+            case "fijo":
+                {
+                    float feed = paid / numberFees;
+                    for (int i = 1; i < numberFees; i++) {
+                        fees.set(i, feed);
+                    }       
+                    break;
+                }
             default:
                 break;
         }
@@ -187,18 +195,42 @@ public class HandleAcquiredProduct {
         return port.createClient(theName, theLastName, theEmail, thePhone, theAddress, availableMoney);
     }*/
 
-    private static void bus1Operation(java.lang.String nombre, java.lang.String apellido, java.lang.String correo, java.lang.String telefono, java.lang.String direccion, float monto, boolean hola, javax.xml.ws.Holder<BusinessLogic.Service.Bus.ResponseMessage> responseMessage) {
+    /*private static void bus1Operation(java.lang.String nombre, java.lang.String apellido, java.lang.String correo, java.lang.String telefono, java.lang.String direccion, float monto, boolean hola, javax.xml.ws.Holder<BusinessLogic.Service.Bus.ResponseMessage> responseMessage) {
         BusinessLogic.Service.Bus.Bus1Service service = new BusinessLogic.Service.Bus.Bus1Service();
         BusinessLogic.Service.Bus.Bus1PortType port = service.getBus1Port();
         javax.xml.ws.Holder<BusinessLogic.Service.Bus.AutoMResponseMessage> maResponseMessage = new Holder<>();
         port.bus1Operation(nombre, apellido, correo, telefono, direccion, monto, "vacio", "vacio", "vacio", "vacio", hola, responseMessage, maResponseMessage);
+    }*/
+
+  /*  private static ResponseMessage busWOperation(java.lang.String coName, java.lang.String coLastname, java.lang.String coEmail, java.lang.String coPhone, java.lang.String coAddress, float coAmount) {
+        BusinessLogic.Service.Bus.BusWService service = new BusinessLogic.Service.Bus.BusWService();
+        BusinessLogic.Service.Bus.BusWPortType port = service.getBusWPort();
+        return port.busWOperation(coName, coLastname, coEmail, coPhone, coAddress, coAmount);
+    }
+*/
+    /*    javax.xml.ws.Holder<BusinessLogic.Service.Bus.ResponseMessage> bus = new Holder<>();
+        javax.xml.ws.Holder<BusinessLogic.Service.Bus.AutoMResponseMessage> autoBus = new Holder<>();
+        autoBus.value = new AutoMResponseMessage();
+        String v = "vacio";
+        BusinessLogic.Service.Bus.BusWService service = new BusinessLogic.Service.Bus.BusWService();
+        BusinessLogic.Service.Bus.BusWPortType port = service.getBusWPort();
+        port.busWOperation(coName, coLastname, coEmail, coPhone, coAddress, coAmount, v, v, v, v, true, bus, autoBus);
+        return bus.value;
+    }*/
+/*
+    private static void busWOperation_2(java.lang.String coName, java.lang.String coLastname, java.lang.String coEmail, java.lang.String coPhone, java.lang.String coAddress, float coAmount, java.lang.String maUser, java.lang.String maPassword, java.lang.String maVehicle, java.lang.String maQuantity, boolean flow, javax.xml.ws.Holder<BusinessLogic.Service.Bus.ResponseMessage> coResponseMessage, javax.xml.ws.Holder<BusinessLogic.Service.Bus.AutoMResponseMessage> maResponseMessage) {
+        BusinessLogic.Service.Bus.BusWService service = new BusinessLogic.Service.Bus.BusWService();
+        BusinessLogic.Service.Bus.BusWPortType port = service.getBusWPort();
+        port.busWOperation(coName, coLastname, coEmail, coPhone, coAddress, coAmount, maUser, maPassword, maVehicle, maQuantity, flow, coResponseMessage, maResponseMessage);
+    }
+*/
+
+    private static ResponseMessage leB1Operation(java.lang.String name, java.lang.String lastname, java.lang.String email, java.lang.String phoneNumber, java.lang.String address, float amount) {
+        BusinessLogic.Service.Bus.LeB1Service service = new BusinessLogic.Service.Bus.LeB1Service();
+        BusinessLogic.Service.Bus.LeB1PortType port = service.getLeB1Port();
+        return port.leB1Operation(name, lastname, email, phoneNumber, address, amount);
     }
 
-
-   
-
-    
-    
  }
     
    

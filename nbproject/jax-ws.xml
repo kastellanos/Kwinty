@@ -42,9 +42,9 @@
         </wsimport-option>
       </wsimport-options>
     </client>
-    <client name="Bus1Port">
-      <wsdl-url>http://192.168.2.218:9089/Bus1Service/Bus1Port?wsdl</wsdl-url>
-      <local-wsdl-file>192.168.2.218_9089/Bus1Service/Bus1Port.wsdl</local-wsdl-file>
+    <client name="LeB1Port">
+      <wsdl-url>http://192.168.2.218:9089/LeB1Service/LeB1Port?wsdl</wsdl-url>
+      <local-wsdl-file>192.168.2.218_9089/LeB1Service/LeB1Port.wsdl</local-wsdl-file>
       <package-name forceReplace="true">BusinessLogic.Service.Bus</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
@@ -62,7 +62,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://192.168.2.218:9089/Bus1Service/Bus1Port?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://192.168.2.218:9089/LeB1Service/LeB1Port?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>

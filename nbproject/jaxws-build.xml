@@ -59,21 +59,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/BusinessLogic/Service/Consume"/>
         <delete dir="${build.generated.dir}/jax-wsCache/SalewCreditWS"/>
     </target>
-    <target name="wsimport-client-Bus1Port" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/Bus1Port"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Bus1Port" destdir="${build.generated.dir}/jax-wsCache/Bus1Port" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/Bus1Port/wsdl/192.168.2.218_9089/Bus1Service/Bus1Port.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://192.168.2.218:9089/Bus1Service/Bus1Port?wsdl" xnocompile="true" xendorsed="true" package="BusinessLogic.Service.Bus">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/Bus1Port/wsdl/192.168.2.218_9089/Bus1Service/Bus1Port.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/Bus1Port"/>
+    <target name="wsimport-client-LeB1Port" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/LeB1Port"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/LeB1Port" destdir="${build.generated.dir}/jax-wsCache/LeB1Port" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/LeB1Port/wsdl/192.168.2.218_9089/LeB1Service/LeB1Port.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://192.168.2.218:9089/LeB1Service/LeB1Port?wsdl" xnocompile="true" xendorsed="true" package="BusinessLogic.Service.Bus">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/LeB1Port/wsdl/192.168.2.218_9089/LeB1Service/LeB1Port.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/LeB1Port"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/Bus1Port">
+            <fileset dir="${build.generated.dir}/jax-wsCache/LeB1Port">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-Bus1Port" depends="-init-project">
+    <target name="wsimport-client-clean-LeB1Port" depends="-init-project">
         <delete dir="${build.generated.sources.dir}/jax-ws/BusinessLogic/Service/Bus"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/Bus1Port"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/LeB1Port"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-SalewCreditWS, wsimport-client-Bus1Port"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-SalewCreditWS, wsimport-client-LeB1Port"/>
 </project>
