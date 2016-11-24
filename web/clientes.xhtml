@@ -115,7 +115,9 @@
           <div class="form-group">
                             <label class="control-label col-sm-2" for="phone_number">Número de Teléfono:</label>
                             <div class="col-sm-5">
-                                <h:inputText value="#{consultClientBean.editClient.phonenumber}" required="true" requiredMessage="¡El numero de telefono es requerido!" styleClass="form-control" id="phone_number" maxlength="10" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
+                                <h:inputText value="#{consultClientBean.editClient.phonenumber}" required="true" requiredMessage="¡El numero de telefono es requerido!" styleClass="form-control" id="phone_number" maxlength="10" validatorMessage="El valor no es un numero o no esta dentro del rango" converterMessage="El valor no es un numero valido">
+                                    <f:validateLongRange minimum="0" maximum="2147483647"/>
+                                </h:inputText>  
                                 <h:message for="phone_number" style="color:red" />    
                             </div>
           </div>

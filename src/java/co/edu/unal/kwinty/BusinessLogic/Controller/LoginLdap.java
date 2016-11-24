@@ -31,9 +31,12 @@ public class LoginLdap {
 
     public Boolean connect(){
 
-        String ldapHost = "192.168.2.170";
-        String dn = "cn=admin,dc=kwinty, dc=com";
-        String password = "admin";
+        String ldapHost = "192.168.2.218";
+        String dn = "cn=admin,dc=arqsoft, dc=unal, dc=edu, dc=co";
+        String password = "arqsoft20162";
+        //String ldapHost = "192.168.2.170";
+        //String dn = "cn=admin,dc=kwinty, dc=com";
+        //String password = "admin";
 
         int ldapPort =  LDAPConnection.DEFAULT_PORT;
         int ldapVersion = LDAPConnection.LDAP_V3;
@@ -55,7 +58,7 @@ public class LoginLdap {
         
         
         System.err.println("---> usuario " + user + " pass : " + password);
-        String dn = "cn=" + user + ",ou=Kwinty,dc=kwinty,dc=com";
+        String dn = "cn=" + user + ",ou=Kwinty,dc=arqsoft, dc=unal, dc=edu, dc=co";
 
         try {
             lc.bind(dn, password);

@@ -66,12 +66,12 @@ public class LoginBean {
         }else{
             messageF = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Usuario y/o contraseña invalidos");
             
-            //login();
+            //login(event);
         }
         FacesContext.getCurrentInstance().addMessage(null, messageF);
     }
     
-    public void login(){
+    public void login(ActionEvent event){
         LoginUser log = new LoginUser();
         message = log.start(this.username, this.password);
         //return "welcome";
@@ -86,10 +86,20 @@ public class LoginBean {
 
             if(role.equalsIgnoreCase("Client")){
                 FacesContext context = FacesContext.getCurrentInstance();
-                context.getApplication().getNavigationHandler().handleNavigation(context, null, "client_home.xhtml");
+                try {
+                    context.getExternalContext().redirect("client_home.xhtml");
+                    //context.getApplication().getNavigationHandler().handleNavigation(context, null, "client_home.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 FacesContext context = FacesContext.getCurrentInstance();
-                context.getApplication().getNavigationHandler().handleNavigation(context, null, "admin_home.xhtml");
+                try {
+                    context.getExternalContext().redirect("admin_home.xhtml");
+                    //context.getApplication().getNavigationHandler().handleNavigation(context, null, "admin_home.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             /*try {
                 FacesContext.getCurrentInstance().getExternalContext().dispatch("admin_home.xhtml");

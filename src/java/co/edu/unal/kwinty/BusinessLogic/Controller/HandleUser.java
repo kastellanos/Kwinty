@@ -29,9 +29,13 @@ public class HandleUser {
     
     public Boolean createUserLdap(String username, String passwordUser, String role){
 
-        String ldapHost = "192.168.2.170";
-        String dn = "cn=admin,dc=kwinty, dc=com";
-        String password = "admin";
+        String ldapHost = "192.168.2.218";
+        String dn = "cn=admin,dc=arqsoft, dc=unal, dc=edu, dc=co";
+        String password = "arqsoft20162";
+
+        //String ldapHost = "192.168.2.170";
+        //String dn = "cn=admin,dc=kwinty, dc=com";
+        //String password = "admin";
         String group = !role.equals("Client") ? "500" : "501";
 
         int ldapPort =  LDAPConnection.DEFAULT_PORT;
@@ -50,7 +54,7 @@ public class HandleUser {
         attributeSet.add(new LDAPAttribute("userpassword", passwordUser));
         //attributeSet.add(new LDAPAttribute("gidNumber", group));
 
-        String dnUser = "cn=" + username + ",ou=Kwinty,dc=kwinty,dc=com";
+        String dnUser = "cn=" + username + ",ou=Kwinty,dc=arqsoft, dc=unal, dc=edu, dc=co";
         LDAPEntry newEntry = new LDAPEntry(dnUser, attributeSet);
         
         try {
